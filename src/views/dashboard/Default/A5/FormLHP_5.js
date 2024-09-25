@@ -32,6 +32,7 @@ const FormLHP = ({ isLoading, pathnih, label0 }) => {
     const [sku, setSKU] = useState('');
 
     // State untuk menyimpan jumlah reguler, hold, output, dan lainnya
+    const [planning,setPlanning] = useState('');
     const [reguler, setReguler] = useState('');
     const [hold, setHold] = useState('');
     const [output, setOutput] = useState('');
@@ -168,7 +169,8 @@ const FormLHP = ({ isLoading, pathnih, label0 }) => {
         grup: label0,                                 // Nilai dari grup (asumsi dari label0)
         shift: shift,                                 // Nilai dari shift
         sku: sku,                                     // Nilai dari SKU
-        reguler: reguler,                             // Nilai dari reguler
+        reguler: reguler, 
+        planning:planning,                            // Nilai dari reguler
         hold: hold,                                   // Nilai dari hold
         output: output,                               // Nilai dari output
         rmd: rmd,                                     // Nilai dari RMD
@@ -256,23 +258,29 @@ const FormLHP = ({ isLoading, pathnih, label0 }) => {
         kendalaall: "{0}"                       // Nilai dari Kendala 
     };
 
-    const calculateSum = (newReguler, newHold) => {
-        const sum = parseFloat(newReguler) + parseFloat(newHold);
-        setOutput(sum || 0);
+    const calculateSum = (newReguler,planning, newHold) => {
+        const sum = ((parseFloat(newReguler) + parseFloat(newHold)) / parseFloat(planning)) * 100;
+        const sumpersen = parseFloat(sum).toFixed(2);
+        setOutput(sumpersen || 0);
     };
     const calculateSumRM = (packtable) => {
         const sum = parseFloat(packtable) + parseFloat(rmd) + parseFloat(rsampleqc) + parseFloat(rpackinner) + parseFloat(rfeeding);
         setRmtotal(sum || 0);
     };
+    const handlePlaningChange = (e) => {
+        const newPlanning = e.target.value;
+        setPlanning(newPlanning);
+        calculateSum(reguler,newPlanning, hold);
+    };
     const handleRegulerChange = (e) => {
         const newReguler = e.target.value;
         setReguler(newReguler);
-        calculateSum(newReguler, hold);
+        calculateSum(newReguler,planning, hold);
     };
     const handleHoldChange = (e) => {
         const newHold = e.target.value;
         setHold(newHold);
-        calculateSum(reguler, newHold);
+        calculateSum(reguler,planning, newHold);
     };
     const handlermTotal = (e) => {
         const packtable = e.target.value;
@@ -317,6 +325,26 @@ const FormLHP = ({ isLoading, pathnih, label0 }) => {
         const newVie12 = e.target.value;
         setViE12(newVie12);
         calculatetotalVi(newVie12)
+    }
+
+    const calculatesakhirvi = (newreject) => {
+        const sum = parseFloat(viawal) + parseFloat(viambil) -parseFloat(vireturn) - parseFloat(viRainner) - parseFloat(newreject);
+        setViakhir(sum || 0);
+    };
+   const handlesakhirvi = (e) => {
+        const newreject = e.target.value;
+        setViinner(newreject);
+        calculatesakhirvi(newreject)
+    }
+
+    const calculateskarton = (newkartonakhir) => {
+        const sum = parseFloat(krkawal) + parseFloat(krAwal) -parseFloat(krpakai) - parseFloat(kreturn) - parseFloat(newkartonakhir);
+        setKrakhir(sum || 0);
+    };
+   const handlekarton = (e) => {
+        const newkartonakhir = e.target.value;
+        setKreject(newkartonakhir);
+        calculateskarton(newkartonakhir)
     }
 
     return (
@@ -369,6 +397,14 @@ const FormLHP = ({ isLoading, pathnih, label0 }) => {
                         </Grid>
 
                         <Grid container spacing={2} direction="row">
+                          <Grid item xs={12} sm={4}>
+                                <TextField
+                                    label="Planning"
+                                    value={planning}
+                                    onChange={handlePlaningChange}
+                                    fullWidth
+                                />
+                            </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
                                     label="Release"
@@ -562,7 +598,7 @@ const FormLHP = ({ isLoading, pathnih, label0 }) => {
                         <Grid container spacing={2} sx={{ mt: 2 }} direction="row">
                             <Grid item xs={12} sm={12}>
                                 <TextField
-                                    label="Total Reject Inner Mesin Bungkus ROLL"
+                                    label="Total Reject Inner Mesin Bungkus kg"
                                     value={roll}
                                     fullWidth
                                     disabled
@@ -719,9 +755,9 @@ const FormLHP = ({ isLoading, pathnih, label0 }) => {
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
-                                    label="S Akhir"
-                                    value={viakhir}
-                                    onChange={(e) => setViakhir(e.target.value)}
+                                    label="R inner"
+                                    value={viRainner}
+                                    onChange={(e) => setViRainner(e.target.value)}
                                     fullWidth
                                 />
                             </Grid>
@@ -740,20 +776,20 @@ const FormLHP = ({ isLoading, pathnih, label0 }) => {
                                 <TextField
                                     label="Pakai"
                                     value={viinner}
-                                    onChange={(e) => setViinner(e.target.value)}
+                                    onChange={handlesakhirvi}
                                     fullWidth
                                 />
                             </Grid>
+                      
                             <Grid item xs={12} sm={4}>
                                 <TextField
-                                    label="R inner"
-                                    value={viRainner}
-                                    onChange={(e) => setViRainner(e.target.value)}
+                                    label="S Akhir"
+                                    value={viakhir}
                                     fullWidth
+                                    disabled
                                 />
                             </Grid>
                         </Grid>
-
                         <Grid container spacing={2} direction="row">
                             {[viE1, viE2, viE3, viE4, viE5, viE6, viE7, viE8, viE9, viE10, viE11].map((value, index) => (
                                 <Grid item xs={12} sm={4} key={index}>
@@ -780,7 +816,7 @@ const FormLHP = ({ isLoading, pathnih, label0 }) => {
                         <Grid container spacing={2} sx={{ mt: 2 }} direction="row">
                             <Grid item xs={12} sm={12}>
                                 <TextField
-                                    label="Total Reject Inner Mesin Bungkus Kg"
+                                    label="Total Reject Inner Mesin Bungkus Roll"
                                     value={variance}
                                     fullWidth
                                     disabled
@@ -806,17 +842,9 @@ const FormLHP = ({ isLoading, pathnih, label0 }) => {
                         <Grid container spacing={2} sx={{ mb: 2, mt: 2 }} direction="row">
                             <Grid item xs={12} sm={4}>
                                 <TextField
-                                    label="Awal"
+                                    label="Ambil"
                                     value={krAwal}
                                     onChange={(e) => setKrAwal(e.target.value)}
-                                    fullWidth
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={4}>
-                                <TextField
-                                    label="S Akhir"
-                                    value={krakhir}
-                                    onChange={(e) => setKrakhir(e.target.value)}
                                     fullWidth
                                 />
                             </Grid>
@@ -828,10 +856,7 @@ const FormLHP = ({ isLoading, pathnih, label0 }) => {
                                     fullWidth
                                 />
                             </Grid>
-                        </Grid>
-
-                        <Grid container spacing={2} direction="row">
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={4}>
                                 <TextField
                                     label="Return"
                                     value={kreturn}
@@ -839,12 +864,23 @@ const FormLHP = ({ isLoading, pathnih, label0 }) => {
                                     fullWidth
                                 />
                             </Grid>
+                        </Grid>
+
+                        <Grid container spacing={2} direction="row">
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     label="Reject"
                                     value={kreject}
-                                    onChange={(e) => setKreject(e.target.value)}
+                                    onChange={handlekarton}
                                     fullWidth
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="S Akhir"
+                                    value={krakhir}
+                                    fullWidth
+                                    disabled
                                 />
                             </Grid>
                         </Grid>

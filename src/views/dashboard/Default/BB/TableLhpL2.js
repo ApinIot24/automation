@@ -399,7 +399,6 @@ const TableLhpL2 = () => {
                       setBanded([dataolah[0].banded, dataolah[1].banded, dataolah[2].banded])
                       setSapuanPack([dataolah[0].sapuanpack, dataolah[1].sapuanpack, dataolah[2].sapuanpack])
                       setBuble([dataolah[0].buble, dataolah[1].buble, dataolah[2].buble])
-
                     })
                     .catch(error => {
                       setOpen(true)

@@ -601,7 +601,7 @@ const MainRoutes = {
       children: [
         {
           path: 'packing-line5-bsc/table/lhp',
-          element: <PrivateRoute element={<TableLhpL5/>} />
+          element: <PrivateRoute element={<TableLhpL5 />} />
         }
       ]
     },

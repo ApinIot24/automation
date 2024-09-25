@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Alert, Box, Grid, Snackbar, Typography, FormControl, TextField, CardContent, MenuItem, Select, InputLabel } from '@mui/material';
+import { Alert, Box, Grid, Snackbar, Typography, FormControl, TextField, CardContent, Select, InputLabel } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { styled } from '@mui/material/styles';
 import MainCard from 'ui-component/cards/MainCard';
@@ -8,10 +8,10 @@ import { gridSpacing } from 'store/constant';
 import axios from 'axios';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { LineChart } from '@mui/x-charts/LineChart';
+import { LineChart } from '@mui/x-charts/LineChart';
 import dayjs from 'dayjs';
 import ButtonBack from 'ui-component/ButtonBack';
-// import { BarChart } from '@mui/x-charts';
+import { BarChart } from '@mui/x-charts';
 import Dialog from '@mui/material/Dialog';
 import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
@@ -34,7 +34,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const TableLhpL2 = () => {
+const TableLhpL5 = () => {
   const [valuedate, setValueDate] = useState(dayjs(new Date()));
   const [state] = useState({
     vertical: 'top',
@@ -45,24 +45,27 @@ const TableLhpL2 = () => {
   const [opendua, setOpenDua] = useState(false);
   const [opentiga, setOpenTiga] = useState(false);
   const [data, setData] = useState([]);
-  // const [pack1 ,setPack1] = useState([0]);
-  // const [pack2 ,setPack2] = useState([0]);
-  // const [pack3 ,setPack3] = useState([0]);
-  // const [pack4 ,setPack4] = useState([0]);
-  // const [pack5 ,setPack5] = useState([0]);
-  // const [sumpack ,setSumPack] = useState([0]);
-  // const [plan, setPlan] = useState([0]);
-  // const [real, setReal] = useState([0]);
-  // const [ach, setAch] = useState([0]);
-  // const [ach1, setAch1] = useState([0]);
-  // const [ach2, setAch2] = useState([0]);
-  // const [sheet , setSheet] = useState([0]);
-  // const [book , setBook] = useState([0]);
-  // const [banded , setBanded] = useState([0]);
-  // const [sapuanpack , setSapuanPack] = useState([0]);
-  // const [buble , setBuble] = useState([0]);
+  const [rmE1c, setRmE1c] = useState([0]);
+  const [rmE2c, setRmE2c] = useState([0]);
+  const [rmE3c, setRmE3c] = useState([0]);
+  const [rmE4c, setRmE4c] = useState([0]);
+  const [rmE5c, setRmE5c] = useState([0]);
+  const [rmE6c, setRmE6c] = useState([0]);
+  const [rmE7c, setRmE7c] = useState([0]);
+  const [rmE8c, setRmE8c] = useState([0]);
+  const [rmE9c, setRmE9c] = useState([0]);
+  const [rmE10c, setRmE10c] = useState([0]);
+  const [rmE11c, setRmE11c] = useState([0]);
+  const [rmE12c, setRmE12c] = useState([0]);
+  const [regulerc, setRegulerc] = useState([0]);
+  const [holdc, setHoldc] = useState([0]);
+  const [outputc, setOutputc] = useState([0]);
+  const [rmdc, setRMDc] = useState([0]);
+  const [rfeedingc, setRfeedingc] = useState([0]);
+  const [rpackTablec, setRPackTablec] = useState([0]);
+  const [rovenc, setRovenc] = useState([0]);
   //Modal
-  // const [inidate , setInidate] = useState('')
+  const [inidate, setInidate] = useState('')
   // State untuk menyimpan data shift
   const [shift, setShift] = useState('');
   const [sku, setSKU] = useState('');
@@ -139,43 +142,45 @@ const TableLhpL2 = () => {
     { field: 'reguler', headerName: 'Reguler', width: 50 },
     { field: 'hold', headerName: 'Hold', width: 50 },
     { field: 'output', headerName: 'Output', width: 50 },
-    { field: 'rmd', headerName: 'Rmd', width: 50 },
-    { field: 'rfeeding', headerName: 'Rfeeding', width: 50 },
-    { field: 'rpacktable', headerName: 'Rpacktable', width: 50 },
-    { field: 'rmtotal', headerName: 'Rmtotal', width: 50 },
-    { field: 'roven', headerName: 'R Oven', width: 50 },
-    { field: 'soven', headerName: 'Sampah Oven', width: 50 },
-    { field: 'mcbks', headerName: 'Mcbks', width: 50 },
-    { field: 'ptable', headerName: 'P Table', width: 50 },
-    { field: 'serbuk', headerName: 'Serbuk', width: 50 },
-    { field: 'tampungan', headerName: 'Tampungan', width: 50 },
-    { field: 'total', headerName: 'Total', width: 50 },
-    { field: 'brtpack', headerName: 'Brt Pack', width: 50 },
-    { field: 'batch', headerName: 'Batch', width: 50 },
-    { field: 'wipackinner', headerName: 'Wi Pack Inner', width: 50 },
-    { field: 'wikulit', headerName: 'Wi Kulit', width: 50 },
-    { field: 'witotal', headerName: 'Wi Total ', width: 50 },
-    { field: 'viawal', headerName: 'Vi awak', width: 50 },
-    { field: 'viambil', headerName: 'Vi ambil', width: 50 },
-    { field: 'viakhir', headerName: 'Vi Akhir', width: 50 },
-    { field: 'vireturn', headerName: 'Vi return', width: 50 },
-    { field: 'viinner', headerName: 'Vi Inner', width: 50 },
-    { field: 'virainner', headerName: 'Vi Rainner', width: 50 },
-    { field: 'variance', headerName: 'Variance', width: 50 },
-    { field: 'krkawal', headerName: 'Kr Awal', width: 50 },
-    { field: 'krawal', headerName: 'Kr Awak', width: 50 },
-    { field: 'krakhir', headerName: 'Kr Akhir', width: 50 },
-    { field: 'krpakai', headerName: 'Kr Pakai', width: 50 },
-    { field: 'kreturn', headerName: 'Kr Return', width: 50 },
-    { field: 'kreject', headerName: 'Kr Reject', width: 50 },
-    { field: 'krakhir', headerName: 'Kr Akhir', width: 50 },
-    { field: 'rpackinner', headerName: 'R pack Inner', width: 50 },
+    // { field: 'rmd', headerName: 'Rmd', width: 50 },
+    // { field: 'rfeeding', headerName: 'Rfeeding', width: 50 },
+    // { field: 'rpacktable', headerName: 'Rpacktable', width: 50 },
+    // { field: 'rmtotal', headerName: 'Rmtotal', width: 50 },
+    // { field: 'roven', headerName: 'R Oven', width: 50 },
+    // { field: 'soven', headerName: 'Sampah Oven', width: 50 },
+    // { field: 'mcbks', headerName: 'Mcbks', width: 50 },
+    // { field: 'ptable', headerName: 'P Table', width: 50 },
+    // { field: 'serbuk', headerName: 'Serbuk', width: 50 },
+    // { field: 'tampungan', headerName: 'Tampungan', width: 50 },
+    // { field: 'total', headerName: 'Total', width: 50 },
+    // { field: 'brtpack', headerName: 'Brt Pack', width: 50 },
+    // { field: 'batch', headerName: 'Batch', width: 50 },
+    // { field: 'wipackinner', headerName: 'Wi Pack Inner', width: 50 },
+    // { field: 'wikulit', headerName: 'Wi Kulit', width: 50 },
+    // { field: 'witotal', headerName: 'Wi Total ', width: 50 },
+    // { field: 'viawal', headerName: 'Vi awak', width: 50 },
+    // { field: 'viambil', headerName: 'Vi ambil', width: 50 },
+    // { field: 'viakhir', headerName: 'Vi Akhir', width: 50 },
+    // { field: 'vireturn', headerName: 'Vi return', width: 50 },
+    // { field: 'viinner', headerName: 'Vi Inner', width: 50 },
+    // { field: 'virainner', headerName: 'Vi Rainner', width: 50 },
+    // { field: 'variance', headerName: 'Variance', width: 50 },
+    // { field: 'krkawal', headerName: 'Kr Awal', width: 50 },
+    // { field: 'krawal', headerName: 'Kr Awak', width: 50 },
+    // { field: 'krakhir', headerName: 'Kr Akhir', width: 50 },
+    // { field: 'krpakai', headerName: 'Kr Pakai', width: 50 },
+    // { field: 'kreturn', headerName: 'Kr Return', width: 50 },
+    // { field: 'kreject', headerName: 'Kr Reject', width: 50 },
+    // { field: 'krakhir', headerName: 'Kr Akhir', width: 50 },
+    // { field: 'rpackinner', headerName: 'R pack Inner', width: 50 },
   ]);
+  // console.log("data pilih ini" , data)
+  // console.log("setrme1c pilih ini" , rmE1c, rmE2c)
+
   const [urlapi] = useState({
     lhp: 'http://10.37.12.17:3000/packing_a1',
-    lhpdaily: 'http://10.37.12.17:3000/lhpl5_daily/l2',
+    lhpdaily: 'http://10.37.12.17:3000/lhpl5_daily/l5',
     urlp2: 'table',
-
   })
   const handleClose = (reason) => {
     if (reason === 'clickaway') {
@@ -205,9 +210,75 @@ const TableLhpL2 = () => {
     axios.get(`http://10.37.12.17:3000/lhpl5/detail/${params.row.id}`)
       .then(response => {
         var dataolah = response.data[0];
-        // setInidate(new Date(dataolah.realdatetime).toLocaleDateString())
+        setInidate(new Date(dataolah.realdatetime).toLocaleDateString())
         setShift(dataolah.shift)
         setSKU(dataolah.sku)
+        setReguler(dataolah.reguler)
+        setHold(dataolah.hold);
+        setOutput(dataolah.output);
+        setRMD(dataolah.rmd);
+        setRfeeding(dataolah.rfeeding);
+        setRsampleqc(dataolah.rsampleqc);
+        setRpackinner(dataolah.rpackinner);
+        setRmE1(dataolah.rmE1);
+        setRmE2(dataolah.rmE2);
+        setRmE3(dataolah.rmE3);
+        setRmE4(dataolah.rmE4);
+        setRmE5(dataolah.rmE5);
+        setRmE6(dataolah.rmE6);
+        setRmE7(dataolah.rmE7);
+        setRmE8(dataolah.rmE8);
+        setRmE9(dataolah.rmE9);
+        setRmE10(dataolah.rmE10);
+        setRmE11(dataolah.rmE11);
+        setRmE12(dataolah.rmE12);
+        setRejectinnermesinroll(dataolah.roll);
+        setRPackTable(dataolah.rpackTable);
+        setRmtotal(dataolah.rmtotal);
+        setRoven(dataolah.roven);
+        setSoven(dataolah.soven);
+        setMcbks(dataolah.mcbks);
+        setPtable(dataolah.ptable);
+        setSerbuk(dataolah.serbuk);
+        setTampungan(dataolah.tampungan);
+        setTotal(dataolah.total);
+        setBrtpack(dataolah.brtpack);
+        setBatch(dataolah.batch);
+        setWipackinner(dataolah.wipackinner);
+        setWikulit(dataolah.wikulit);
+        setWitotal(dataolah.witotal);
+        setViawal(dataolah.viawal);
+        setViambil(dataolah.viambil);
+        setViakhir(dataolah.viakhir);
+        setVireturn(dataolah.vireturn);
+        setViinner(dataolah.viinner);
+        setViRainner(dataolah.viRainner);
+        setViE1(dataolah.viE1);
+        setViE2(dataolah.viE2);
+        setViE3(dataolah.viE3);
+        setViE4(dataolah.viE4);
+        setViE5(dataolah.viE5);
+        setViE6(dataolah.viE6);
+        setViE7(dataolah.viE7);
+        setViE8(dataolah.viE8);
+        setViE9(dataolah.viE9);
+        setViE10(dataolah.viE10);
+        setViE11(dataolah.viE11);
+        setViE12(dataolah.viE12);
+        setVariance(dataolah.variance);
+        setKrkawal(dataolah.krkawal);
+        setKrAwal(dataolah.krAwal);
+        setKrakhir(dataolah.krakhir);
+        setKrpakai(dataolah.krpakai);
+        setKreturn(dataolah.kreturn);
+        setKreject(dataolah.kreject);
+        setKendala1(dataolah.kendala1);
+        setKendala2(dataolah.kendala2);
+        setKendala3(dataolah.kendala3);
+        setKendala4(dataolah.kendala4);
+        setKendala5(dataolah.kendala5);
+        setOpenDua(true);
+        setOpenTiga(false);
       })
       .catch(error => {
         console.log(error);
@@ -218,23 +289,47 @@ const TableLhpL2 = () => {
   useEffect(() => {
     setLoading(false);
     axios.get(urlapi.lhpdaily)
-      .then(response => {
-        var dataolah = response.data;
-
+    .then(response => {
+      var dataolah = response.data;
+      console.log(dataolah);
         const d = new Date();
         let hour = d.getHours();
         if (hour >= 15) {
           let objects = [];
           objects[0] = {};
-          objects[0].id = dataolah[0].id;
-          objects[0].shift = dataolah[0].shift
-          objects[0].sku = dataolah[0].sku
+          objects[0].id = dataolah[0].id || 0;
+          objects[0].shift = dataolah[0].shift || 0;
+          objects[0].sku = dataolah[0].sku || 0;
+          objects[0].reguler = dataolah[0].reguler || 0;
+          objects[0].hold = dataolah[0].hold || 0;
+          objects[0].output = dataolah[0].output || 0;
+          setData(objects);
+          setRmE1c([dataolah[0].rmall.rmE1 || 0]);
+          setRmE2c([dataolah[0].rmall.rmE2 || 0]);
+          setRmE3c([dataolah[0].rmall.rmE3 || 0]);
+          setRmE4c([dataolah[0].rmall.rmE4 || 0]);
+          setRmE5c([dataolah[0].rmall.rmE5 || 0]);
+          setRmE6c([dataolah[0].rmall.rmE6 || 0]);
+          setRmE7c([dataolah[0].rmall.rmE7 || 0]);
+          setRmE8c([dataolah[0].rmall.rmE8 || 0]);
+          setRmE9c([dataolah[0].rmall.rmE9 || 0]);
+          setRmE10c([dataolah[0].rmall.rmE10 || 0]);
+          setRmE11c([dataolah[0].rmall.rmE11 || 0]);
+          setRmE12c([dataolah[0].rmall.rmE12 || 0]);
+          setRegulerc([dataolah[0].reguler || 0]);
+          setHoldc([dataolah[0].hold || 0]);
+          setOutputc([dataolah[0].output || 0]);
+          setRPackTablec([dataolah[0].rpackTable || 0]);
+          setRovenc([dataolah[0].roven || 0]);
+          setRMDc([dataolah[0].rmd || 0]);
+          setRfeedingc([dataolah[0].rfeeding || 0]);
         }
       })
       .catch(error => {
         console.log(error);
       });
   }, []);
+
 
   return (
     <MainCard title="Report LHP Line 5" secondary={<ButtonBack path={'/utils/packing-line5-bsc/table'} />} >
@@ -256,7 +351,6 @@ const TableLhpL2 = () => {
                 thisdatenow.setDate(thisdate.getDate() + 1)
                 var datenyarnow = new Date();
                 var datestringnow = datenyarnow.getFullYear() + "-0" + (datenyarnow.getMonth() + 1) + "-" + datenyarnow.getDate()
-                console.log("Tanggal", datestring)
                 if (datestringnow === datestring) {
                   axios.get(urlapi.lhpdaily)
                     .then(response => {
@@ -269,50 +363,105 @@ const TableLhpL2 = () => {
                         objects[0].id = dataolah[0].id;
                         objects[0].shift = dataolah[0].shift
                         objects[0].sku = dataolah[0].sku
+                        objects[0].reguler = dataolah[0].reguler
+                        objects[0].hold = dataolah[0].hold
+                        objects[0].output = dataolah[0].output
+                        setData(objects)
+                        setRmE1c([dataolah[0].rmall.rmE1])
+                        setRmE2c([dataolah[0].rmall.rmE2])
+                        setRmE3c([dataolah[0].rmall.rmE3])
+                        setRmE4c([dataolah[0].rmall.rmE4])
+                        setRmE5c([dataolah[0].rmall.rmE5])
+                        setRmE6c([dataolah[0].rmall.rmE6])
+                        setRmE7c([dataolah[0].rmall.rmE7])
+                        setRmE8c([dataolah[0].rmall.rmE8])
+                        setRmE9c([dataolah[0].rmall.rmE9])
+                        setRmE10c([dataolah[0].rmall.rmE10])
+                        setRmE11c([dataolah[0].rmall.rmE11])
+                        setRmE12c([dataolah[0].rmall.rmE12])
+                        setRegulerc([dataolah[0].reguler])
+                        setHoldc([dataolah[0].hold])
+                        setOutputc([dataolah[0].output])
+                        setRPackTablec([dataolah[0].rpackTable])
+                        setRovenc([dataolah[0].roven])
+                        setRMDc([dataolah[0].rmd])
+                        setRfeedingc([dataolah[0].rfeeding])
                       }
                     })
                     .catch(error => {
                       console.log(error);
                     });
                 } else {
-                  axios.get(`http://10.37.12.17:3000/lhpl5_daily/date/${datestring}/l2`)
+                  axios.get(`http://10.37.12.17:3000/lhpl5_daily/date/${datestring}/l5`)
                     .then(response => {
                       var dataolah = response.data;
-                      // console.log("Tanggal" , dataolah)
                       let objects = [];
                       objects[0] = {};
                       objects[0].id = dataolah[0].id;
                       objects[0].shift = dataolah[0].shift
                       objects[0].sku = dataolah[0].sku
+                      objects[0].reguler = dataolah[0].reguler
+                      objects[0].hold = dataolah[0].hold
+                      objects[0].output = dataolah[0].output
                       objects[1] = {};
                       objects[1].id = dataolah[1].id;
                       objects[1].shift = dataolah[1].shift
                       objects[1].sku = dataolah[1].sku
+                      objects[1].reguler = dataolah[1].reguler
+                      objects[1].hold = dataolah[1].hold
+                      objects[1].output = dataolah[1].output
                       objects[2] = {};
                       objects[2].id = dataolah[2].id;
                       objects[2].shift = dataolah[2].shift
                       objects[2].sku = dataolah[2].sku
+                      objects[2].reguler = dataolah[2].reguler
+                      objects[2].hold = dataolah[2].hold
+                      objects[2].output = dataolah[2].output
                       setData(objects)
+                      console.log("dataolah pilih ini" , [dataolah[0].rmall.rmE1], [dataolah[1].rmall.rmE1], [dataolah[2].rmall.rmE1])
+                      setRmE1c([dataolah[0].rmall.rmE1, dataolah[1].rmall.rmE1, dataolah[2].rmall.rmE1])
+                      setRmE2c([dataolah[0].rmall.rmE2, dataolah[1].rmall.rmE2, dataolah[2].rmall.rmE2])
+                      setRmE3c([dataolah[0].rmall.rmE3, dataolah[1].rmall.rmE3, dataolah[2].rmall.rmE3])
+                      setRmE4c([dataolah[0].rmall.rmE4, dataolah[1].rmall.rmE4, dataolah[2].rmall.rmE4])
+                      setRmE5c([dataolah[0].rmall.rmE5, dataolah[1].rmall.rmE5, dataolah[2].rmall.rmE5])
+                      setRmE6c([dataolah[0].rmall.rmE6, dataolah[1].rmall.rmE6, dataolah[2].rmall.rmE6])
+                      setRmE7c([dataolah[0].rmall.rmE7, dataolah[1].rmall.rmE7, dataolah[2].rmall.rmE7])
+                      setRmE8c([dataolah[0].rmall.rmE8, dataolah[1].rmall.rmE8, dataolah[2].rmall.rmE8])
+                      setRmE9c([dataolah[0].rmall.rmE9, dataolah[1].rmall.rmE9, dataolah[2].rmall.rmE9])
+                      setRmE10c([dataolah[0].rmall.rmE10, dataolah[1].rmall.rmE10, dataolah[2].rmall.rmE10])
+                      setRmE11c([dataolah[0].rmall.rmE11, dataolah[1].rmall.rmE11, dataolah[2].rmall.rmE11])
+                      setRmE12c([dataolah[0].rmall.rmE12, dataolah[1].rmall.rmE12, dataolah[2].rmall.rmE12])
+                      setRegulerc([dataolah[0].reguler, dataolah[1].reguler, dataolah[2].reguler])
+                      setHoldc([dataolah[0].hold, dataolah[1].hold, dataolah[2].hold])
+                      setOutputc([dataolah[0].output, dataolah[1].hold, dataolah[2].hold])
+                      setRPackTablec([dataolah[0].rpackTable, dataolah[1].rpackTable, dataolah[2].rpackTable])
+                      setRovenc([dataolah[0].roven, dataolah[1].roven, dataolah[2].roven])
+                      setRMDc([dataolah[0].rmd, dataolah[1].rmd, dataolah[2].rmd])
+                      setRfeedingc([dataolah[0].rfeeding, dataolah[1].rfeeding, dataolah[2].rfeeding])
+                   
                     })
                     .catch(error => {
                       setOpen(true)
                       setData([])
-                      // setPack1([0])
-                      // setPack2([0])
-                      // setPack3([0])
-                      // setPack4([0])
-                      // setPack5([0])
-                      // setSumPack([0])
-                      // setPlan([0])
-                      // setReal([0])
-                      // setAch([0])
-                      // setAch1([0])
-                      // setAch2([0])
-                      // setSheet([0])
-                      // setBook([0])
-                      // setBanded([0])
-                      // setSapuanPack([0])
-                      // setBuble([0])
+                      setRmE1c([0])
+                      setRmE2c([0])
+                      setRmE3c([0])
+                      setRmE4c([0])
+                      setRmE5c([0])
+                      setRmE6c([0])
+                      setRmE7c([0])
+                      setRmE8c([0])
+                      setRmE9c([0])
+                      setRmE10c([0])
+                      setRmE11c([0])
+                      setRmE12c([0])
+                      setRegulerc([0])
+                      setHoldc([0])
+                      setOutputc([0])
+                      setRPackTablec([0])
+                      setRovenc([0])
+                      setRMDc([0])
+                      setRfeedingc([0])
                       console.log(error);
                     });
                 }
@@ -337,7 +486,7 @@ const TableLhpL2 = () => {
               </Grid>
               <Grid item sx={{ mb: 0.75 }}>
                 <Box sx={{ width: '100%' }}>
-                  {/* <LineChart
+                  <LineChart
                     xAxis={[{
                       scaleType: 'band',
                       data: ['Shift 1', 'Shift 2', 'Shift 3']
@@ -345,44 +494,80 @@ const TableLhpL2 = () => {
                     series={[
                       {
                         id: '1',
-                        label: 'B1',
+                        label: 'E1',
                         curve: "linear",
-                        data: 0,
+                        data: rmE1c, // Nilai default 0
                       },
                       {
                         id: '2',
-                        label: 'B2',
+                        label: 'E2',
                         curve: "linear",
-                        data: 0,
+                        data: rmE2c,
                       },
                       {
                         id: '3',
-                        label: 'B3',
+                        label: 'E3',
                         curve: "linear",
-                        data: 0,
+                        data: rmE3c,
                       },
                       {
                         id: '4',
-                        label: 'B4',
+                        label: 'E4',
                         curve: "linear",
-                        data: 0,
+                        data: rmE4c,
                       },
                       {
                         id: '5',
-                        label: 'A4',
+                        label: 'E5',
                         curve: "linear",
-                        data: 0,
+                        data: rmE5c,
                       },
                       {
                         id: '6',
-                        label: 'Total',
+                        label: 'E6',
                         curve: "linear",
-                        data: 0,
-                      }
+                        data: rmE6c,
+                      },
+                      {
+                        id: '7',
+                        label: 'E7',
+                        curve: "linear",
+                        data: rmE7c,
+                      },
+                      {
+                        id: '8',
+                        label: 'E8',
+                        curve: "linear",
+                        data: rmE8c,
+                      },
+                      {
+                        id: '9',
+                        label: 'E9',
+                        curve: "linear",
+                        data: rmE9c,
+                      },
+                      {
+                        id: '10',
+                        label: 'E10',
+                        curve: "linear",
+                        data: rmE10c,
+                      },
+                      {
+                        id: '11',
+                        label: 'E11',
+                        curve: "linear",
+                        data: rmE11c,
+                      },
+                      {
+                        id: '12',
+                        label: 'E12',
+                        curve: "linear",
+                        data: rmE12c,
+                      },
                     ]}
                     height={300}
                     width={450}
-                  /> */}
+                  />
                 </Box>
               </Grid>
             </Grid>
@@ -399,13 +584,13 @@ const TableLhpL2 = () => {
                 </Grid>
                 <Grid container justifyContent="Center">
                   <Grid item>
-                    <Typography variant="h4">(Reguler =  0 %, Ach Shift 2 =  0 %,Ach Shift 3 =  0 %)</Typography>
+                    <Typography variant="h4">(release=  {regulerc} %, release Shift 2 =  {regulerc} %,release Shift 3 =  {regulerc} %)</Typography>
                   </Grid>
                 </Grid>
               </Grid>
               <Grid item sx={{ mb: 0.75 }}>
                 <Box sx={{ width: '100%' }}>
-                  {/* <BarChart
+                  <BarChart
                     xAxis={[{
                       scaleType: 'band',
                       data: ['Shift 1', 'Shift 2', 'Shift 3']
@@ -414,19 +599,25 @@ const TableLhpL2 = () => {
                       {
                         id: '1',
                         stack: 'A',
-                        label: 'Plan',
-                        data: 0,
+                        label: 'release',
+                        data: regulerc,
                       },
                       {
                         id: '2',
                         stack: 'A',
-                        label: 'Real',
-                        data: 0,
+                        label: 'Hold',
+                        data: holdc,
+                      },
+                      {
+                        id: '3',
+                        stack: 'A',
+                        label: 'output',
+                        data: outputc,
                       },
                     ]}
                     height={300}
                     width={450}
-                  /> */}
+                  />
                 </Box>
               </Grid>
             </Grid>
@@ -444,7 +635,7 @@ const TableLhpL2 = () => {
               </Grid>
               <Grid item sx={{ mb: 0.75 }}>
                 <Box sx={{ width: '100%' }}>
-                  {/* <LineChart
+                  <LineChart
                     xAxis={[{
                       scaleType: 'band',
                       data: ['Shift 1', 'Shift 2', 'Shift 3']
@@ -452,38 +643,32 @@ const TableLhpL2 = () => {
                     series={[
                       {
                         id: '1',
-                        label: 'Sheet',
+                        label: 'Pack Table',
                         curve: "linear",
-                        data: 1,
+                        data: rpackTablec, // Nilai default 0
                       },
                       {
                         id: '2',
-                        label: 'Book',
+                        label: 'Oven',
                         curve: "linear",
-                        data: 1,
+                        data: rovenc,
                       },
                       {
                         id: '3',
-                        label: 'Bended',
+                        label: 'MD',
                         curve: "linear",
-                        data: 1,
+                        data: rmdc,
                       },
                       {
                         id: '4',
-                        label: 'Sapuan Pack',
+                        label: 'Feeding',
                         curve: "linear",
-                        data: 1,
-                      },
-                      {
-                        id: '5',
-                        label: 'Buble',
-                        curve: "linear",
-                        data: 1,
+                        data: rfeedingc,
                       }
                     ]}
                     height={300}
                     width={450}
-                  /> */}
+                  />
                 </Box>
               </Grid>
             </Grid>
@@ -537,40 +722,36 @@ const TableLhpL2 = () => {
               <Typography variant="h5">Primary</Typography>
               <Grid container spacing={2} direction="row" sx={{ mt: 1, width: '100%' }}>
                 <Grid item xs={12} sm={2}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      label="Date"
-                      value={valueDate}
-                      onChange={(newValue) => setValueDate(newValue)}
+                <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={inidate}
+                      label="Tanggal"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
                     />
-                  </LocalizationProvider>
+                </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={5}>
                   <FormControl required sx={{ m: 1, width: '100%' }}>
-                    <InputLabel>Shift</InputLabel>
-                    <Select
+                    <TextField
                       value={shift}
-                      onChange={(e) => setShift(e.target.value)}
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value="Shift 1">Shift 1</MenuItem>
-                      <MenuItem value="Shift 2">Shift 2</MenuItem>
-                      <MenuItem value="Shift 3">Shift 3</MenuItem>
-                    </Select>
+                      label="SHIFT"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={5}>
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <InputLabel>SKU</InputLabel>
                     <Select
-                      value={sku}
-                      onChange={(e) => setSKU(e.target.value)} >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value="ROMA KELAPA (410279)">ROMA KELAPA (410279)</MenuItem>
+                      value={sku}>
                     </Select>
                   </FormControl>
                 </Grid>
@@ -1144,4 +1325,4 @@ const TableLhpL2 = () => {
   )
 };
 
-export default TableLhpL2;
+export default TableLhpL5;
