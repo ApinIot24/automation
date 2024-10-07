@@ -15,9 +15,10 @@ import ButtonOff from 'ui-component/ButtonOffL7';
 // import axios from 'axios';
 // ==============================|| HAPPY CODING ||============================== //
 
-const FormLHP = ({ isLoading ,pathnih, label0, label1 , label2 , label3, label4, label5, label6, label7, label8 }) => {
+const FormLHP = ({ isLoading , label0, label1 , label2 , label3, label4, label5, label6, label7, label8 }) => {
     // const [alert, setAlert] = useState(false);
     // const [alertContent, setAlertContent] = useState('');
+    const users = localStorage.getItem('username');
     const [valuedate, setValueDate] = useState(dayjs(new Date()));
     const [shift, setShift] = useState('');
     const [plan, setPlan] = useState('');
@@ -131,6 +132,7 @@ const FormLHP = ({ isLoading ,pathnih, label0, label1 , label2 , label3, label4,
         dbproud : dbproud,
     }
     const LHP = {
+        
     realdatetime : valuedate.format('YYYY-MM-DD'),
     grup : label0,
     shift : shift, 
@@ -167,7 +169,8 @@ const FormLHP = ({ isLoading ,pathnih, label0, label1 , label2 , label3, label4,
     banded_under : forbanded,
     banded_over :forbanded2 ,
     cutoff_jam : cutoff,
-    ctn_luar : ctnluar                 
+    ctn_luar : ctnluar,
+    users_input: users                 
     };
     const LHPDUA = {
         realdatetime : valuedate,
@@ -1188,10 +1191,10 @@ const FormLHP = ({ isLoading ,pathnih, label0, label1 , label2 , label3, label4,
                 </Grid>
                 <Grid container spacing={2} direction="row" >
                     <Grid item xs={12} sm={1} > 
-                        <ButtonSave lhp={LHP} path={pathnih} />
+                        <ButtonSave lhp={LHP}  />
                     </Grid>
                     <Grid item xs={12} sm={1} > 
-                        <ButtonOff lhp={LHPDUA} path={pathnih} />
+                        <ButtonOff lhp={LHPDUA}  />
                     </Grid>
                     
                    
@@ -1210,7 +1213,6 @@ const FormLHP = ({ isLoading ,pathnih, label0, label1 , label2 , label3, label4,
 
 FormLHP.propTypes = {
   isLoading: PropTypes.bool,
-  pathnih : PropTypes.bool,
   label0 : PropTypes.bool,
   label1 : PropTypes.bool,
   label2 : PropTypes.bool,

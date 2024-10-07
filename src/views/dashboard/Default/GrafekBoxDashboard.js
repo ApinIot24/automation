@@ -15,6 +15,7 @@ import MainCard from 'ui-component/cards/MainCard';
 import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
 import { blue } from '@mui/material/colors';
 import axios from 'axios';
+import { mangoFusionPalette } from '@mui/x-charts/colorPalettes';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: 'whitesmoke',
@@ -45,6 +46,7 @@ const GrafekBoxDashboard = ({ isLoading ,url ,label ,urltwo , labeltwo }) => {
    const [counternihdua , setCountertwo] = useState([0]);
    const [dinamisurl , setUrlnya] = useState(url);                                                                                                                                  
    const [dinamisurltwo , setUrlTWOnya] = useState(urltwo);
+       const colortemplate = mangoFusionPalette();
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -182,14 +184,14 @@ const GrafekBoxDashboard = ({ isLoading ,url ,label ,urltwo , labeltwo }) => {
                             type : 'bar',
                             label: label,
                             data: counternih,
-                            color : '#7C4700'
+                          color: colortemplate[3]
                             },
                             {
                                 id: '2',
                                 type : 'bar',
                                 label: labeltwo,
                                 data: counternihdua,
-                                color : '#a52a2a'
+                              color: colortemplate[4]
                             }
                         ]}
                         // xAxis={[
@@ -235,14 +237,14 @@ const GrafekBoxDashboard = ({ isLoading ,url ,label ,urltwo , labeltwo }) => {
                             type : 'bar',
                             label: label,
                             data: counternih,
-                            color : '#7C4700'
+                                color: colortemplate[3]
                             },
                             {
                                 id: '2',
                                 type : 'bar',
                                 label: labeltwo,
                                 data: counternihdua,
-                                color : '#a52a2a'
+                                  color: colortemplate[4]
                             }
                         ]}
                         // xAxis={[
@@ -289,14 +291,14 @@ const GrafekBoxDashboard = ({ isLoading ,url ,label ,urltwo , labeltwo }) => {
                             type : 'bar',
                             label: label,
                             data: counternih,
-                            color : '#7C4700'
+                            color: colortemplate[3]
                             },
                             {
                                 id: '2',
                                 type : 'bar',
                                 label: labeltwo,
                                 data: counternihdua,
-                                color : '#a52a2a'
+                                  color: colortemplate[4]
                             }
                         ]}
                         // xAxis={[
@@ -325,7 +327,7 @@ const GrafekBoxDashboard = ({ isLoading ,url ,label ,urltwo , labeltwo }) => {
             <Stack spacing={5} ml={10} mt={-5} mb={2} direction="row">
                 <Stack direction="row" spacing={1} alignItems="center">
                     <Avatar
-                        sx={{ width: 12, height: 12, bgcolor: '#a52a2a', svg: { display: 'none' } }}
+                        sx={{ width: 12, height: 12, bgcolor: colortemplate[3], svg: { display: 'none' } }}
                     ></Avatar>
                     <Typography variant="h4" color="textSecondary">
                       Packing L1
@@ -333,7 +335,7 @@ const GrafekBoxDashboard = ({ isLoading ,url ,label ,urltwo , labeltwo }) => {
                 </Stack>
                 <Stack direction="row" spacing={1} alignItems="center">
                     <Avatar
-                        sx={{ width: 12, height: 12, bgcolor: '#7C4700', svg: { display: 'none' } }}
+                        sx={{ width: 12, height: 12, bgcolor: colortemplate[4], svg: { display: 'none' } }}
                     ></Avatar>
                     <Typography variant="h4" color="textSecondary">
                        Packing L2

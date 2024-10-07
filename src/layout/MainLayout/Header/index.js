@@ -17,7 +17,9 @@ import { IconMenu2 } from '@tabler/icons-react';
 
 const Header = ({ handleLeftDrawerToggle }) => {
   const theme = useTheme();
-
+  const today = new Date();
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const todayFormatted = today.toLocaleDateString('id-ID', options);
   return (
     <>
       {/* logo & toggler button */}
@@ -62,6 +64,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
       <Box sx={{ flexGrow: 1 }} />
 
       {/* notification & profile */}
+      <h2>{todayFormatted}</h2>
       <NotificationSection />
       <ProfileSection />
     </>

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { useEffect , useState} from 'react';
+import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
-import {  Box, Grid , Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { ResponsiveChartContainer } from '@mui/x-charts/ResponsiveChartContainer';
 import { ChartsXAxis } from '@mui/x-charts/ChartsXAxis';
 import { ChartsTooltip, ChartsYAxis } from '@mui/x-charts';
@@ -16,42 +16,46 @@ import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
 import axios from 'axios';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
-    backgroundColor: 'whitesmoke',
-    color: '#fff',
-    overflow: 'hidden',
-    marginRight : 4,
-    position: 'relative',
-    '&:after': {
-      content: '""',
-      position: 'absolute',
-      width: 15,
-      height: 480,
-      background: 'green',
-      top: -85,
-      left: -5,
-      [theme.breakpoints.down('sm')]: {
-        top: -105,
-        left: -140
-      }
-    },
+  backgroundColor: 'whitesmoke',
+  color: '#fff',
+  overflow: 'hidden',
+  marginRight: 4,
+  position: 'relative',
+  '&:after': {
+    content: '""',
+    position: 'absolute',
+    width: 15,
+    height: 480,
+    background: 'green',
+    top: -85,
+    left: -5,
+    [theme.breakpoints.down('sm')]: {
+      top: -105,
+      left: -140
+    }
+  },
 }));
 
 // ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
 
-const GrafekCenkit = ({ isLoading ,url ,label }) => {
-    const [value, setValue] = React.useState('http://10.37.12.17:3000/shift1_');
-   const [counternih , setCounter] = useState([]);
-   const [dinamisurl , setUrlnya] = useState(url);
+const GrafekCenkit = ({ isLoading, url, label }) => {
+  const [value, setValue] = React.useState('http://10.37.12.17:3000/shift1_');
+  const [counternih, setCounter] = useState([]);
+  const [counternih2, setCounter2] = useState([]);
+  const [dinamisurl, setUrlnya] = useState(url);
 
   const handleChange = (event, newValue) => {
     let counts = [];
+    let counts2 = [];
     axios.get(newValue + label)
       .then(response => {
         var datalasts = response.data;
         for (let index = 0; index < datalasts.length; index++) {
-          counts.push(datalasts[index].cntr_mixing)
+          parseInt(counts.push(datalasts[index].temp_cooling))
+          parseInt(counts2.push(datalasts[index].temp_water))
         }
         setCounter(counts);
+        setCounter2(counts2);
       })
       .catch(error => {
         console.log(error);
@@ -62,33 +66,39 @@ const GrafekCenkit = ({ isLoading ,url ,label }) => {
 
   useEffect(() => {
     let counts = [];
-      axios.get(url)
-        .then(response => {
-          var datalasts = response.data;
-          for (let index = 0; index < datalasts.length; index++) {
-            counts.push(datalasts[index].cntr_mixing)
-          }
-          setCounter(counts);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    let counts2 = [];
+    axios.get(url)
+      .then(response => {
+        var datalasts = response.data;
+        for (let index = 0; index < datalasts.length; index++) {
+          parseInt(counts.push(datalasts[index].temp_cooling))
+          parseInt(counts2.push(datalasts[index].temp_water))
+        }
+        setCounter(counts);
+        setCounter2(counts2);
+      })
+      .catch(error => {
+        console.log(error);
+      });
     const interval = setInterval(() => {
       let count = [];
+      let count2 = [];
       axios.get(dinamisurl)
         .then(response => {
           var datalast = response.data;
           for (let index = 0; index < datalast.length; index++) {
-            count.push(datalast[index].cntr_mixing)
+            parseInt(count.push(datalast[index].temp_cooling))
+            parseInt(count2.push(datalast[index].temp_water))
           }
           setCounter(count);
+          setCounter2(count2);
         })
         .catch(error => {
           console.log(error);
         });
-      }, 1800000);
-        return () => clearInterval(interval);
-    }, []);
+    }, 1800000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -106,23 +116,30 @@ const GrafekCenkit = ({ isLoading ,url ,label }) => {
             </Box>
             <TabPanel value="http://10.37.12.17:3000/shift1_">
               <Grid container direction="column">
-              <Grid item>
+                <Grid item>
                   <Grid container justifyContent="space-between">
                     <Grid item>
                       <Typography variant="h5">Grafik Counter</Typography>
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item sx={{ mb: 0.75 , mt : -3}}>
+                <Grid item sx={{ mb: 0.75, mt: -3 }}>
                   <Box sx={{ width: '100%' }}>
                     <div>
                       <ResponsiveChartContainer
-                      
                         series={[
                           {
-                            type : 'line',
+                            type: 'line',
+                            label: 'temp cooling',
+                            color: '#f20f0f',
                             data: counternih,
-                          }
+                          },
+                          {
+                            type: 'line',
+                            label: 'temp water',
+                            color: '#0f6af2',
+                            data: counternih2,
+                          },
                         ]}
                         // xAxis={[
                         //   {
@@ -131,13 +148,20 @@ const GrafekCenkit = ({ isLoading ,url ,label }) => {
                         //     id: 'x-axis-id',
                         //   },
                         // ]}
-                        xAxis={[{ scaleType: 'band', 
-                                    data: ['07.00','07.30','08.00','08.30','09.00','09.30','10.00','10.30','11.00','11.30','12.00','12.30','13.00','13.30','14.00','14.30','14.59']
-                                    
-                                    }]}
+                        xAxis={[{
+                          scaleType: 'line',
+                          data: ['07.00', '07.30', '08.00', '08.30', '09.00', '09.30', '10.00', '10.30', '11.00', '11.30', '12.00', '12.30', '13.00', '13.30', '14.00', '14.30', '14.59']
+                        }]}
+                        yAxis={[
+                          {
+                            data: [
+                              23, 22, 21, 20, 19, 18, 17, 16,15// Hanya menampilkan nilai dari 18.00 sampai 16.00
+                            ],
+                          },
+                        ]}
                         height={300}
                       >
-                        <MarkPlot/>
+                        <MarkPlot />
                         <LinePlot />
                         <ChartsTooltip />
                         <ChartsXAxis />
@@ -151,22 +175,30 @@ const GrafekCenkit = ({ isLoading ,url ,label }) => {
             <TabPanel value="http://10.37.12.17:3000/shift2_">
               <Grid container direction="column">
                 <Grid item>
-                    <Grid container justifyContent="space-between">
-                      <Grid item>
-                        <Typography variant="h5">Grafik Counter</Typography>
-                      </Grid>
+                  <Grid container justifyContent="space-between">
+                    <Grid item>
+                      <Typography variant="h5">Grafik Counter</Typography>
+                    </Grid>
                   </Grid>
                 </Grid>
-                <Grid item sx={{ mb: 0.75 , mt : -3}}>
+                <Grid item sx={{ mb: 0.75, mt: -3 }}>
                   <Box sx={{ width: '100%' }}>
                     <div>
                       <ResponsiveChartContainer
-                      
+
                         series={[
                           {
-                            type : 'line',
+                            type: 'line',
+                            label: 'temp cooling',
+                            color: '#f20f0f',
                             data: counternih,
-                          }
+                          },
+                          {
+                            type: 'line',
+                            label: 'temp water',
+                            color: '#0f6af2',
+                            data: counternih2,
+                          },
                         ]}
                         // xAxis={[
                         //   {
@@ -175,13 +207,21 @@ const GrafekCenkit = ({ isLoading ,url ,label }) => {
                         //     id: 'x-axis-id',
                         //   },
                         // ]}
-                        xAxis={[{ scaleType: 'band', 
-                                    data: ['15.00','15.30','16.00','16.30','17.00','17.30','18.00','18.30','19.00','19.30','20.00','20.30','21.00','21.30','22.00','22.30','22.59']
-                                    
-                                    }]}
+                        xAxis={[{
+                          scaleType: 'line',
+                          data: ['15.00', '15.30', '16.00', '16.30', '17.00', '17.30', '18.00', '18.30', '19.00', '19.30', '20.00', '20.30', '21.00', '21.30', '22.00', '22.30', '22.59']
+
+                        }]}
+                        yAxis={[
+                          {
+                            data: [
+                              23, 22, 21, 20, 19, 18, 17, 16,15// Hanya menampilkan nilai dari 18.00 sampai 16.00
+                            ],
+                          },
+                        ]}
                         height={300}
                       >
-                        <MarkPlot/>
+                        <MarkPlot />
                         <LinePlot />
                         <ChartsTooltip />
                         <ChartsXAxis />
@@ -193,24 +233,32 @@ const GrafekCenkit = ({ isLoading ,url ,label }) => {
               </Grid>
             </TabPanel>
             <TabPanel value="http://10.37.12.17:3000/shift3_">
-            <Grid container direction="column">
+              <Grid container direction="column">
                 <Grid item>
-                    <Grid container justifyContent="space-between">
-                      <Grid item>
-                        <Typography variant="h5">Grafik Counter</Typography>
-                      </Grid>
+                  <Grid container justifyContent="space-between">
+                    <Grid item>
+                      <Typography variant="h5">Grafik Counter</Typography>
+                    </Grid>
                   </Grid>
                 </Grid>
-                <Grid item sx={{ mb: 0.75 , mt : -3}}>
+                <Grid item sx={{ mb: 0.75, mt: -3 }}>
                   <Box sx={{ width: '100%' }}>
                     <div>
                       <ResponsiveChartContainer
-                      
+
                         series={[
                           {
-                            type : 'line',
+                            type: 'line',
+                            label: 'temp cooling',
+                            color: '#f20f0f',
                             data: counternih,
-                          }
+                          },
+                          {
+                            type: 'line',
+                            label: 'temp water',
+                            color: '#0f6af2',
+                            data: counternih2,
+                          },
                         ]}
                         // xAxis={[
                         //   {
@@ -219,13 +267,21 @@ const GrafekCenkit = ({ isLoading ,url ,label }) => {
                         //     id: 'x-axis-id',
                         //   },
                         // ]}
-                        xAxis={[{ scaleType: 'band', 
-                                    data: ['23.00','23.30','24.00','00.30','01.00','01.30','02.00','02.30','03.00','03.30','04.00','04.30','05.00','05.30','06.00','06.30','06.59']
-                                    
-                                    }]}
+                        xAxis={[{
+                          scaleType: 'line',
+                          data: ['23.00', '23.30', '24.00', '00.30', '01.00', '01.30', '02.00', '02.30', '03.00', '03.30', '04.00', '04.30', '05.00', '05.30', '06.00', '06.30', '06.59']
+
+                        }]}
+                        yAxis={[
+                          {
+                            data: [
+                              23, 22, 21, 20, 19, 18, 17, 16,15// Hanya menampilkan nilai dari 18.00 sampai 16.00
+                            ],
+                          },
+                        ]}
                         height={300}
                       >
-                        <MarkPlot/>
+                        <MarkPlot />
                         <LinePlot />
                         <ChartsTooltip />
                         <ChartsXAxis />
@@ -237,7 +293,7 @@ const GrafekCenkit = ({ isLoading ,url ,label }) => {
               </Grid>
             </TabPanel>
           </TabContext>
-        </CardWrapper>
+        </CardWrapper >
       )}
     </>
   );
@@ -245,8 +301,8 @@ const GrafekCenkit = ({ isLoading ,url ,label }) => {
 
 GrafekCenkit.propTypes = {
   isLoading: PropTypes.bool,
-  url : PropTypes.bool,
-  label : PropTypes.bool
+  url: PropTypes.bool,
+  label: PropTypes.bool
 };
 
 export default GrafekCenkit;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Alert, Box, Grid, Snackbar, Typography ,FormControl, TextField ,CardContent} from '@mui/material';
+import { Alert, Box, Grid, Snackbar, Typography, FormControl, TextField, CardContent } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { styled } from '@mui/material/styles';
 import MainCard from 'ui-component/cards/MainCard';
@@ -11,7 +11,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LineChart } from '@mui/x-charts/LineChart';
 import dayjs from 'dayjs';
 import ButtonBack from 'ui-component/ButtonBack';
-import { BarChart } from '@mui/x-charts';
+// import { BarChart } from '@mui/x-charts';
 import Dialog from '@mui/material/Dialog';
 import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
@@ -23,12 +23,12 @@ import Slide from '@mui/material/Slide';
 
 // ==============================|| Happy Coding ||============================== //
 const CardWrapper = styled(MainCard)(() => ({
-    backgroundColor: 'whitesmoke',
-    color: '#fff',
-    overflow: 'hidden',
-    marginRight : 4,
-    position: 'relative',
-  }));
+  backgroundColor: 'whitesmoke',
+  color: '#fff',
+  overflow: 'hidden',
+  marginRight: 4,
+  position: 'relative',
+}));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -44,112 +44,311 @@ const TableLhpL7 = () => {
   const [open, setOpen] = useState(false);
   const [opendua, setOpenDua] = useState(false);
   const [opentiga, setOpenTiga] = useState(false);
-  const [data ,setData] = useState([]);
-  const [pack1 ,setPack1] = useState([0]);
-  const [pack2 ,setPack2] = useState([0]);
-  const [pack3 ,setPack3] = useState([0]);
-  const [pack4 ,setPack4] = useState([0]);
-  const [pack5 ,setPack5] = useState([0]);
-  const [pack6 ,setPack6] = useState([0]);
-  const [pack7 ,setPack7] = useState([0]);
-  const [pack8 ,setPack8] = useState([0]);
-  const [sumpack ,setSumPack] = useState([0]);
+  const [data, setData] = useState([]);
+  const [pack1, setPack1] = useState([0]);
+  const [pack2, setPack2] = useState([0]);
+  const [pack3, setPack3] = useState([0]);
+  const [pack4, setPack4] = useState([0]);
+  const [pack5, setPack5] = useState([0]);
+  const [pack6, setPack6] = useState([0]);
+  const [pack7, setPack7] = useState([0]);
+  const [pack8, setPack8] = useState([0]);
+  const [sumpack, setSumPack] = useState([0]);
   const [plan, setPlan] = useState([0]);
   const [real, setReal] = useState([0]);
   const [ach, setAch] = useState([0]);
   const [ach1, setAch1] = useState([0]);
   const [ach2, setAch2] = useState([0]);
-  const [sheet , setSheet] = useState([0]);
-  const [book , setBook] = useState([0]);
-  const [banded , setBanded] = useState([0]);
-  const [sapuanpack , setSapuanPack] = useState([0]);
-  const [buble , setBuble] = useState([0]);
+  const [sheet, setSheet] = useState([0]);
+  const [book, setBook] = useState([0]);
+  const [banded, setBanded] = useState([0]);
+  const [sapuanpack, setSapuanPack] = useState([0]);
+  const [buble, setBuble] = useState([0]);
   //Modal
-  const [inidate , setInidate] = useState('')
+  const [inidate, setInidate] = useState('')
   const [shift, setShift] = useState('');
   const [pland, setPland] = useState('');
   const [reald, setReald] = useState('');
   const [achd, setAchd] = useState('');
   const [sku, setSKU] = useState('');
-  const [cello , setCello] = useState('');
-  const [cello1 , setCello1] = useState('');
-  const [cello2 , setCello2] = useState('');
-  const [cello3 , setCello3] = useState('');
-  const [cello4 , setCello4] = useState('');
-  const [cello5 , setCello5] = useState('');
-//   const [cello6 , setCello6] = useState('');
-//   const [cello7 , setCello7] = useState('');
-//   const [cello8 , setCello8] = useState('');
-  const [sumpackd , setSumPackd] = useState('');
-  const [pack1d , setPack1d] = useState('');
-  const [pack2d , setPack2d] = useState('');
-  const [pack3d , setPack3d] = useState('');
-  const [pack4d , setPack4d] = useState('');
-  const [pack5d , setPack5d] = useState('');
-//   const [pack6d , setPack6d] = useState('');
-//   const [pack7d , setPack7d] = useState('');
-//   const [pack8d , setPack8d] = useState('');
-  const [speed1 , setSpeed1] = useState('');
-  const [speed2 , setSpeed2] = useState('');
-  const [speed3 , setSpeed3] = useState('');
-  const [speed4 , setSpeed4] = useState('');
-  const [speed5 , setSpeed5] = useState('');
-//   const [speed6 , setSpeed6] = useState('');
-//   const [speed7 , setSpeed7] = useState('');
-//   const [speed8 , setSpeed8] = useState('');
-  const [adonan , setAdonan] = useState('');
-  const [avgbook , setAVGBook] = useState('');
-  const [avgsheet , setAVGSheet] = useState('');
-  const [creamccb , setCreamCCB] = useState('');
-  const [sheetd , setSheetd] = useState('');
-  const [bookd , setBookd] = useState('');
-  const [cutkasar , setCutkasar] = useState('');
-  const [bubukcut , setBubukCut] = useState('');
-  const [sapuancut , setSapuanCut] = useState('');
-  const [qccello , setQCCello] = useState('');
-  const [qcpacking , setQCPacking] = useState('');
-  const [cellocpp , setCelloCPP] = useState('');
-  const [ctnsup , setCtnSup] = useState('');
-  const [ctnproud , setCtnProud] = useState('');
-  const [cello_used , setCelloUsed] = useState('');
-  const [bandedd , setBandedd] = useState('');
-  const [sapuanpackd , setSapuanPackd] = useState('');
-  const [bubled , setBubled] = useState('');
-  const [supcello , setSupCello] = useState('');
-  const [samplectnqc , setSampleCtnQc] = useState('');
-  const [forbanded , setForBanded] = useState('');
-  const [forbanded2 , setForBanded2] = useState('');
-  const [cutoff , setCutOff] = useState('');
-  const [ctnluar , setCtnLuar] = useState('');
-  const [kendala1 , setKendala1] = useState('');
-  const [kendala2 , setKendala2] = useState('');
-  const [kendala3 , setKendala3] = useState('');
-  const [kendala4 , setKendala4] = useState('');
-  const [kendala5 , setKendala5] = useState('');
-//   const [Db , setDb] = useState('');
-//     const [plastikpof , setPlastikPof] = useState('');
-//     const [coklat , setCoklat] = useState('');
-//     const [pof , setPOF] = useState('');
-//     const [sortir , setSortir] = useState('');
-  const [field ] = useState([
+  const [cello, setCello] = useState('');
+  const [cello1, setCello1] = useState('');
+  const [cello2, setCello2] = useState('');
+  const [cello3, setCello3] = useState('');
+  const [cello4, setCello4] = useState('');
+  const [cello5, setCello5] = useState('');
+  //   const [cello6 , setCello6] = useState('');
+  //   const [cello7 , setCello7] = useState('');
+  //   const [cello8 , setCello8] = useState('');
+  const [sumpackd, setSumPackd] = useState('');
+  const [pack1d, setPack1d] = useState('');
+  const [pack2d, setPack2d] = useState('');
+  const [pack3d, setPack3d] = useState('');
+  const [pack4d, setPack4d] = useState('');
+  const [pack5d, setPack5d] = useState('');
+  //   const [pack6d , setPack6d] = useState('');
+  //   const [pack7d , setPack7d] = useState('');
+  //   const [pack8d , setPack8d] = useState('');
+  const [speed1, setSpeed1] = useState('');
+  const [speed2, setSpeed2] = useState('');
+  const [speed3, setSpeed3] = useState('');
+  const [speed4, setSpeed4] = useState('');
+  const [speed5, setSpeed5] = useState('');
+  //   const [speed6 , setSpeed6] = useState('');
+  //   const [speed7 , setSpeed7] = useState('');
+  //   const [speed8 , setSpeed8] = useState('');
+  const [adonan, setAdonan] = useState('');
+  const [avgbook, setAVGBook] = useState('');
+  const [avgsheet, setAVGSheet] = useState('');
+  const [creamccb, setCreamCCB] = useState('');
+  const [sheetd, setSheetd] = useState('');
+  const [bookd, setBookd] = useState('');
+  const [cutkasar, setCutkasar] = useState('');
+  const [bubukcut, setBubukCut] = useState('');
+  const [sapuancut, setSapuanCut] = useState('');
+  const [qccello, setQCCello] = useState('');
+  const [qcpacking, setQCPacking] = useState('');
+  const [cellocpp, setCelloCPP] = useState('');
+  const [ctnsup, setCtnSup] = useState('');
+  const [ctnproud, setCtnProud] = useState('');
+  const [cello_used, setCelloUsed] = useState('');
+  const [bandedd, setBandedd] = useState('');
+  const [sapuanpackd, setSapuanPackd] = useState('');
+  const [bubled, setBubled] = useState('');
+  const [supcello, setSupCello] = useState('');
+  const [samplectnqc, setSampleCtnQc] = useState('');
+  const [forbanded, setForBanded] = useState('');
+  const [forbanded2, setForBanded2] = useState('');
+  const [cutoff, setCutOff] = useState('');
+  const [ctnluar, setCtnLuar] = useState('');
+  const [kendala1, setKendala1] = useState('');
+  const [kendala2, setKendala2] = useState('');
+  const [kendala3, setKendala3] = useState('');
+  const [kendala4, setKendala4] = useState('');
+  const [kendala5, setKendala5] = useState('');
+  //   const [Db , setDb] = useState('');
+  //     const [plastikpof , setPlastikPof] = useState('');
+  //     const [coklat , setCoklat] = useState('');
+  //     const [pof , setPOF] = useState('');
+  //     const [sortir , setSortir] = useState('');
+  const [field] = useState([
     { field: 'id', headerName: 'ID', width: 50 },
-    { field: 'shift', headerName: 'Time', width: 100 },
+    { field: 'user_input', headerName: 'User Input', width: 50 },
+    { field: 'shift', headerName: 'Shift', width: 100 },
     { field: 'sku', headerName: 'Sku', width: 200 },
     { field: 'plan', headerName: 'Plan', width: 75 },
     { field: 'real', headerName: 'Real', width: 75 },
     { field: 'ach', headerName: 'Achievement', width: 100 },
-    { field: 'packing_reject', headerName: 'Reject Cello', width: 100 },
-    { field: 'sheet', headerName: 'Reject Sheet', width: 100},
-    { field: 'book', headerName: 'Reject Book', width: 100 },
-    { field: 'banded', headerName: 'Reject Banded', width: 100 },
-    { field: 'sapuanpack', headerName: 'Reject Sapuan Packing', width: 135 },
-    { field: 'buble', headerName: 'Reject Buble', width: 125 },
-    { field: 'tanggal', headerName: 'Date', width: 100 }
+    {
+      field: 'cello', headerName: 'Cello', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.cello.cello || ''}`;
+      }
+    },
+    {
+      field: 'cello.cello1', headerName: 'Cello1', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.cello.cello1 || ''}`;
+      }
+    },
+    {
+      field: 'cello.cello2', headerName: 'Cello2', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.cello.cello2 || ''}`;
+      }
+    },
+    {
+      field: 'cello.cello3', headerName: 'Cello3', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.cello.cello3 || ''}`;
+      }
+    },
+    {
+      field: 'cello.cello4', headerName: 'Cello4', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.cello.cello4 || ''}`;
+      }
+    },
+    {
+      field: 'cello.cello5', headerName: 'Cello5', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.cello.cello5 || ''}`;
+      }
+    },
+    {
+      field: 'cello.cello6', headerName: 'Cello6', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.cello.cello6 || ''}`;
+      }
+    },
+    {
+      field: 'cello.cello7', headerName: 'Cello7', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.cello.cello7 || ''}`;
+      }
+    },
+    { field: 'cellocpp', headerName: 'Cello CPP', width: 100 },
+    {
+      field: 'ctnsup', headerName: 'CTN SUP', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.ctn_type.ctnsup || ''}`;
+      }
+    },
+    {
+      field: 'ctnproud', headerName: 'CTN PROUD', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.ctn_type.ctnproud || ''}`;
+      }
+    },
+    { field: 'plastik_pof', headerName: 'Plastik Pof', width: 100 },
+    { field: 'coklat_used', headerName: 'Coklat Used', width: 100 },
+    { field: 'pof_kue', headerName: 'Pof Kue', width: 100 },
+    {
+      field: 'dbsubp', headerName: 'DB SUP', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.ctn_type.dbsup || ''}`;
+      }
+    },
+    {
+      field: 'dbproud', headerName: 'DB PROUD', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.d_b.dbproud || ''}`;
+      }
+    },
+    { field: 'cello_used', headerName: 'Cello USED', width: 100 },
+    { field: 'adonan_used', headerName: 'Adonan Used', width: 100 },
+    { field: 'ccbcream_used', headerName: 'CCB Cream', width: 100 },
+    { field: 'avgsheet', headerName: 'AVG Sheet', width: 100 },
+    { field: 'avgbook', headerName: 'AVG BOOK', width: 100 },
+    { field: 'sheet', headerName: 'Sheet', width: 100 },
+    { field: 'book', headerName: 'Book', width: 100 },
+    { field: 'cutkasar', headerName: 'Cut Kasar', width: 100 },
+    { field: 'bubukcutting', headerName: 'Bubuk Cutting', width: 100 },
+    { field: 'sapuancut', headerName: 'Sapuan Cut', width: 100 },
+    { field: 'qcpacking', headerName: 'Qc Packing', width: 100 },
+    { field: 'qccello', headerName: 'Qc Cello', width: 100 },
+    { field: 'sample_ctn_qc', headerName: 'Sample Ctn Qc', width: 100 }, {
+      field: 'pack1', headerName: 'pack1', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.packing_reject.pack1 || ''}`;
+      }
+    },
+    {
+      field: 'pack2', headerName: 'pack2', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.packing_reject.pack2 || ''}`;
+      }
+    },
+    {
+      field: 'pack3', headerName: 'pack3', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.packing_reject.pack3 || ''}`;
+      }
+    },
+    {
+      field: 'pack4', headerName: 'pack4', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.packing_reject.pack4 || ''}`;
+      }
+    },
+    {
+      field: 'pack5', headerName: 'pack5', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.packing_reject.pack5 || ''}`;
+      }
+    },
+    {
+      field: 'pack6', headerName: 'pack6', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.packing_reject.pack6 || ''}`;
+      }
+    },
+    {
+      field: 'pack7', headerName: 'pack7', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.packing_reject.pack7 || ''}`;
+      }
+    },
+    {
+      field: 'pack8', headerName: 'pack8', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.packing_reject.pack8 || ''}`;
+      }
+    },
+    {
+      field: 'sumpack', headerName: 'Reject Packing', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.packing_reject.sumpack || ''}`;
+      }
+    },
+    { field: 'banded_under', headerName: 'Banded Under', width: 100 },
+    { field: 'banded_over', headerName: 'Banded Over', width: 100 },
+    { field: 'sapuanpack', headerName: 'Sapuan Pack', width: 100 },
+    { field: 'buble', headerName: 'Buble', width: 100 },
+    { field: 'suppliercello', headerName: 'Suppliercello', width: 100 },
+    { field: 'cutoff', headerName: 'Cut OFF', width: 100 },
+    { field: 'ctn_luar', headerName: 'CTN Luar', width: 100 }, {
+      field: 'speed1', headerName: 'speed1', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.speed_mesin.speed1 || ''}`;
+      }
+    },
+    {
+      field: 'speed2', headerName: 'speed2', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.speed_mesin.speed2 || ''}`;
+      }
+    },
+    {
+      field: 'speed3', headerName: 'speed3', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.speed_mesin.speed3 || ''}`;
+      }
+    },
+    {
+      field: 'speed4', headerName: 'speed4', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.speed_mesin.speed4 || ''}`;
+      }
+    },
+    {
+      field: 'speed5', headerName: 'speed5', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.speed_mesin.speed5 || ''}`;
+      }
+    },
+    {
+      field: 'kendala1', headerName: 'kendala1', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.kendala.kendala1 || ''}`;
+      }
+    }, {
+      field: 'kendala2', headerName: 'kendala2', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.kendala.kendala2 || ''}`;
+      }
+    }, {
+      field: 'kendala3', headerName: 'kendala3', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.kendala.kendala3 || ''}`;
+      }
+    }, {
+      field: 'kendala4', headerName: 'kendala4', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.kendala.kendala4 || ''}`;
+      }
+    }, {
+      field: 'kendala5', headerName: 'kendala5', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.kendala.kendala5 || ''}`;
+      }
+    },
+    { field: 'realdatetime', headerName: 'Date', width: 100 }
   ]);
   const [urlapi] = useState({
-    lhp : 'http://10.37.12.17:3000/packing_a1',
-    lhpdaily : 'http://10.37.12.17:3000/lhp_daily/l7',
-    urlp2 : 'table',
+    lhp: 'http://10.37.12.17:3000/packing_a1',
+    lhpdaily: 'http://10.37.12.17:3000/lhp_daily/l7',
+    urlp2: 'table',
 
   })
   const handleClose = (reason) => {
@@ -178,120 +377,105 @@ const TableLhpL7 = () => {
     // console.log('Params', params.row.id)
     setOpenTiga(true);
     axios.get(`http://10.37.12.17:3000/lhp/detail/${params.row.id}`)
-    .then(response => {
-      var dataolah = response.data[0];
-      setInidate(new Date(dataolah.realdatetime).toLocaleDateString())
-      setShift(dataolah.shift)
-      setPland(dataolah.plan)
-      setReald(dataolah.real)
-      setAchd(dataolah.ach)
-      setSKU(dataolah.sku)
-      setCello(dataolah.cello.cello)
-      setCello1(dataolah.cello.cello1)
-      setCello2(dataolah.cello.cello2)
-      setCello3(dataolah.cello.cello3)
-      setCello4(dataolah.cello.cello4)
-      setCello5(dataolah.cello.cello5)
-    //   setCello6(dataolah.cello.cello6)
-    //   setCello7(dataolah.cello.cello7)
-    //   setCello8(dataolah.cello.cello8)
-      setSumPackd(dataolah.packing_reject.sumpack)
-      setPack1d(dataolah.packing_reject.pack1)
-      setPack2d(dataolah.packing_reject.pack2)
-      setPack3d(dataolah.packing_reject.pack3)
-      setPack4d(dataolah.packing_reject.pack4)
-      setPack5d(dataolah.packing_reject.pack5)
-      setPack6d(dataolah.packing_reject.pack6)
-      setPack7d(dataolah.packing_reject.pack7)
-      setPack8d(dataolah.packing_reject.pack8)
-      setSpeed1(dataolah.speed_mesin.speed1)
-      setSpeed2(dataolah.speed_mesin.speed2)
-      setSpeed3(dataolah.speed_mesin.speed3)
-      setSpeed4(dataolah.speed_mesin.speed4)
-      setSpeed5(dataolah.speed_mesin.speed5)
-    //   setSpeed6(dataolah.speed_mesin.speed3)
-    //   setSpeed7(dataolah.speed_mesin.speed4)
-    //   setSpeed8(dataolah.speed_mesin.speed5)
-      setAdonan(dataolah.adonan_used)
-      setAVGBook(dataolah.avgbook)
-      setAVGSheet(dataolah.avgsheet)
-      setCreamCCB(dataolah.ccbcream_used)
-      setSheetd(dataolah.sheet)
-      setBookd(dataolah.book)
-      setCutkasar(dataolah.cutkasar)
-      setBubukCut(dataolah.bubukcutting)
-      setSapuanCut(dataolah.sapuancut)
-      setQCCello(dataolah.qccello)
-      setQCPacking(dataolah.qcpacking)
-      setCelloCPP(dataolah.cellocpp)
-      setCtnSup(dataolah.ctn_type.ctnsup)
-      setCtnProud(dataolah.ctn_type.ctnproud)
-      setCelloUsed(dataolah.cello_used)
-      setBandedd(dataolah.banded)
-      setSapuanPackd(dataolah.sapuanpack)
-      setBubled(dataolah.buble)
-      setSupCello(dataolah.suppliercello)
-      setSampleCtnQc(dataolah.sample_ctn_qc)
-      setForBanded(dataolah.banded_under)
-      setForBanded2(dataolah.banded_over)
-      setCutOff(dataolah.cutoff_jam)
-      setCtnLuar(dataolah.ctn_luar)
-      setKendala1(dataolah.kendala.kendala1)
-      setKendala2(dataolah.kendala.kendala2)
-      setKendala3(dataolah.kendala.kendala3)
-      setKendala4(dataolah.kendala.kendala4)
-      setKendala5(dataolah.kendala.kendala5)
-      setOpenDua(true);
-      setOpenTiga(false);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-    
+      .then(response => {
+        var dataolah = response.data[0];
+        setInidate(new Date(dataolah.realdatetime).toLocaleDateString())
+        setShift(dataolah.shift)
+        setPland(dataolah.plan)
+        setReald(dataolah.real)
+        setAchd(dataolah.ach)
+        setSKU(dataolah.sku)
+        setCello(dataolah.cello.cello)
+        setCello1(dataolah.cello.cello1)
+        setCello2(dataolah.cello.cello2)
+        setCello3(dataolah.cello.cello3)
+        setCello4(dataolah.cello.cello4)
+        setCello5(dataolah.cello.cello5)
+        //   setCello6(dataolah.cello.cello6)
+        //   setCello7(dataolah.cello.cello7)
+        //   setCello8(dataolah.cello.cello8)
+        setSumPackd(dataolah.packing_reject.sumpack)
+        setPack1d(dataolah.packing_reject.pack1)
+        setPack2d(dataolah.packing_reject.pack2)
+        setPack3d(dataolah.packing_reject.pack3)
+        setPack4d(dataolah.packing_reject.pack4)
+        setPack5d(dataolah.packing_reject.pack5)
+        setPack6d(dataolah.packing_reject.pack6)
+        setPack7d(dataolah.packing_reject.pack7)
+        setPack8d(dataolah.packing_reject.pack8)
+        setSpeed1(dataolah.speed_mesin.speed1)
+        setSpeed2(dataolah.speed_mesin.speed2)
+        setSpeed3(dataolah.speed_mesin.speed3)
+        setSpeed4(dataolah.speed_mesin.speed4)
+        setSpeed5(dataolah.speed_mesin.speed5)
+        //   setSpeed6(dataolah.speed_mesin.speed3)
+        //   setSpeed7(dataolah.speed_mesin.speed4)
+        //   setSpeed8(dataolah.speed_mesin.speed5)
+        setAdonan(dataolah.adonan_used)
+        setAVGBook(dataolah.avgbook)
+        setAVGSheet(dataolah.avgsheet)
+        setCreamCCB(dataolah.ccbcream_used)
+        setSheetd(dataolah.sheet)
+        setBookd(dataolah.book)
+        setCutkasar(dataolah.cutkasar)
+        setBubukCut(dataolah.bubukcutting)
+        setSapuanCut(dataolah.sapuancut)
+        setQCCello(dataolah.qccello)
+        setQCPacking(dataolah.qcpacking)
+        setCelloCPP(dataolah.cellocpp)
+        setCtnSup(dataolah.ctn_type.ctnsup)
+        setCtnProud(dataolah.ctn_type.ctnproud)
+        setCelloUsed(dataolah.cello_used)
+        setBandedd(dataolah.banded)
+        setSapuanPackd(dataolah.sapuanpack)
+        setBubled(dataolah.buble)
+        setSupCello(dataolah.suppliercello)
+        setSampleCtnQc(dataolah.sample_ctn_qc)
+        setForBanded(dataolah.banded_under)
+        setForBanded2(dataolah.banded_over)
+        setCutOff(dataolah.cutoff_jam)
+        setCtnLuar(dataolah.ctn_luar)
+        setKendala1(dataolah.kendala.kendala1)
+        setKendala2(dataolah.kendala.kendala2)
+        setKendala3(dataolah.kendala.kendala3)
+        setKendala4(dataolah.kendala.kendala4)
+        setKendala5(dataolah.kendala.kendala5)
+        setOpenDua(true);
+        setOpenTiga(false);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
   };
-  const [isLoading , setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(false);
-      axios.get(urlapi.lhpdaily)
+    axios.get(urlapi.lhpdaily)
       .then(response => {
         var dataolah = response.data;
 
         const d = new Date();
         let hour = d.getHours();
         if (hour >= 15) {
-            let objects = [];  
-            objects[0] = {};
-            objects[0].id = dataolah[0].id;
-            objects[0].shift = dataolah[0].shift
-            objects[0].sku = dataolah[0].sku
-            objects[0].plan = dataolah[0].plan
-            objects[0].real = dataolah[0].real
-            objects[0].ach = dataolah[0].ach
-            objects[0].packing_reject = dataolah[0].packing_reject.sumpack
-            objects[0].sheet = dataolah[0].sheet
-            objects[0].book = dataolah[0].book
-            objects[0].banded = dataolah[0].banded
-            objects[0].sapuanpack = dataolah[0].sapuanpack
-            objects[0].buble = dataolah[0].buble
-            objects[0].tanggal = new Date().toLocaleDateString();
-            setData(objects)
-            setPack1([dataolah[0].packing_reject.pack1])
-            setPack2([dataolah[0].packing_reject.pack2])
-            setPack3([dataolah[0].packing_reject.pack3])
-            setPack4([dataolah[0].packing_reject.pack4])
-            setPack5([dataolah[0].packing_reject.pack5])
-            setPack6([dataolah[0].packing_reject.pack6])
-            setPack7([dataolah[0].packing_reject.pack7])
-            setPack8([dataolah[0].packing_reject.pack8])
-            setSumPack([dataolah[0].packing_reject.sumpack])
-            setPlan([dataolah[0].plan])
-            setReal([dataolah[0].real])
-            setAch([dataolah[0].ach])
-            setSheet([dataolah[0].sheet])
-            setBook([dataolah[0].book])
-            setBanded([dataolah[0].banded])
-            setSapuanPack([dataolah[0].sapuanpack])
-            setBuble([dataolah[0].buble])
+          setData(dataolah)
+          setPack1([dataolah[0].packing_reject.pack1])
+          setPack2([dataolah[0].packing_reject.pack2])
+          setPack3([dataolah[0].packing_reject.pack3])
+          setPack4([dataolah[0].packing_reject.pack4])
+          setPack5([dataolah[0].packing_reject.pack5])
+          setPack6([dataolah[0].packing_reject.pack6])
+          setPack7([dataolah[0].packing_reject.pack7])
+          setPack8([dataolah[0].packing_reject.pack8])
+          setSumPack([dataolah[0].packing_reject.sumpack])
+          setPlan([dataolah[0].plan])
+          setReal([dataolah[0].real])
+          setAch([dataolah[0].ach])
+          setSheet([dataolah[0].sheet])
+          setBook([dataolah[0].book])
+          setBanded([dataolah[0].banded])
+          setSapuanPack([dataolah[0].sapuanpack])
+          setBuble([dataolah[0].buble])
         }
       })
       .catch(error => {
@@ -308,59 +492,47 @@ const TableLhpL7 = () => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="Search Date"
-              value = {valuedate}
+              value={valuedate}
               onChange={(newValue) => {
                 setValueDate(newValue);
-                var thisdate = new Date(newValue);
-                thisdate.setDate(thisdate.getDate() + 1)
-                var datenyar = new Date(newValue);
-                var datestring = datenyar.getFullYear()  + "-0" + (datenyar.getMonth()+1) + "-" + datenyar.getDate()
-                var thisdatenow = new Date(newValue);
-                thisdatenow.setDate(thisdate.getDate() + 1)
-                var datenyarnow = new Date();
-                var datestringnow = datenyarnow.getFullYear()  + "-0" + (datenyarnow.getMonth()+1) + "-" + datenyarnow.getDate()
-                console.log("Tanggal" , datestring)
-                if (datestringnow===datestring) {
+                // Buat objek Date dari newValue (tanggal asli)
+                let originalDate = new Date(newValue);
+                // Format tanggal asli menjadi string 'YYYY-MM-DD'
+                let datestring = originalDate.getFullYear() + "-" +
+                  String(originalDate.getMonth() + 1).padStart(2, '0') + "-" +
+                  String(originalDate.getDate()).padStart(2, '0');
+                // Tambahkan satu hari ke originalDate
+                originalDate.setDate(originalDate.getDate() + 1);
+                let datestringnow = originalDate.getFullYear() + "-" +
+                  String(originalDate.getMonth() + 1).padStart(2, '0') + "-" +
+                  String(originalDate.getDate()).padStart(2, '0');
+                console.log("Tanggal", datestring)
+                if (datestringnow === datestring) {
                   axios.get(urlapi.lhpdaily)
                     .then(response => {
                       var dataolah = response.data;
                       const d = new Date();
                       let hour = d.getHours();
                       if (hour >= 15) {
-                          let objects = [];  
-                          objects[0] = {};
-                          objects[0].id = dataolah[0].id;
-                          objects[0].shift = dataolah[0].shift
-                          objects[0].sku = dataolah[0].sku
-                          objects[0].plan = dataolah[0].plan
-                          objects[0].real = dataolah[0].real
-                          objects[0].ach = dataolah[0].ach
-                          objects[0].packing_reject = dataolah[0].packing_reject.sumpack
-                          objects[0].sheet = dataolah[0].sheet
-                          objects[0].book = dataolah[0].book
-                          objects[0].banded = dataolah[0].banded
-                          objects[0].sapuanpack = dataolah[0].sapuanpack
-                          objects[0].buble = dataolah[0].buble
-                          objects[0].tanggal = new Date().toLocaleDateString();
-                          setData(objects)
-                          setPack1([dataolah[0].packing_reject.pack1])
-                          setPack2([dataolah[0].packing_reject.pack2])
-                          setPack3([dataolah[0].packing_reject.pack3])
-                          setPack4([dataolah[0].packing_reject.pack4])
-                          setPack5([dataolah[0].packing_reject.pack5])
-                          setPack6([dataolah[0].packing_reject.pack6])
-                          setPack7([dataolah[0].packing_reject.pack7])
-                          setPack8([dataolah[0].packing_reject.pack8])
-                          setSumPack([dataolah[0].packing_reject.sumpack])
-                          setPlan([dataolah[0].plan])
-                          setReal([dataolah[0].real])
-                          setAch([dataolah[0].ach])
-                          setSheet([dataolah[0].sheet])
-                          setBook([dataolah[0].book])
-                          setBanded([dataolah[0].banded])
-                          setSapuanPack([dataolah[0].sapuanpack])
-                          setBuble([dataolah[0].buble])
-                          
+                        setData(dataolah)
+                        setPack1([dataolah[0].packing_reject.pack1])
+                        setPack2([dataolah[0].packing_reject.pack2])
+                        setPack3([dataolah[0].packing_reject.pack3])
+                        setPack4([dataolah[0].packing_reject.pack4])
+                        setPack5([dataolah[0].packing_reject.pack5])
+                        setPack6([dataolah[0].packing_reject.pack6])
+                        setPack7([dataolah[0].packing_reject.pack7])
+                        setPack8([dataolah[0].packing_reject.pack8])
+                        setSumPack([dataolah[0].packing_reject.sumpack])
+                        setPlan([dataolah[0].plan])
+                        setReal([dataolah[0].real])
+                        setAch([dataolah[0].ach])
+                        setSheet([dataolah[0].sheet])
+                        setBook([dataolah[0].book])
+                        setBanded([dataolah[0].banded])
+                        setSapuanPack([dataolah[0].sapuanpack])
+                        setBuble([dataolah[0].buble])
+
                       }
                     })
                     .catch(error => {
@@ -371,282 +543,256 @@ const TableLhpL7 = () => {
                   .then(response => {
                     var dataolah = response.data;
                     // console.log("Tanggal" , dataolah)
-                    let objects = [];  
-                    objects[0] = {};
-                    objects[0].id = dataolah[0].id;
-                    objects[0].shift = dataolah[0].shift
-                    objects[0].sku = dataolah[0].sku
-                    objects[0].plan = dataolah[0].plan
-                    objects[0].real = dataolah[0].real
-                    objects[0].ach = dataolah[0].ach
-                    objects[0].packing_reject = dataolah[0].packing_reject.sumpack
-                    objects[0].sheet = dataolah[0].sheet
-                    objects[0].book = dataolah[0].book
-                    objects[0].banded = dataolah[0].banded
-                    objects[0].sapuanpack = dataolah[0].sapuanpack
-                    objects[0].buble = dataolah[0].buble
-                    objects[0].tanggal = new Date(newValue).toLocaleDateString();
-                    objects[1] = {};
-                    objects[1].id = dataolah[1].id;
-                    objects[1].shift = dataolah[1].shift
-                    objects[1].sku = dataolah[1].sku
-                    objects[1].plan = dataolah[1].plan
-                    objects[1].real = dataolah[1].real
-                    objects[1].ach = dataolah[1].ach
-                    objects[1].packing_reject = dataolah[1].packing_reject.sumpack
-                    objects[1].sheet = dataolah[1].sheet
-                    objects[1].book = dataolah[1].book
-                    objects[1].banded = dataolah[1].banded
-                    objects[1].sapuanpack = dataolah[1].sapuanpack
-                    objects[1].buble = dataolah[1].buble
-                    objects[1].tanggal = new Date(newValue).toLocaleDateString();
-                    objects[2] = {};
-                    objects[2].id = dataolah[2].id;
-                    objects[2].shift = dataolah[2].shift
-                    objects[2].sku = dataolah[2].sku
-                    objects[2].plan = dataolah[2].plan
-                    objects[2].real = dataolah[2].real
-                    objects[2].ach = dataolah[2].ach
-                    objects[2].packing_reject = dataolah[2].packing_reject.sumpack
-                    objects[2].sheet = dataolah[2].sheet
-                    objects[2].book = dataolah[2].book
-                    objects[2].banded = dataolah[2].banded
-                    objects[2].sapuanpack = dataolah[2].sapuanpack
-                    objects[2].buble = dataolah[2].buble
-                    objects[2].tanggal = new Date(newValue).toLocaleDateString();
-                    setData(objects)
-                    setPack1([dataolah[0].packing_reject.pack1,dataolah[1].packing_reject.pack1,dataolah[2].packing_reject.pack1])
-                    setPack2([dataolah[0].packing_reject.pack2,dataolah[1].packing_reject.pack2,dataolah[2].packing_reject.pack2])
-                    setPack3([dataolah[0].packing_reject.pack3,dataolah[1].packing_reject.pack3,dataolah[2].packing_reject.pack3])
-                    setPack4([dataolah[0].packing_reject.pack4,dataolah[1].packing_reject.pack4,dataolah[2].packing_reject.pack4])
-                    setPack5([dataolah[0].packing_reject.pack5,dataolah[1].packing_reject.pack5,dataolah[2].packing_reject.pack5])
-                    setPack6([dataolah[0].packing_reject.pack6,dataolah[1].packing_reject.pack6,dataolah[2].packing_reject.pack6])
-                    setPack7([dataolah[0].packing_reject.pack7,dataolah[1].packing_reject.pack7,dataolah[2].packing_reject.pack7])
-                    setPack8([dataolah[0].packing_reject.pack8,dataolah[1].packing_reject.pack8,dataolah[2].packing_reject.pack8])
-                    setSumPack([dataolah[0].packing_reject.sumpack,dataolah[1].packing_reject.sumpack,dataolah[2].packing_reject.sumpack])
-                    setPlan([dataolah[0].plan,dataolah[1].plan,dataolah[2].plan])
-                    setReal([dataolah[0].real,dataolah[1].real,dataolah[2].real])
-                    setAch([dataolah[0].ach])
-                    setAch1([dataolah[1].ach])
-                    setAch2([dataolah[2].ach])
-                    setSheet([dataolah[0].sheet,dataolah[1].sheet,dataolah[2].sheet])
-                    setBook([dataolah[0].book,dataolah[1].book,dataolah[2].book])
-                    setBanded([dataolah[0].banded,dataolah[1].banded,dataolah[2].banded])
-                    setSapuanPack([dataolah[0].sapuanpack,dataolah[1].sapuanpack,dataolah[2].sapuanpack])
-                    setBuble([dataolah[0].buble,dataolah[1].buble,dataolah[2].buble])
-
+                    setData(dataolah)
+                    setPack1([dataolah[0]?.packing_reject?.pack1 || 0, dataolah[1]?.packing_reject?.pack1 || 0, dataolah[2]?.packing_reject?.pack1 || 0])
+                    setPack2([dataolah[0]?.packing_reject?.pack2 || 0, dataolah[1]?.packing_reject?.pack2 || 0, dataolah[2]?.packing_reject?.pack2 || 0])
+                    setPack3([dataolah[0]?.packing_reject?.pack3 || 0, dataolah[1]?.packing_reject?.pack3 || 0, dataolah[2]?.packing_reject?.pack3 || 0])
+                    setPack4([dataolah[0]?.packing_reject?.pack4 || 0, dataolah[1]?.packing_reject?.pack4 || 0, dataolah[2]?.packing_reject?.pack4 || 0])
+                    setPack5([dataolah[0]?.packing_reject?.pack5 || 0, dataolah[1]?.packing_reject?.pack5 || 0, dataolah[2]?.packing_reject?.pack5 || 0])
+                    setPack6([dataolah[0]?.packing_reject?.pack6 || 0, dataolah[1]?.packing_reject?.pack6 || 0, dataolah[2]?.packing_reject?.pack6 || 0])
+                    setPack7([dataolah[0]?.packing_reject?.pack7 || 0, dataolah[1]?.packing_reject?.pack7 || 0, dataolah[2]?.packing_reject?.pack7 || 0])
+                    setPack8([dataolah[0]?.packing_reject?.pack8 || 0, dataolah[1]?.packing_reject?.pack8 || 0, dataolah[2]?.packing_reject?.pack8 || 0])
+                    setSumPack([dataolah[0]?.packing_reject?.sumpack || 0, dataolah[1]?.packing_reject?.sumpack || 0, dataolah[2]?.packing_reject?.sumpack || 0])
+                    setPlan([dataolah[0]?.plan || 0, dataolah[1]?.plan || 0, dataolah[2]?.plan || 0])
+                    setReal([dataolah[0]?.real || 0, dataolah[1]?.real || 0, dataolah[2]?.real || 0])
+                    setAch([dataolah[0]?.ach || 0])
+                    setAch1([dataolah[1]?.ach || 0])
+                    setAch2([dataolah[2]?.ach || 0])
+                    setSheet([dataolah[0]?.sheet || 0, dataolah[1]?.sheet || 0, dataolah[2]?.sheet || 0])
+                    setBook([dataolah[0]?.book || 0, dataolah[1]?.book || 0, dataolah[2]?.book || 0])
+                    setBanded([dataolah[0]?.banded || 0, dataolah[1]?.banded || 0, dataolah[2]?.banded || 0])
+                    setSapuanPack([dataolah[0]?.sapuanpack || 0, dataolah[1]?.sapuanpack || 0, dataolah[2]?.sapuanpack || 0])
+                    setBuble([dataolah[0]?.buble || 0, dataolah[1]?.buble || 0, dataolah[2]?.buble || 0])
                   })
                   .catch(error => {
                     setOpen(true)
-                      setData([])
-                      setPack1([0])
-                      setPack2([0])
-                      setPack3([0])
-                      setPack4([0])
-                      setPack5([0])
-                      setPack6([0])
-                      setPack7([0])
-                      setPack8([0])
-                      setSumPack([0])
-                      setPlan([0])
-                      setReal([0])
-                      setAch([0])
-                      setAch1([0])
-                      setAch2([0])
-                      setSheet([0])
-                      setBook([0])
-                      setBanded([0])
-                      setSapuanPack([0])
-                      setBuble([0])
+                    setData([])
+                    setPack1([0])
+                    setPack2([0])
+                    setPack3([0])
+                    setPack4([0])
+                    setPack5([0])
+                    setPack6([0])
+                    setPack7([0])
+                    setPack8([0])
+                    setSumPack([0])
+                    setPlan([0])
+                    setReal([0])
+                    setAch([0])
+                    setAch1([0])
+                    setAch2([0])
+                    setSheet([0])
+                    setBook([0])
+                    setBanded([0])
+                    setSapuanPack([0])
+                    setBuble([0])
                     console.log(error);
-                  });
+                  });                
                 }
               }}
             />
           </LocalizationProvider>
         </Grid>
       </Grid>
-      <Grid item sx={{mb: 5}} xs={12} >
-        <DataGrid rows={data} columns={field} loading={isLoading} slots={{ toolbar: GridToolbar }} onRowClick={handleRowClick}/>
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Grid item xs={2} sm={4} md={4}>
+          <CardWrapper border={false} content={false}>
+            <Grid container direction="column">
+              <Grid item sx={{ mb: 0.75, mt: 2 }}>
+                <Grid container justifyContent="Center">
+                  <Grid item>
+                    <Typography variant="h3">Grafik Reject Cello</Typography>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item sx={{ mb: 0.75 }}>
+                <Box sx={{ width: '100%' }}>
+                  <LineChart
+                    xAxis={[{
+                      scaleType: 'band',
+                      data: ['Shift 1', 'Shift 2', 'Shift 3']
+                    }]}
+                    series={[
+                      {
+                        id: '1',
+                        label: 'G1',
+                        curve: "linear",
+                        data: pack1,
+                        color: '#9603ff',
+                      },
+                      {
+                        id: '2',
+                        label: 'G2',
+                        curve: "linear",
+                        data: pack2,
+                        color: '#ffb303',
+                      },
+                      {
+                        id: '3',
+                        label: 'G3',
+                        curve: "linear",
+                        data: pack3,
+                        color: '#03ffbc',
+                      },
+                      {
+                        id: '4',
+                        label: 'G4',
+                        curve: "linear",
+                        data: pack4,
+                        color: '#1017e3',
+                      },
+                      {
+                        id: '5',
+                        label: 'G5',
+                        curve: "linear",
+                        data: pack5,
+                        color: '#ed0744',
+                      },
+                      {
+                        id: '6',
+                        label: 'G6',
+                        curve: "linear",
+                        data: pack6,
+                        color: '#03ffdd',
+                      },
+                      {
+                        id: '7',
+                        label: 'G7',
+                        curve: "linear",
+                        data: pack7,
+                        color: '#850776',
+                      },
+                      {
+                        id: '8',
+                        label: 'G8',
+                        curve: "linear",
+                        data: pack8,
+                        color: '#ed0744',
+                      },
+                      {
+                        id: '9',
+                        label: 'Total',
+                        curve: "linear",
+                        data: sumpack,
+                        color: '#5707ed',
+                      }
+                    ]}
+                    height={300}
+                    width={450}
+                  />
+                </Box>
+              </Grid>
+            </Grid>
+          </CardWrapper>
+        </Grid>
+        <Grid item xs={2} sm={4} md={4}>
+          <CardWrapper border={false} content={false}>
+            <Grid container direction="column">
+              <Grid item sx={{ mb: 0.75, mt: 2 }}>
+                <Grid container justifyContent="Center">
+                  <Grid item>
+                    <Typography variant="h3">Grafik Achievement</Typography>
+                  </Grid>
+                </Grid>
+                <Grid container justifyContent="Center">
+                  <Grid item>
+                    <Typography variant="h4">(Ach Shift 1 =  {ach} %, Ach Shift 2 =  {ach1} %,Ach Shift 3 =  {ach2} %)</Typography>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item sx={{ mb: 0.75 }}>
+                <Box sx={{ width: '100%' }}>
+                  <LineChart
+                    xAxis={[{
+                      scaleType: 'band',
+                      data: ['Shift 1', 'Shift 2', 'Shift 3']
+                    }]}
+                    series={[
+                      {
+                        id: '1',
+                        stack: 'A',
+                        label: 'Real',
+                        data: real,
+                        color: '#03ffbc',
+                      },
+                      {
+                        id: '2',
+                        stack: 'B',
+                        label: 'Plan',
+                        data: plan,
+                        color: '#d4131d',
+                      }
+                    ]}
+                    height={300}
+                    width={450}
+                  />
+                </Box>
+              </Grid>
+            </Grid>
+          </CardWrapper>
+        </Grid>
+        <Grid item xs={2} sm={4} md={4}>
+          <CardWrapper border={false} content={false}>
+            <Grid container direction="column">
+              <Grid item sx={{ mb: 0.75, mt: 2 }}>
+                <Grid container justifyContent="Center">
+                  <Grid item>
+                    <Typography variant="h3">Grafik Reject</Typography>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item sx={{ mb: 0.75 }}>
+                <Box sx={{ width: '100%' }}>
+                  <LineChart
+                    xAxis={[{
+                      scaleType: 'band',
+                      data: ['Shift 1', 'Shift 2', 'Shift 3']
+                    }]}
+                    series={[
+                      {
+                        id: '1',
+                        label: 'Sheet',
+                        curve: "linear",
+                        data: sheet, color: '#1017e3',
+                      },
+                      {
+                        id: '2',
+                        label: 'Book',
+                        curve: "linear",
+                        data: book, color: '#ed0744',
+                      },
+                      {
+                        id: '3',
+                        label: 'Bended',
+                        curve: "linear",
+                        data: banded, color: '#03ffdd',
+                      },
+                      {
+                        id: '4',
+                        label: 'Sapuan Pack',
+                        curve: "linear",
+                        data: sapuanpack, color: '#ed0744',
+                      },
+                      {
+                        id: '5',
+                        label: 'Buble',
+                        curve: "linear",
+                        data: buble, color: '#5707ed',
+                      }
+                    ]}
+                    height={300}
+                    width={450}
+                  />
+                </Box>
+              </Grid>
+            </Grid>
+          </CardWrapper>
+        </Grid>
       </Grid>
-      <Grid container  spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        <Grid item xs={2} sm={4} md={4}>
-          <CardWrapper border={false} content={false}>
-            <Grid container direction="column">
-                <Grid item sx={{ mb: 0.75,  mt: 2}}>
-                    <Grid container justifyContent="Center">
-                      <Grid item>
-                        <Typography variant="h3">Grafik Reject Cello</Typography>
-                      </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item sx={{ mb: 0.75 }}>
-                    <Box sx={{ width: '100%' }}>
-                        <LineChart
-                          xAxis={[{ scaleType: 'band', 
-                          data: ['Shift 1','Shift 2','Shift 3']}]}
-                          series={[
-                                {
-                                  id: '1',
-                                  label: 'G1',
-                                  curve: "linear",
-                                  data: pack1,
-                                },
-                                {
-                                  id: '2',
-                                  label: 'G2',
-                                  curve: "linear",
-                                  data: pack2,
-                                },
-                                {
-                                  id: '3',
-                                  label: 'G3',
-                                  curve: "linear",
-                                  data: pack3,
-                                },
-                                {
-                                  id: '4',
-                                  label: 'G4',
-                                  curve: "linear",
-                                  data: pack4,
-                                },
-                                {
-                                  id: '5',
-                                  label: 'G5',
-                                  curve: "linear",
-                                  data: pack5,
-                                },
-                                {
-                                    id: '6',
-                                    label: 'G6',
-                                    curve: "linear",
-                                    data: pack6,
-                                },
-                                {
-                                    id: '7',
-                                    label: 'G7',
-                                    curve: "linear",
-                                    data: pack7,
-                                },
-                                {
-                                    id: '8',
-                                    label: 'G8',
-                                    curve: "linear",
-                                    data: pack8,
-                                },
-                                {
-                                  id: '9',
-                                  label: 'Total',
-                                  curve: "linear",
-                                  data: sumpack,
-                                }
-                          ]}
-                          height={300}
-                          width={450}
-                        />        
-                    </Box>
-                </Grid>
-            </Grid>
-          </CardWrapper>
-        </Grid>
-        <Grid item xs={2} sm={4} md={4}>
-          <CardWrapper border={false} content={false}>
-            <Grid container direction="column">
-                <Grid item sx={{ mb: 0.75,  mt: 2}}>
-                    <Grid container justifyContent="Center">
-                      <Grid item>
-                        <Typography variant="h3">Grafik Achievement</Typography>
-                      </Grid>
-                    </Grid>
-                    <Grid container justifyContent="Center">
-                      <Grid item>
-                        <Typography variant="h4">(Ach Shift 1 =  {ach} %, Ach Shift 2 =  {ach1} %,Ach Shift 3 =  {ach2} %)</Typography>
-                      </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item sx={{ mb: 0.75 }}>
-                    <Box sx={{ width: '100%' }}>
-                        <BarChart
-                          xAxis={[{ scaleType: 'band', 
-                          data: ['Shift 1','Shift 2','Shift 3']}]}
-                          series={[
-                                {
-                                  id: '1',
-                                  stack: 'A',
-                                  label: 'Plan',
-                                  data: plan,
-                                },
-                                {
-                                  id: '2',
-                                  stack: 'A',
-                                  label: 'Real',
-                                  data: real,
-                                },
-                          ]}
-                          height={300}
-                          width={450}
-                        />        
-                    </Box>
-                </Grid>
-            </Grid>
-          </CardWrapper>
-        </Grid>
-        <Grid item xs={2} sm={4} md={4}>
-          <CardWrapper border={false} content={false}>
-            <Grid container direction="column">
-                <Grid item sx={{ mb: 0.75,  mt: 2}}>
-                    <Grid container justifyContent="Center">
-                      <Grid item>
-                        <Typography variant="h3">Grafik Reject</Typography>
-                      </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item sx={{ mb: 0.75 }}>
-                    <Box sx={{ width: '100%' }}>
-                        <LineChart
-                          xAxis={[{ scaleType: 'band', 
-                          data: ['Shift 1','Shift 2','Shift 3']}]}
-                          series={[
-                                {
-                                  id: '1',
-                                  label: 'Sheet',
-                                  curve: "linear",
-                                  data: sheet,
-                                },
-                                {
-                                  id: '2',
-                                  label: 'Book',
-                                  curve: "linear",
-                                  data: book,
-                                },
-                                {
-                                  id: '3',
-                                  label: 'Bended',
-                                  curve: "linear",
-                                  data: banded,
-                                },
-                                {
-                                  id: '4',
-                                  label: 'Sapuan Pack',
-                                  curve: "linear",
-                                  data: sapuanpack,
-                                },
-                                {
-                                  id: '5',
-                                  label: 'Buble',
-                                  curve: "linear",
-                                  data: buble,
-                                }
-                          ]}
-                          height={300}
-                          width={450}
-                        />        
-                    </Box>
-                </Grid>
-            </Grid>
-          </CardWrapper>
-        </Grid>
+      <Grid item sx={{ mb: 5 }} xs={12} >
+        <DataGrid rows={data} columns={field} loading={isLoading} slots={{ toolbar: GridToolbar }} onRowClick={handleRowClick} />
       </Grid>
+
       <Snackbar
         onClose={handleClose}
         anchorOrigin={{ vertical, horizontal }}
@@ -654,14 +800,14 @@ const TableLhpL7 = () => {
         key={vertical + horizontal}
         autoHideDuration={5000}
       >
-          <Alert
-            onClose={handleClose}
-            severity="error"
-            variant="filled"
-            sx={{ width: '100%' }}
-          >
-            Data is not complete, cannot show data in table and graphics
-          </Alert>
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          Data is not complete, cannot show data in table and graphics
+        </Alert>
       </Snackbar>
       <Dialog
         fullScreen
@@ -684,738 +830,738 @@ const TableLhpL7 = () => {
               Close
             </Typography>
             <Typography >
-            Detail Data
-          </Typography>
+              Detail Data
+            </Typography>
           </Toolbar>
         </AppBar>
         <DialogContent dividers={scroll === 'paper'}>
           <MainCard content={false}>
             <CardContent>
-                  <Typography variant="h5">Primary</Typography>
-                  <Grid container spacing={2} direction="row" sx={{ mt: 1, width: '100%' }} >
-                      <Grid item xs={12} sm={2} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                            <TextField
-                                value={inidate}
-                                label="Tanggal"
-                                defaultValue=""
-                                id="outlined-read-only-input"
-                                InputProps={{
-                                  readOnly: true,
-                                }}
-                            />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={5}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                            <TextField
-                                value={shift}
-                                label="SHIFT"
-                                defaultValue=""
-                                id="outlined-read-only-input"
-                                InputProps={{
-                                  readOnly: true,
-                                }}
-                            />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={5}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={sku}
-                              label="SKU"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                  </Grid>
-                  <Grid container spacing={2} direction="row" >
-                      <Grid item xs={12} sm={4} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={pland}
-                              label="Plan (Ctn)"
-                              type="number"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={reald}
-                              label="Real(Ctn)"
-                              type="number"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={achd}
-                              label="Ach(%)"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                  </Grid>
-                  <Divider sx={{ mb : 2 ,  border: 1, borderColor: 'divider' }}/>
-                  <Typography variant="h5">REJECT PM</Typography>
-                  <Grid container spacing={2} direction="row" >
-                      <Grid item xs={12} sm={2} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={cello}
-                              label="Cello (Kg)"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={cello1}
-                              label={"MP B1"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={cello2}
-                              label={"MP B2"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={cello3}
-                              label={"MP B3"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                              
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={cello4}
-                              label={"MP B4"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={cello5}
-                              label={"MP A4"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                  </Grid>
-                  <Grid container spacing={2} direction="row" >
-                      <Grid item xs={12} sm={3} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={cellocpp}
-                              label="Cello CPP (Kg)"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={3}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={ctnsup}
-                              label="Ctn Sup (lbr)"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={3}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={ctnproud}
-                              label="Ctn Proud (lbr)"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={3}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={cello_used}
-                              label="Pemakaian Cello"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                  </Grid>
-                  <Grid container spacing={2} direction="row" >
-                      <Grid item xs={12} sm={3} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={adonan}
-                              label="Pemakaian Adonan"
-                              type="number"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={3}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={creamccb}
-                              label="Pemakaian Cream CCB(kg)"
-                              type="number"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={3}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={avgsheet}
-                              label="Rata-rata Sheet(gr)"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={3}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={avgbook}
-                              label="Rata-rata Book (gr)"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                  </Grid>
-                  <Divider sx={{ mb : 2 ,  border: 1, borderColor: 'divider' }}/>
-                  <Typography variant="h5">REJECT(kg)</Typography>
-                  <Grid container spacing={2} direction="row" >
-                      <Grid item xs={12} sm={1.6} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={sheetd}
-                              label="Sheet"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={1.6}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={bookd}
-                              label="Book"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={1.6}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={cutkasar}    
-                              label="Potongan Kasar"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={1.6} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={bubukcut}    
-                              label="Bubuk Cutting"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={1.6}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={sapuancut}    
-                              label="Sapuan Cutting"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={1.6}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={qcpacking}    
-                              label="QC Packing"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={1.6}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={qccello}    
-                              label="QC Cello"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                  </Grid>
-                  <Grid container spacing={2} direction="row" >
-                      <Grid item xs={12} sm={2} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={sumpackd}
-                              label="Total Packing"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={pack1d}
-                              label={"MP B1"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={pack2d}
-                              label={"MP B2"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={pack3d}
-                              label={"MP B3"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={pack4d}
-                              label={"MP B4"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={pack5d}
-                              label={"MP A4"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                  </Grid>
-                  <Grid container spacing={2} direction="row" >
-                      <Grid item xs={12} sm={3} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={bandedd}
-                              label="Banded"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={3}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={sapuanpackd}
-                              label="Sapuan Packing"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={3}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={bubled}
-                              label="Buble"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={3}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={supcello}
-                              label="Suplier Cello"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                  </Grid>
-                  <Divider sx={{ mb : 2 ,  border: 1, borderColor: 'divider' }}/>
-                  <Typography variant="h5">Speed Mesin Packing</Typography>
-                  <Grid container spacing={2} direction="row" >
-                      <Grid item xs={12} sm={2.4} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={speed1}
-                              label= {"MP B1"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2.4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                          value={speed2}
-                              label={"MP B2"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2.4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={speed3}
-                              label={"MP B3"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2.4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={speed4}
-                              label={"MP B4"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2.4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={speed5}
-                              label={"MP A4"}
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                  </Grid>
-                  <Divider sx={{ mb : 2 ,  border: 1, borderColor: 'divider' }}/>
-                  <Typography variant="h5">Tambahan</Typography>
-                  <Grid container spacing={2} direction="row" >
-                      <Grid item xs={12} sm={2.4} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={samplectnqc}
-                              label= "Sample Carton QC"
-                              type="number"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2.4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={forbanded}
-                              label= "Pengulangan Banded (under)"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2.4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={forbanded2}
-                              label="Pengulangan Banded (over)"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2.4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={cutoff}
-                              label="Cut Off(jam)"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2.4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={ctnluar}
-                              label="Carton luar"
-                              defaultValue=""
-                              id="outlined-read-only-input"
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                  </Grid>
-                  <Divider sx={{ mb : 2 ,  border: 1, borderColor: 'divider' }}/>
-                  <Typography variant="h5">Kendala / Note</Typography>
-                  <Grid container spacing={2} direction="row" >
-                      <Grid item xs={12} sm={2.4} >
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={kendala1}
-                              id="outlined-multiline-static"
-                              label="Kendala 1"
-                              multiline
-                              rows={4}
-                              defaultValue=""
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2.4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={kendala2}
-                              id="outlined-multiline-static"
-                              label="Kendala 2"
-                              multiline
-                              rows={4}
-                              defaultValue=""
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2.4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={kendala3}
-                              id="outlined-multiline-static"
-                              label="Kendala 3"
-                              multiline
-                              rows={4}
-                              defaultValue=""
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2.4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                              value={kendala4}
-                              id="outlined-multiline-static"
-                              label="Kendala 4"
-                              multiline
-                              rows={4}
-                              defaultValue=""
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                          />
-                          </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={2.4}>
-                          <FormControl required sx={{ m: 1, width: '100%' }}>
-                          <TextField
-                            value={kendala5}
-                            id="outlined-multiline-static"
-                            label="Kendala 5"
-                            multiline
-                            rows={4}
-                            defaultValue=""
-                            InputProps={{
-                              readOnly: true,
-                            }}
-                          />
-                          </FormControl>
-                      </Grid>
-                  </Grid>
+              <Typography variant="h5">Primary</Typography>
+              <Grid container spacing={2} direction="row" sx={{ mt: 1, width: '100%' }} >
+                <Grid item xs={12} sm={2} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={inidate}
+                      label="Tanggal"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={5}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={shift}
+                      label="SHIFT"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={5}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={sku}
+                      label="SKU"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} direction="row" >
+                <Grid item xs={12} sm={4} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={pland}
+                      label="Plan (Ctn)"
+                      type="number"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={reald}
+                      label="Real(Ctn)"
+                      type="number"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={achd}
+                      label="Ach(%)"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Divider sx={{ mb: 2, border: 1, borderColor: 'divider' }} />
+              <Typography variant="h5">REJECT PM</Typography>
+              <Grid container spacing={2} direction="row" >
+                <Grid item xs={12} sm={2} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={cello}
+                      label="Cello (Kg)"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={cello1}
+                      label={"MP B1"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={cello2}
+                      label={"MP B2"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={cello3}
+                      label={"MP B3"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={cello4}
+                      label={"MP B4"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={cello5}
+                      label={"MP A4"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} direction="row" >
+                <Grid item xs={12} sm={3} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={cellocpp}
+                      label="Cello CPP (Kg)"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={ctnsup}
+                      label="Ctn Sup (lbr)"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={ctnproud}
+                      label="Ctn Proud (lbr)"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={cello_used}
+                      label="Pemakaian Cello"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} direction="row" >
+                <Grid item xs={12} sm={3} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={adonan}
+                      label="Pemakaian Adonan"
+                      type="number"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={creamccb}
+                      label="Pemakaian Cream CCB(kg)"
+                      type="number"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={avgsheet}
+                      label="Rata-rata Sheet(gr)"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={avgbook}
+                      label="Rata-rata Book (gr)"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Divider sx={{ mb: 2, border: 1, borderColor: 'divider' }} />
+              <Typography variant="h5">REJECT(kg)</Typography>
+              <Grid container spacing={2} direction="row" >
+                <Grid item xs={12} sm={1.6} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={sheetd}
+                      label="Sheet"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={1.6}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={bookd}
+                      label="Book"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={1.6}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={cutkasar}
+                      label="Potongan Kasar"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={1.6} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={bubukcut}
+                      label="Bubuk Cutting"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={1.6}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={sapuancut}
+                      label="Sapuan Cutting"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={1.6}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={qcpacking}
+                      label="QC Packing"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={1.6}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={qccello}
+                      label="QC Cello"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} direction="row" >
+                <Grid item xs={12} sm={2} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={sumpackd}
+                      label="Total Packing"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={pack1d}
+                      label={"MP B1"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={pack2d}
+                      label={"MP B2"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={pack3d}
+                      label={"MP B3"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={pack4d}
+                      label={"MP B4"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={pack5d}
+                      label={"MP A4"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} direction="row" >
+                <Grid item xs={12} sm={3} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={bandedd}
+                      label="Banded"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={sapuanpackd}
+                      label="Sapuan Packing"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={bubled}
+                      label="Buble"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={supcello}
+                      label="Suplier Cello"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Divider sx={{ mb: 2, border: 1, borderColor: 'divider' }} />
+              <Typography variant="h5">Speed Mesin Packing</Typography>
+              <Grid container spacing={2} direction="row" >
+                <Grid item xs={12} sm={2.4} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={speed1}
+                      label={"MP B1"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={speed2}
+                      label={"MP B2"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={speed3}
+                      label={"MP B3"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={speed4}
+                      label={"MP B4"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={speed5}
+                      label={"MP A4"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Divider sx={{ mb: 2, border: 1, borderColor: 'divider' }} />
+              <Typography variant="h5">Tambahan</Typography>
+              <Grid container spacing={2} direction="row" >
+                <Grid item xs={12} sm={2.4} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={samplectnqc}
+                      label="Sample Carton QC"
+                      type="number"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={forbanded}
+                      label="Pengulangan Banded (under)"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={forbanded2}
+                      label="Pengulangan Banded (over)"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={cutoff}
+                      label="Cut Off(jam)"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={ctnluar}
+                      label="Carton luar"
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Divider sx={{ mb: 2, border: 1, borderColor: 'divider' }} />
+              <Typography variant="h5">Kendala / Note</Typography>
+              <Grid container spacing={2} direction="row" >
+                <Grid item xs={12} sm={2.4} >
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={kendala1}
+                      id="outlined-multiline-static"
+                      label="Kendala 1"
+                      multiline
+                      rows={4}
+                      defaultValue=""
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={kendala2}
+                      id="outlined-multiline-static"
+                      label="Kendala 2"
+                      multiline
+                      rows={4}
+                      defaultValue=""
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={kendala3}
+                      id="outlined-multiline-static"
+                      label="Kendala 3"
+                      multiline
+                      rows={4}
+                      defaultValue=""
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={kendala4}
+                      id="outlined-multiline-static"
+                      label="Kendala 4"
+                      multiline
+                      rows={4}
+                      defaultValue=""
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={kendala5}
+                      id="outlined-multiline-static"
+                      label="Kendala 5"
+                      multiline
+                      rows={4}
+                      defaultValue=""
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
             </CardContent>
           </MainCard>
         </DialogContent>
@@ -1426,14 +1572,14 @@ const TableLhpL7 = () => {
         key={vertical + horizontal}
       >
         <Alert
-            onClose={handleClose}
-            severity="primary"
-            variant="filled"
-            sx={{ width: '100%' }}
-          >
-            loading
-          </Alert>
-        
+          onClose={handleClose}
+          severity="primary"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          loading
+        </Alert>
+
       </Snackbar>
     </MainCard>
   )

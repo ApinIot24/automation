@@ -58,6 +58,7 @@ const TableLhpL5 = () => {
   const [rmE11c, setRmE11c] = useState([0]);
   const [rmE12c, setRmE12c] = useState([0]);
   const [regulerc, setRegulerc] = useState([0]);
+  // console.log('reguler',regulerc);
   const [holdc, setHoldc] = useState([0]);
   const [outputc, setOutputc] = useState([0]);
   const [rmdc, setRMDc] = useState([0]);
@@ -139,40 +140,217 @@ const TableLhpL5 = () => {
     { field: 'users_input', headerName: 'User Input', width: 200 },
     { field: 'shift', headerName: 'Time', width: 100 },
     { field: 'sku', headerName: 'Sku', width: 200 },
-    { field: 'reguler', headerName: 'Reguler', width: 50 },
+    { field: 'reguler', headerName: 'Release', width: 50 },
+    { field: 'planning', headerName: 'R Sample Qc', width: 50 },
     { field: 'hold', headerName: 'Hold', width: 50 },
     { field: 'output', headerName: 'Output', width: 50 },
-    // { field: 'rmd', headerName: 'Rmd', width: 50 },
-    // { field: 'rfeeding', headerName: 'Rfeeding', width: 50 },
-    // { field: 'rpacktable', headerName: 'Rpacktable', width: 50 },
-    // { field: 'rmtotal', headerName: 'Rmtotal', width: 50 },
-    // { field: 'roven', headerName: 'R Oven', width: 50 },
-    // { field: 'soven', headerName: 'Sampah Oven', width: 50 },
-    // { field: 'mcbks', headerName: 'Mcbks', width: 50 },
-    // { field: 'ptable', headerName: 'P Table', width: 50 },
-    // { field: 'serbuk', headerName: 'Serbuk', width: 50 },
-    // { field: 'tampungan', headerName: 'Tampungan', width: 50 },
-    // { field: 'total', headerName: 'Total', width: 50 },
-    // { field: 'brtpack', headerName: 'Brt Pack', width: 50 },
-    // { field: 'batch', headerName: 'Batch', width: 50 },
-    // { field: 'wipackinner', headerName: 'Wi Pack Inner', width: 50 },
-    // { field: 'wikulit', headerName: 'Wi Kulit', width: 50 },
-    // { field: 'witotal', headerName: 'Wi Total ', width: 50 },
-    // { field: 'viawal', headerName: 'Vi awak', width: 50 },
-    // { field: 'viambil', headerName: 'Vi ambil', width: 50 },
-    // { field: 'viakhir', headerName: 'Vi Akhir', width: 50 },
-    // { field: 'vireturn', headerName: 'Vi return', width: 50 },
-    // { field: 'viinner', headerName: 'Vi Inner', width: 50 },
-    // { field: 'virainner', headerName: 'Vi Rainner', width: 50 },
-    // { field: 'variance', headerName: 'Variance', width: 50 },
-    // { field: 'krkawal', headerName: 'Kr Awal', width: 50 },
-    // { field: 'krawal', headerName: 'Kr Awak', width: 50 },
-    // { field: 'krakhir', headerName: 'Kr Akhir', width: 50 },
-    // { field: 'krpakai', headerName: 'Kr Pakai', width: 50 },
-    // { field: 'kreturn', headerName: 'Kr Return', width: 50 },
-    // { field: 'kreject', headerName: 'Kr Reject', width: 50 },
-    // { field: 'krakhir', headerName: 'Kr Akhir', width: 50 },
-    // { field: 'rpackinner', headerName: 'R pack Inner', width: 50 },
+    { field: 'rmd', headerName: 'Rmd', width: 50 },
+    { field: 'rfeeding', headerName: 'Rfeeding', width: 50 },
+    { field: 'roll', headerName: 'Roll', width: 50 },
+    { field: 'rsampleqc', headerName: 'R Sample Qc', width: 50 },
+    {
+      field: 'rmE1', headerName: 'RM E1', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.rmall.rmE1 || ''}`;
+      }
+    },
+    {
+      field: 'rmE2', headerName: 'RM E2', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.rmall.rmE2 || ''}`;
+      }
+    },
+    {
+      field: 'rmE3', headerName: 'RM E3', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.rmall.rmE3 || ''}`;
+      }
+    },
+    {
+      field: 'rmE4', headerName: 'RM E4', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.rmall.rmE4 || ''}`;
+      }
+    },
+    {
+      field: 'rmE5', headerName: 'RM E5', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.rmall.rmE5 || ''}`;
+      }
+    },
+    {
+      field: 'rmE6', headerName: 'RM E6', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.rmall.rmE6 || ''}`;
+      }
+    },
+    {
+      field: 'rmE7', headerName: 'RM E7', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.rmall.rmE7 || ''}`;
+      }
+    },
+    {
+      field: 'rmE8', headerName: 'RM E8', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.rmall.rmE8 || ''}`;
+      }
+    },
+    {
+      field: 'rmE9', headerName: 'RM E9', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.rmall.rmE9 || ''}`;
+      }
+    },
+    {
+      field: 'rmE10', headerName: 'RM E10', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.rmall.rmE10 || ''}`;
+      }
+    },
+    {
+      field: 'rmE11', headerName: 'RM E11', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.rmall.rmE11 || ''}`;
+      }
+    },
+    {
+      field: 'rmE12', headerName: 'RM E12', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.rmall.rmE12 || ''}`;
+      }
+    },
+    { field: 'rpacktable', headerName: 'Rpacktable', width: 50 },
+    { field: 'rmtotal', headerName: 'Rmtotal', width: 50 },
+    { field: 'roven', headerName: 'R Oven', width: 50 },
+    { field: 'soven', headerName: 'Sampah Oven', width: 50 },
+    { field: 'mcbks', headerName: 'Mcbks', width: 50 },
+    { field: 'ptable', headerName: 'P Table', width: 50 },
+    { field: 'serbuk', headerName: 'Serbuk', width: 50 },
+    { field: 'tampungan', headerName: 'Tampungan', width: 50 },
+    { field: 'total', headerName: 'Total', width: 50 },
+    { field: 'brtpack', headerName: 'Brt Pack', width: 50 },
+    { field: 'batch', headerName: 'Batch', width: 50 },
+    { field: 'wipackinner', headerName: 'Wi Pack Inner', width: 50 },
+    { field: 'wikulit', headerName: 'Wi Kulit', width: 50 },
+    { field: 'witotal', headerName: 'Wi Total ', width: 50 },
+    { field: 'viawal', headerName: 'Vi awak', width: 50 },
+    { field: 'viambil', headerName: 'Vi ambil', width: 50 },
+    { field: 'viakhir', headerName: 'Vi Akhir', width: 50 },
+    { field: 'vireturn', headerName: 'Vi return', width: 50 },
+    { field: 'viinner', headerName: 'Vi Inner', width: 50 },
+    { field: 'virainner', headerName: 'Vi Rainner', width: 50 },
+    {
+      field: 'viE1', headerName: 'Vi E1', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.viall.viE1 || ''}`;
+      }
+    },
+    {
+      field: 'viE2', headerName: 'Vi E2', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.viall.viE2 || ''}`;
+      }
+    },
+    {
+      field: 'viE3', headerName: 'Vi E3', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.viall.viE3 || ''}`;
+      }
+    },
+    {
+      field: 'viE4', headerName: 'Vi E4', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.viall.viE4 || ''}`;
+      }
+    },
+    {
+      field: 'viE5', headerName: 'Vi E5', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.viall.viE5 || ''}`;
+      }
+    },
+    {
+      field: 'viE6', headerName: 'Vi E6', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.viall.viE6 || ''}`;
+      }
+    },
+    {
+      field: 'viE7', headerName: 'Vi E7', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.viall.viE7 || ''}`;
+      }
+    },
+    {
+      field: 'viE8', headerName: 'Vi E8', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.viall.viE8 || ''}`;
+      }
+    },
+    {
+      field: 'viE9', headerName: 'Vi E9', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.viall.viE9 || ''}`;
+      }
+    },
+    {
+      field: 'viE10', headerName: 'Vi E10', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.viall.viE10 || ''}`;
+      }
+    },
+    {
+      field: 'viE11', headerName: 'Vi E11', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.viall.viE11 || ''}`;
+      }
+    },
+    {
+      field: 'viE12', headerName: 'Vi E12', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.viall.viE12 || ''}`;
+      }
+    },
+    { field: 'variance', headerName: 'Variance', width: 50 },
+    { field: 'krkawal', headerName: 'Kr Awal', width: 50 },
+    { field: 'krawal', headerName: 'Kr Awak', width: 50 },
+    { field: 'krakhir', headerName: 'Kr Akhir', width: 50 },
+    { field: 'krpakai', headerName: 'Kr Pakai', width: 50 },
+    { field: 'kreturn', headerName: 'Kr Return', width: 50 },
+    { field: 'kreject', headerName: 'Kr Reject', width: 50 },
+
+    {
+      field: 'kendala1', headerName: 'Kendala 1', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.kendalaall.kendala1 || ''}`;
+      }
+    },
+    {
+      field: 'kendala2', headerName: 'Kendala 2', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.kendalaall.kendala2 || ''}`;
+      }
+    },
+    {
+      field: 'kendala3', headerName: 'Kendala 3', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.kendalaall.kendala3 || ''}`;
+      }
+    },
+    {
+      field: 'kendala4', headerName: 'Kendala 4', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.kendalaall.kendala4 || ''}`;
+      }
+    },
+    {
+      field: 'kendala5', headerName: 'Kendala 5', width: 50,
+      valueGetter: (value, row) => {
+        return `${row.kendalaall.kendala5 || ''}`;
+      }
+    },
+    { field: 'rpackinner', headerName: 'R pack Inner', width: 50 },
   ]);
   // console.log("data pilih ini" , data)
   // console.log("setrme1c pilih ini" , rmE1c, rmE2c)
@@ -289,21 +467,13 @@ const TableLhpL5 = () => {
   useEffect(() => {
     setLoading(false);
     axios.get(urlapi.lhpdaily)
-    .then(response => {
-      var dataolah = response.data;
-      console.log(dataolah);
+      .then(response => {
+        var dataolah = response.data;
+        console.log(dataolah);
         const d = new Date();
         let hour = d.getHours();
         if (hour >= 15) {
-          let objects = [];
-          objects[0] = {};
-          objects[0].id = dataolah[0].id || 0;
-          objects[0].shift = dataolah[0].shift || 0;
-          objects[0].sku = dataolah[0].sku || 0;
-          objects[0].reguler = dataolah[0].reguler || 0;
-          objects[0].hold = dataolah[0].hold || 0;
-          objects[0].output = dataolah[0].output || 0;
-          setData(objects);
+          setData(dataolah)
           setRmE1c([dataolah[0].rmall.rmE1 || 0]);
           setRmE2c([dataolah[0].rmall.rmE2 || 0]);
           setRmE3c([dataolah[0].rmall.rmE3 || 0]);
@@ -343,14 +513,18 @@ const TableLhpL5 = () => {
               value={valuedate}
               onChange={(newValue) => {
                 setValueDate(newValue);
-                var thisdate = new Date(newValue);
-                thisdate.setDate(thisdate.getDate() + 1)
-                var datenyar = new Date(newValue);
-                var datestring = datenyar.getFullYear() + "-0" + (datenyar.getMonth() + 1) + "-" + datenyar.getDate()
-                var thisdatenow = new Date(newValue);
-                thisdatenow.setDate(thisdate.getDate() + 1)
-                var datenyarnow = new Date();
-                var datestringnow = datenyarnow.getFullYear() + "-0" + (datenyarnow.getMonth() + 1) + "-" + datenyarnow.getDate()
+                // Buat objek Date dari newValue (tanggal asli)
+                let originalDate = new Date(newValue);
+                // Format tanggal asli menjadi string 'YYYY-MM-DD'
+                let datestring = originalDate.getFullYear() + "-" +
+                  String(originalDate.getMonth() + 1).padStart(2, '0') + "-" +
+                  String(originalDate.getDate()).padStart(2, '0');
+                // Tambahkan satu hari ke originalDate
+                originalDate.setDate(originalDate.getDate() + 1);
+                // Format tanggal baru (setelah ditambah 1 hari) menjadi string 'YYYY-MM-DD'
+                let datestringnow = originalDate.getFullYear() + "-" +
+                  String(originalDate.getMonth() + 1).padStart(2, '0') + "-" +
+                  String(originalDate.getDate()).padStart(2, '0');
                 if (datestringnow === datestring) {
                   axios.get(urlapi.lhpdaily)
                     .then(response => {
@@ -358,15 +532,7 @@ const TableLhpL5 = () => {
                       const d = new Date();
                       let hour = d.getHours();
                       if (hour >= 15) {
-                        let objects = [];
-                        objects[0] = {};
-                        objects[0].id = dataolah[0].id;
-                        objects[0].shift = dataolah[0].shift
-                        objects[0].sku = dataolah[0].sku
-                        objects[0].reguler = dataolah[0].reguler
-                        objects[0].hold = dataolah[0].hold
-                        objects[0].output = dataolah[0].output
-                        setData(objects)
+                        setData(dataolah)
                         setRmE1c([dataolah[0].rmall.rmE1])
                         setRmE2c([dataolah[0].rmall.rmE2])
                         setRmE3c([dataolah[0].rmall.rmE3])
@@ -395,50 +561,26 @@ const TableLhpL5 = () => {
                   axios.get(`http://10.37.12.17:3000/lhpl5_daily/date/${datestring}/l5`)
                     .then(response => {
                       var dataolah = response.data;
-                      let objects = [];
-                      objects[0] = {};
-                      objects[0].id = dataolah[0].id;
-                      objects[0].shift = dataolah[0].shift
-                      objects[0].sku = dataolah[0].sku
-                      objects[0].reguler = dataolah[0].reguler
-                      objects[0].hold = dataolah[0].hold
-                      objects[0].output = dataolah[0].output
-                      objects[1] = {};
-                      objects[1].id = dataolah[1].id;
-                      objects[1].shift = dataolah[1].shift
-                      objects[1].sku = dataolah[1].sku
-                      objects[1].reguler = dataolah[1].reguler
-                      objects[1].hold = dataolah[1].hold
-                      objects[1].output = dataolah[1].output
-                      objects[2] = {};
-                      objects[2].id = dataolah[2].id;
-                      objects[2].shift = dataolah[2].shift
-                      objects[2].sku = dataolah[2].sku
-                      objects[2].reguler = dataolah[2].reguler
-                      objects[2].hold = dataolah[2].hold
-                      objects[2].output = dataolah[2].output
-                      setData(objects)
-                      console.log("dataolah pilih ini" , [dataolah[0].rmall.rmE1], [dataolah[1].rmall.rmE1], [dataolah[2].rmall.rmE1])
-                      setRmE1c([dataolah[0].rmall.rmE1, dataolah[1].rmall.rmE1, dataolah[2].rmall.rmE1])
-                      setRmE2c([dataolah[0].rmall.rmE2, dataolah[1].rmall.rmE2, dataolah[2].rmall.rmE2])
-                      setRmE3c([dataolah[0].rmall.rmE3, dataolah[1].rmall.rmE3, dataolah[2].rmall.rmE3])
-                      setRmE4c([dataolah[0].rmall.rmE4, dataolah[1].rmall.rmE4, dataolah[2].rmall.rmE4])
-                      setRmE5c([dataolah[0].rmall.rmE5, dataolah[1].rmall.rmE5, dataolah[2].rmall.rmE5])
-                      setRmE6c([dataolah[0].rmall.rmE6, dataolah[1].rmall.rmE6, dataolah[2].rmall.rmE6])
-                      setRmE7c([dataolah[0].rmall.rmE7, dataolah[1].rmall.rmE7, dataolah[2].rmall.rmE7])
-                      setRmE8c([dataolah[0].rmall.rmE8, dataolah[1].rmall.rmE8, dataolah[2].rmall.rmE8])
-                      setRmE9c([dataolah[0].rmall.rmE9, dataolah[1].rmall.rmE9, dataolah[2].rmall.rmE9])
-                      setRmE10c([dataolah[0].rmall.rmE10, dataolah[1].rmall.rmE10, dataolah[2].rmall.rmE10])
-                      setRmE11c([dataolah[0].rmall.rmE11, dataolah[1].rmall.rmE11, dataolah[2].rmall.rmE11])
-                      setRmE12c([dataolah[0].rmall.rmE12, dataolah[1].rmall.rmE12, dataolah[2].rmall.rmE12])
-                      setRegulerc([dataolah[0].reguler, dataolah[1].reguler, dataolah[2].reguler])
-                      setHoldc([dataolah[0].hold, dataolah[1].hold, dataolah[2].hold])
-                      setOutputc([dataolah[0].output, dataolah[1].hold, dataolah[2].hold])
-                      setRPackTablec([dataolah[0].rpackTable, dataolah[1].rpackTable, dataolah[2].rpackTable])
-                      setRovenc([dataolah[0].roven, dataolah[1].roven, dataolah[2].roven])
-                      setRMDc([dataolah[0].rmd, dataolah[1].rmd, dataolah[2].rmd])
-                      setRfeedingc([dataolah[0].rfeeding, dataolah[1].rfeeding, dataolah[2].rfeeding])
-                   
+                      setData(dataolah)
+                      setRmE1c([dataolah[0]?.rmall?.rmE1 || 0, dataolah[1]?.rmall?.rmE1 || 0, dataolah[2]?.rmall?.rmE1 || 0])
+                      setRmE2c([dataolah[0]?.rmall?.rmE2 || 0, dataolah[1]?.rmall?.rmE2 || 0, dataolah[2]?.rmall?.rmE2 || 0])
+                      setRmE3c([dataolah[0]?.rmall?.rmE3 || 0, dataolah[1]?.rmall?.rmE3 || 0, dataolah[2]?.rmall?.rmE3 || 0])
+                      setRmE4c([dataolah[0]?.rmall?.rmE4 || 0, dataolah[1]?.rmall?.rmE4 || 0, dataolah[2]?.rmall?.rmE4 || 0])
+                      setRmE5c([dataolah[0]?.rmall?.rmE5 || 0, dataolah[1]?.rmall?.rmE5 || 0, dataolah[2]?.rmall?.rmE5 || 0])
+                      setRmE6c([dataolah[0]?.rmall?.rmE6 || 0, dataolah[1]?.rmall?.rmE6 || 0, dataolah[2]?.rmall?.rmE6 || 0])
+                      setRmE7c([dataolah[0]?.rmall?.rmE7 || 0, dataolah[1]?.rmall?.rmE7 || 0, dataolah[2]?.rmall?.rmE7 || 0])
+                      setRmE8c([dataolah[0]?.rmall?.rmE8 || 0, dataolah[1]?.rmall?.rmE8 || 0, dataolah[2]?.rmall?.rmE8 || 0])
+                      setRmE9c([dataolah[0]?.rmall?.rmE9 || 0, dataolah[1]?.rmall?.rmE9 || 0, dataolah[2]?.rmall?.rmE9 || 0])
+                      setRmE10c([dataolah[0]?.rmall?.rmE10 || 0, dataolah[1]?.rmall?.rmE10 || 0, dataolah[2]?.rmall?.rmE10 || 0])
+                      setRmE11c([dataolah[0]?.rmall?.rmE11 || 0, dataolah[1]?.rmall?.rmE11 || 0, dataolah[2]?.rmall?.rmE11 || 0])
+                      setRmE12c([dataolah[0]?.rmall?.rmE12 || 0, dataolah[1]?.rmall?.rmE12 || 0, dataolah[2]?.rmall?.rmE12 || 0])
+                      setRegulerc([dataolah[0]?.reguler || 0, dataolah[1]?.reguler || 0, dataolah[2]?.reguler || 0])
+                      setHoldc([dataolah[0]?.hold || 0, dataolah[1]?.hold || 0, dataolah[2]?.hold || 0])
+                      setOutputc([dataolah[0]?.output || 0, dataolah[1]?.output || 0, dataolah[2]?.output || 0])
+                      setRPackTablec([dataolah[0]?.rpackTable || 0, dataolah[1]?.rpackTable || 0, dataolah[2]?.rpackTable || 0])
+                      setRovenc([dataolah[0]?.roven || 0, dataolah[1]?.roven || 0, dataolah[2]?.roven || 0])
+                      setRMDc([dataolah[0]?.rmd || 0, dataolah[1]?.rmd || 0, dataolah[2]?.rmd || 0])
+                      setRfeedingc([dataolah[0]?.rfeeding || 0, dataolah[1]?.rfeeding || 0, dataolah[2]?.rfeeding || 0])
                     })
                     .catch(error => {
                       setOpen(true)
@@ -496,73 +638,85 @@ const TableLhpL5 = () => {
                         id: '1',
                         label: 'E1',
                         curve: "linear",
-                        data: rmE1c, // Nilai default 0
+                        data: rmE1c,
+                        color: '#1017e3',
                       },
                       {
                         id: '2',
                         label: 'E2',
                         curve: "linear",
                         data: rmE2c,
+                        color: '#ed0744',
                       },
                       {
                         id: '3',
                         label: 'E3',
                         curve: "linear",
                         data: rmE3c,
+                        color: '#03ffdd',
                       },
                       {
                         id: '4',
                         label: 'E4',
                         curve: "linear",
                         data: rmE4c,
+                        color: '#850776',
                       },
                       {
                         id: '5',
                         label: 'E5',
                         curve: "linear",
                         data: rmE5c,
+                        color: '#ed0744',
                       },
                       {
                         id: '6',
                         label: 'E6',
                         curve: "linear",
                         data: rmE6c,
+                        color: '#5707ed',
                       },
                       {
                         id: '7',
                         label: 'E7',
                         curve: "linear",
                         data: rmE7c,
+                        color: '#07edd6'
                       },
                       {
                         id: '8',
                         label: 'E8',
                         curve: "linear",
                         data: rmE8c,
+                        color: '#07b7ed',
                       },
                       {
                         id: '9',
                         label: 'E9',
                         curve: "linear",
                         data: rmE9c,
+                        color: '#5407ed',
                       },
                       {
                         id: '10',
                         label: 'E10',
                         curve: "linear",
                         data: rmE10c,
+                        color: '#bf07ed',
                       },
                       {
                         id: '11',
                         label: 'E11',
                         curve: "linear",
                         data: rmE11c,
+                        color: '#bf07ed',
                       },
                       {
                         id: '12',
                         label: 'E12',
                         curve: "linear",
                         data: rmE12c,
+                        color: '#ed0776',
                       },
                     ]}
                     height={300}
@@ -584,7 +738,9 @@ const TableLhpL5 = () => {
                 </Grid>
                 <Grid container justifyContent="Center">
                   <Grid item>
-                    <Typography variant="h4">(release=  {regulerc} %, release Shift 2 =  {regulerc} %,release Shift 3 =  {regulerc} %)</Typography>
+                    <Typography variant="h4">
+                      (release = {Math.round(outputc[0] || 0)}%, release Shift 2 = {Math.round(outputc[1] || 0)}%, release Shift 3 = {Math.round(outputc[2] || 0)}%)
+                    </Typography>
                   </Grid>
                 </Grid>
               </Grid>
@@ -604,13 +760,13 @@ const TableLhpL5 = () => {
                       },
                       {
                         id: '2',
-                        stack: 'A',
+                        stack: 'B',
                         label: 'Hold',
                         data: holdc,
                       },
                       {
                         id: '3',
-                        stack: 'A',
+                        stack: 'C',
                         label: 'output',
                         data: outputc,
                       },
@@ -722,7 +878,7 @@ const TableLhpL5 = () => {
               <Typography variant="h5">Primary</Typography>
               <Grid container spacing={2} direction="row" sx={{ mt: 1, width: '100%' }}>
                 <Grid item xs={12} sm={2}>
-                <FormControl required sx={{ m: 1, width: '100%' }}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
                       value={inidate}
                       label="Tanggal"
@@ -732,7 +888,7 @@ const TableLhpL5 = () => {
                         readOnly: true,
                       }}
                     />
-                </FormControl>
+                  </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={5}>
                   <FormControl required sx={{ m: 1, width: '100%' }}>
