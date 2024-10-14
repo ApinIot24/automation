@@ -3,10 +3,11 @@ import Button from '@mui/material/Button';
 // import { useNavigate } from "react-router-dom"; // Uncomment if using navigation
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import dayjs from 'dayjs';
 import { Alert, Snackbar } from '@mui/material';
 
 // ==============================|| BUTTON SAVE ||============================== //
-const ButtonSave = ({ lhp }) => {
+const ButtonSave = ({ lhp, downtime }) => {
   // let navigate = useNavigate(); // Uncomment if using navigation
   const [state] = React.useState({
     vertical: 'top',
@@ -35,9 +36,18 @@ const ButtonSave = ({ lhp }) => {
   };
 
   const routeChange = () => {
+    const formattedDowntime = downtime.map(entry => ({
+      time_start: entry.time_start ? dayjs(entry.time_start).format('HH:mm:ss') : null,
+      time_stop: entry.time_stop ? dayjs(entry.time_stop).format('HH:mm:ss') : null,
+      total_dt: entry.total_dt,
+      kendala: entry.kendala,
+    }));
     if (!validateInput()) return; // Stop if validation fails
-
-    axios.post('http://10.37.12.17:3000/lhpl7', lhp)
+    const payload = {
+      ...lhp,
+      downtime: formattedDowntime // Include downtime in the payload
+    }
+    axios.post('http://10.37.12.17:3000/lhpl7', payload)
       .then(response => {
         console.log("Data saved:", response);
         setMessage("LHP successfully saved to the database. Thank you for your input! and this id lhp: " + response.data.id); 

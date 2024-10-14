@@ -109,190 +109,177 @@ const TableLhpL2 = () => {
   const [forbanded2, setForBanded2] = useState('');
   const [cutoff, setCutOff] = useState('');
   const [ctnluar, setCtnLuar] = useState('');
-  const [kendala1, setKendala1] = useState('');
-  const [kendala2, setKendala2] = useState('');
-  const [kendala3, setKendala3] = useState('');
-  const [kendala4, setKendala4] = useState('');
-  const [kendala5, setKendala5] = useState('');
-  const [field] = useState([
-    { field: 'id', headerName: 'ID', width: 50 },
-    { field: 'shift', headerName: 'Time', width: 100 },
-    { field: 'sku', headerName: 'Sku', width: 200 },
-    { field: 'plan', headerName: 'Plan', width: 75 },
-    { field: 'real', headerName: 'Real', width: 75 },
-    { field: 'ach', headerName: 'Achievement', width: 100 },
-    {
-      field: 'cello', headerName: 'Cello', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello || ''}`;
+  const [kendala, setKendala] = useState({});
+  const generateKendalaColumns = (maxKendalaCount) => {
+    const columns = [
+      { field: 'id', headerName: 'ID', width: 50 },
+      { field: 'shift', headerName: 'Time', width: 100 },
+      { field: 'sku', headerName: 'Sku', width: 200 },
+      { field: 'plan', headerName: 'Plan', width: 75 },
+      { field: 'real', headerName: 'Real', width: 75 },
+      { field: 'ach', headerName: 'Achievement', width: 100 },
+      {
+        field: 'cello', headerName: 'Cello', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello || ''}`;
+        }
+      },
+      {
+        field: 'cello.cello1', headerName: 'Cello1', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello1 || ''}`;
+        }
+      },
+      {
+        field: 'cello.cello2', headerName: 'Cello2', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello2 || ''}`;
+        }
+      },
+      {
+        field: 'cello.cello3', headerName: 'Cello3', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello3 || ''}`;
+        }
+      },
+      {
+        field: 'cello.cello4', headerName: 'Cello4', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello4 || ''}`;
+        }
+      },
+      {
+        field: 'cello.cello5', headerName: 'Cello5', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello5 || ''}`;
+        }
+      },
+      { field: 'cellocpp', headerName: 'Cello CPP', width: 100 },
+      {
+        field: 'ctnsup', headerName: 'CTN SUP', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.ctn_type.ctnsup || ''}`;
+        }
+      },
+      {
+        field: 'ctnproud', headerName: 'CTN PROUD', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.ctn_type.ctnproud || ''}`;
+        }
+      },
+      { field: 'cello_used', headerName: 'Cello USED', width: 100 },
+      { field: 'adonan_used', headerName: 'Adonan Used', width: 100 },
+      { field: 'ccbcream_used', headerName: 'CCB Cream', width: 100 },
+      { field: 'avgsheet', headerName: 'AVG Sheet', width: 100 },
+      { field: 'avgbook', headerName: 'AVG BOOK', width: 100 },
+      { field: 'sheet', headerName: 'Sheet', width: 100 },
+      { field: 'book', headerName: 'Book', width: 100 },
+      { field: 'cutkasar', headerName: 'Cut Kasar', width: 100 },
+      { field: 'bubukcutting', headerName: 'Bubuk Cutting', width: 100 },
+      { field: 'sapuancut', headerName: 'Sapuan Cut', width: 100 },
+      { field: 'qcpacking', headerName: 'Qc Packing', width: 100 },
+      { field: 'qccello', headerName: 'Qc Cello', width: 100 },
+      { field: 'sample_ctn_qc', headerName: 'Sample Ctn Qc', width: 100 }, {
+        field: 'pack1', headerName: 'pack1', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.pack1 || ''}`;
+        }
+      },
+      {
+        field: 'pack2', headerName: 'pack2', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.pack2 || ''}`;
+        }
+      },
+      {
+        field: 'pack3', headerName: 'pack3', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.pack3 || ''}`;
+        }
+      },
+      {
+        field: 'pack4', headerName: 'pack4', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.pack4 || ''}`;
+        }
+      },
+      {
+        field: 'pack5', headerName: 'pack5', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.pack5 || ''}`;
+        }
+      },
+      {
+        field: 'sumpack', headerName: 'Reject Pack', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.sumpack || ''}`;
+        }
+      },
+      {
+        field: 'banded_asli', headerName: 'Banded', width: 100, valueGetter: (value, row) => {
+          return `${row.banded || ''}`;
+        }
+      },
+      { field: 'banded_under', headerName: 'Banded Under', width: 100 },
+      { field: 'banded_over', headerName: 'Banded Over', width: 100 },
+      { field: 'sapuanpack', headerName: 'Sapuan Pack', width: 100 },
+      { field: 'buble', headerName: 'Buble', width: 100 },
+      { field: 'suppliercello', headerName: 'Suppliercello', width: 100 },
+      { field: 'cutoff', headerName: 'Cut OFF', width: 100 },
+      { field: 'ctn_luar', headerName: 'CTN Luar', width: 100 }, {
+        field: 'speed1', headerName: 'speed1', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.speed_mesin.speed1 || ''}`;
+        }
+      },
+      {
+        field: 'speed2', headerName: 'speed2', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.speed_mesin.speed2 || ''}`;
+        }
+      },
+      {
+        field: 'speed3', headerName: 'speed3', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.speed_mesin.speed3 || ''}`;
+        }
+      },
+      {
+        field: 'speed4', headerName: 'speed4', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.speed_mesin.speed4 || ''}`;
+        }
+      },
+      {
+        field: 'speed5', headerName: 'speed5', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.speed_mesin.speed5 || ''}`;
+        }
       }
-    },
-    {
-      field: 'cello.cello1', headerName: 'Cello1', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello1 || ''}`;
-      }
-    },
-    {
-      field: 'cello.cello2', headerName: 'Cello2', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello2 || ''}`;
-      }
-    },
-    {
-      field: 'cello.cello3', headerName: 'Cello3', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello3 || ''}`;
-      }
-    },
-    {
-      field: 'cello.cello4', headerName: 'Cello4', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello4 || ''}`;
-      }
-    },
-    {
-      field: 'cello.cello5', headerName: 'Cello5', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello5 || ''}`;
-      }
-    },
-    { field: 'cellocpp', headerName: 'Cello CPP', width: 100 },
-    {
-      field: 'ctnsup', headerName: 'CTN SUP', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.ctn_type.ctnsup || ''}`;
-      }
-    },
-    {
-      field: 'ctnproud', headerName: 'CTN PROUD', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.ctn_type.ctnproud || ''}`;
-      }
-    },
-    { field: 'cello_used', headerName: 'Cello USED', width: 100 },
-    { field: 'adonan_used', headerName: 'Adonan Used', width: 100 },
-    { field: 'ccbcream_used', headerName: 'CCB Cream', width: 100 },
-    { field: 'avgsheet', headerName: 'AVG Sheet', width: 100 },
-    { field: 'avgbook', headerName: 'AVG BOOK', width: 100 },
-    { field: 'sheet', headerName: 'Sheet', width: 100 },
-    { field: 'book', headerName: 'Book', width: 100 },
-    { field: 'cutkasar', headerName: 'Cut Kasar', width: 100 },
-    { field: 'bubukcutting', headerName: 'Bubuk Cutting', width: 100 },
-    { field: 'sapuancut', headerName: 'Sapuan Cut', width: 100 },
-    { field: 'qcpacking', headerName: 'Qc Packing', width: 100 },
-    { field: 'qccello', headerName: 'Qc Cello', width: 100 },
-    { field: 'sample_ctn_qc', headerName: 'Sample Ctn Qc', width: 100 }, {
-      field: 'pack1', headerName: 'pack1', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.pack1 || ''}`;
-      }
-    },
-    {
-      field: 'pack2', headerName: 'pack2', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.pack2 || ''}`;
-      }
-    },
-    {
-      field: 'pack3', headerName: 'pack3', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.pack3 || ''}`;
-      }
-    },
-    {
-      field: 'pack4', headerName: 'pack4', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.pack4 || ''}`;
-      }
-    },
-    {
-      field: 'pack5', headerName: 'pack5', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.pack5 || ''}`;
-      }
-    },
-    {
-      field: 'sumpack', headerName: 'Reject Pack', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.sumpack || ''}`;
-      }
-    },
-    {
-      field: 'banded_asli', headerName: 'Banded', width: 100, valueGetter: (value, row) => {
-        return `${row.banded || ''}`;
-      }
-    },
-    { field: 'banded_under', headerName: 'Banded Under', width: 100 },
-    { field: 'banded_over', headerName: 'Banded Over', width: 100 },
-    { field: 'sapuanpack', headerName: 'Sapuan Pack', width: 100 },
-    { field: 'buble', headerName: 'Buble', width: 100 },
-    { field: 'suppliercello', headerName: 'Suppliercello', width: 100 },
-    { field: 'cutoff', headerName: 'Cut OFF', width: 100 },
-    { field: 'ctn_luar', headerName: 'CTN Luar', width: 100 }, {
-      field: 'speed1', headerName: 'speed1', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.speed_mesin.speed1 || ''}`;
-      }
-    },
-    {
-      field: 'speed2', headerName: 'speed2', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.speed_mesin.speed2 || ''}`;
-      }
-    },
-    {
-      field: 'speed3', headerName: 'speed3', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.speed_mesin.speed3 || ''}`;
-      }
-    },
-    {
-      field: 'speed4', headerName: 'speed4', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.speed_mesin.speed4 || ''}`;
-      }
-    },
-    {
-      field: 'speed5', headerName: 'speed5', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.speed_mesin.speed5 || ''}`;
-      }
-    },
-    {
-      field: 'kendala1', headerName: 'kendala1', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.kendala.kendala1 || ''}`;
-      }
-    }, {
-      field: 'kendala2', headerName: 'kendala2', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.kendala.kendala2 || ''}`;
-      }
-    }, {
-      field: 'kendala3', headerName: 'kendala3', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.kendala.kendala3 || ''}`;
-      }
-    }, {
-      field: 'kendala4', headerName: 'kendala4', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.kendala.kendala4 || ''}`;
-      }
-    }, {
-      field: 'kendala5', headerName: 'kendala5', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.kendala.kendala5 || ''}`;
-      }
-    },
-    { field: 'realdatetime', headerName: 'Date', width: 100 }
-  ]);
+    ];
+    for (let i = 1; i <= maxKendalaCount; i++) {
+      columns.push({
+        field: `kendala${i}`,
+        headerName: `Kendala ${i}`,
+        width: 200,
+        valueGetter: (value, row) => {
+          return `${row.kendala?.[`kendala${i}`] || ''}`; // Akses menggunakan bracket notation
+        }
+      });
+    }
+    return columns;
+  };
+
   const [urlapi] = useState({
     lhp: 'http://10.37.12.17:3000/packing_a1',
     lhpdaily: 'http://10.37.12.17:3000/lhp_daily/l2',
     urlp2: 'table',
 
   })
+
+  const maxKendalaCount = Math.max(...data.map(row => Object.keys(row.kendala).length));
+  const columns = generateKendalaColumns(maxKendalaCount); // Menghasilkan kolom
+
   const handleClose = (reason) => {
     if (reason === 'clickaway') {
       return;
@@ -368,11 +355,7 @@ const TableLhpL2 = () => {
         setForBanded2(dataolah.banded_over)
         setCutOff(dataolah.cutoff_jam)
         setCtnLuar(dataolah.ctn_luar)
-        setKendala1(dataolah.kendala.kendala1)
-        setKendala2(dataolah.kendala.kendala2)
-        setKendala3(dataolah.kendala.kendala3)
-        setKendala4(dataolah.kendala.kendala4)
-        setKendala5(dataolah.kendala.kendala5)
+        setKendala(dataolah.kendala)
         setOpenDua(true);
         setOpenTiga(false);
       })
@@ -468,57 +451,55 @@ const TableLhpL2 = () => {
                     });
                 } else {
                   axios.get(`http://10.37.12.17:3000/lhp_daily/date/${datestring}/l2`)
-                  .then(response => {
-                    var dataolah = response.data;
-                    // console.log("Tanggal" , dataolah)
-                    setData(dataolah)
-                    setPack1([dataolah[0]?.packing_reject?.pack1 || 0, dataolah[1]?.packing_reject?.pack1 || 0, dataolah[2]?.packing_reject?.pack1 || 0])
-                    setPack2([dataolah[0]?.packing_reject?.pack2 || 0, dataolah[1]?.packing_reject?.pack2 || 0, dataolah[2]?.packing_reject?.pack2 || 0])
-                    setPack3([dataolah[0]?.packing_reject?.pack3 || 0, dataolah[1]?.packing_reject?.pack3 || 0, dataolah[2]?.packing_reject?.pack3 || 0])
-                    setPack4([dataolah[0]?.packing_reject?.pack4 || 0, dataolah[1]?.packing_reject?.pack4 || 0, dataolah[2]?.packing_reject?.pack4 || 0])
-                    setPack5([dataolah[0]?.packing_reject?.pack5 || 0, dataolah[1]?.packing_reject?.pack5 || 0, dataolah[2]?.packing_reject?.pack5 || 0])
-                    setSumPack([dataolah[0]?.packing_reject?.sumpack || 0, dataolah[1]?.packing_reject?.sumpack || 0, dataolah[2]?.packing_reject?.sumpack || 0])
-                    setPlan([dataolah[0]?.plan || 0, dataolah[1]?.plan || 0, dataolah[2]?.plan || 0])
-                    setReal([dataolah[0]?.real || 0, dataolah[1]?.real || 0, dataolah[2]?.real || 0])
-                    setAch([dataolah[0]?.ach || 0])
-                    setAch1([dataolah[1]?.ach || 0])
-                    setAch2([dataolah[2]?.ach || 0])
-                    setSheet([dataolah[0]?.sheet || 0, dataolah[1]?.sheet || 0, dataolah[2]?.sheet || 0])
-                    setBook([dataolah[0]?.book || 0, dataolah[1]?.book || 0, dataolah[2]?.book || 0])
-                    setBanded([dataolah[0]?.banded || 0, dataolah[1]?.banded || 0, dataolah[2]?.banded || 0])
-                    setSapuanPack([dataolah[0]?.sapuanpack || 0, dataolah[1]?.sapuanpack || 0, dataolah[2]?.sapuanpack || 0])
-                    setBuble([dataolah[0]?.buble || 0, dataolah[1]?.buble || 0, dataolah[2]?.buble || 0])
-                  })
-                  .catch(error => {
-                    setOpen(true)
-                    setData([])
-                    setPack1([0])
-                    setPack2([0])
-                    setPack3([0])
-                    setPack4([0])
-                    setPack5([0])
-                    setSumPack([0])
-                    setPlan([0])
-                    setReal([0])
-                    setAch([0])
-                    setAch1([0])
-                    setAch2([0])
-                    setSheet([0])
-                    setBook([0])
-                    setBanded([0])
-                    setSapuanPack([0])
-                    setBuble([0])
-                    console.log(error);
-                  });                
+                    .then(response => {
+                      var dataolah = response.data;
+                      // console.log("Tanggal" , dataolah)
+                      setData(dataolah)
+                      setPack1([dataolah[0]?.packing_reject?.pack1 || 0, dataolah[1]?.packing_reject?.pack1 || 0, dataolah[2]?.packing_reject?.pack1 || 0])
+                      setPack2([dataolah[0]?.packing_reject?.pack2 || 0, dataolah[1]?.packing_reject?.pack2 || 0, dataolah[2]?.packing_reject?.pack2 || 0])
+                      setPack3([dataolah[0]?.packing_reject?.pack3 || 0, dataolah[1]?.packing_reject?.pack3 || 0, dataolah[2]?.packing_reject?.pack3 || 0])
+                      setPack4([dataolah[0]?.packing_reject?.pack4 || 0, dataolah[1]?.packing_reject?.pack4 || 0, dataolah[2]?.packing_reject?.pack4 || 0])
+                      setPack5([dataolah[0]?.packing_reject?.pack5 || 0, dataolah[1]?.packing_reject?.pack5 || 0, dataolah[2]?.packing_reject?.pack5 || 0])
+                      setSumPack([dataolah[0]?.packing_reject?.sumpack || 0, dataolah[1]?.packing_reject?.sumpack || 0, dataolah[2]?.packing_reject?.sumpack || 0])
+                      setPlan([dataolah[0]?.plan || 0, dataolah[1]?.plan || 0, dataolah[2]?.plan || 0])
+                      setReal([dataolah[0]?.real || 0, dataolah[1]?.real || 0, dataolah[2]?.real || 0])
+                      setAch([dataolah[0]?.ach || 0])
+                      setAch1([dataolah[1]?.ach || 0])
+                      setAch2([dataolah[2]?.ach || 0])
+                      setSheet([dataolah[0]?.sheet || 0, dataolah[1]?.sheet || 0, dataolah[2]?.sheet || 0])
+                      setBook([dataolah[0]?.book || 0, dataolah[1]?.book || 0, dataolah[2]?.book || 0])
+                      setBanded([dataolah[0]?.banded || 0, dataolah[1]?.banded || 0, dataolah[2]?.banded || 0])
+                      setSapuanPack([dataolah[0]?.sapuanpack || 0, dataolah[1]?.sapuanpack || 0, dataolah[2]?.sapuanpack || 0])
+                      setBuble([dataolah[0]?.buble || 0, dataolah[1]?.buble || 0, dataolah[2]?.buble || 0])
+                    })
+                    .catch(error => {
+                      setOpen(true)
+                      setData([])
+                      setPack1([0])
+                      setPack2([0])
+                      setPack3([0])
+                      setPack4([0])
+                      setPack5([0])
+                      setSumPack([0])
+                      setPlan([0])
+                      setReal([0])
+                      setAch([0])
+                      setAch1([0])
+                      setAch2([0])
+                      setSheet([0])
+                      setBook([0])
+                      setBanded([0])
+                      setSapuanPack([0])
+                      setBuble([0])
+                      console.log(error);
+                    });
                 }
               }}
             />
           </LocalizationProvider>
         </Grid>
       </Grid>
-      <Grid item sx={{ mb: 5 }} xs={12} >
-        <DataGrid rows={data} columns={field} loading={isLoading} slots={{ toolbar: GridToolbar }} onRowClick={handleRowClick} />
-      </Grid>
+   
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         <Grid item xs={2} sm={4} md={4}>
           <CardWrapper border={false} content={false}>
@@ -658,35 +639,35 @@ const TableLhpL2 = () => {
                         label: 'Sheet',
                         curve: "linear",
                         data: sheet,
-                          color: '#9603ff',
+                        color: '#9603ff',
                       },
                       {
                         id: '2',
                         label: 'Book',
                         curve: "linear",
                         data: book,
-                            color: '#ffb303',
+                        color: '#ffb303',
                       },
                       {
                         id: '3',
                         label: 'Bended',
                         curve: "linear",
                         data: banded,
-                         color: '#03ffbc',
+                        color: '#03ffbc',
                       },
                       {
                         id: '4',
                         label: 'Sapuan Pack',
                         curve: "linear",
                         data: sapuanpack,
-                            color: '#1017e3',
+                        color: '#1017e3',
                       },
                       {
                         id: '5',
                         label: 'Buble',
                         curve: "linear",
                         data: buble,
-                         color: '#ff0389',
+                        color: '#ff0389',
                       }
                     ]}
                     height={300}
@@ -697,6 +678,9 @@ const TableLhpL2 = () => {
             </Grid>
           </CardWrapper>
         </Grid>
+      </Grid>
+      <Grid item sx={{ mb: 5 }} xs={12} >
+        <DataGrid rows={data} columns={columns} loading={isLoading} slots={{ toolbar: GridToolbar }} onRowClick={handleRowClick} />
       </Grid>
       <Snackbar
         onClose={handleClose}
@@ -1391,81 +1375,22 @@ const TableLhpL2 = () => {
               <Divider sx={{ mb: 2, border: 1, borderColor: 'divider' }} />
               <Typography variant="h5">Kendala / Note</Typography>
               <Grid container spacing={2} direction="row" >
-                <Grid item xs={12} sm={2.4} >
-                  <FormControl required sx={{ m: 1, width: '100%' }}>
-                    <TextField
-                      value={kendala1}
-                      id="outlined-multiline-static"
-                      label="Kendala 1"
-                      multiline
-                      rows={4}
-                      defaultValue=""
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={2.4}>
-                  <FormControl required sx={{ m: 1, width: '100%' }}>
-                    <TextField
-                      value={kendala2}
-                      id="outlined-multiline-static"
-                      label="Kendala 2"
-                      multiline
-                      rows={4}
-                      defaultValue=""
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={2.4}>
-                  <FormControl required sx={{ m: 1, width: '100%' }}>
-                    <TextField
-                      value={kendala3}
-                      id="outlined-multiline-static"
-                      label="Kendala 3"
-                      multiline
-                      rows={4}
-                      defaultValue=""
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={2.4}>
-                  <FormControl required sx={{ m: 1, width: '100%' }}>
-                    <TextField
-                      value={kendala4}
-                      id="outlined-multiline-static"
-                      label="Kendala 4"
-                      multiline
-                      rows={4}
-                      defaultValue=""
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={2.4}>
-                  <FormControl required sx={{ m: 1, width: '100%' }}>
-                    <TextField
-                      value={kendala5}
-                      id="outlined-multiline-static"
-                      label="Kendala 5"
-                      multiline
-                      rows={4}
-                      defaultValue=""
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
+                {Object.entries(kendala).map(([key, value]) => (
+                  <Grid item xs={12} sm={2.4} key={key}>
+                    <FormControl required sx={{ m: 1, width: '100%' }}>
+                      <TextField
+                        value={value} // Mengambil nilai dari kendala
+                        id={key} // ID unik untuk setiap TextField
+                        label={key} // Label berdasarkan kunci kendala
+                        multiline
+                        rows={4}
+                        InputProps={{
+                          readOnly: true, // Membuat field menjadi read-only
+                        }}
+                      />
+                    </FormControl>
+                  </Grid>
+                ))}
               </Grid>
             </CardContent>
           </MainCard>

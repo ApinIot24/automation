@@ -97,44 +97,44 @@ const Biskuit = () => {
       <TabPanel value="0">
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} sm={4}>
-              <CardCounterBandet url={urlapi.packingl2} isLoading={isLoading} />
+              <CardCounterBandet url={urlapi} isLoading={isLoading} />
              <Divider sx={{ my: 1.5 }} />
-              <CardCounterBox url={urlapi.packingl2} isLoading={isLoading} />
+              <CardCounterBox url={urlapi} isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} sm={8}>
-              <GrafekBandet label={label.grapl2} url={urlapi.grapikl2} isLoading={isLoading} />
+              <GrafekBandet label={label} url={urlapi} isLoading={isLoading} />
             <Divider sx={{ my: 1.5 }} />
-              <GrafekBox label={label.grapl2} url={urlapi.grapikl2} isLoading={isLoading} />
+              <GrafekBox label={label} url={urlapi} isLoading={isLoading} />
           </Grid>
         </Grid>
       </TabPanel>
       <TabPanel value="1">
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} sm={4}>
-             <PopularCard url={urlapi.packingb1} isLoading={isLoading} />
+             <PopularCard url={urlapi} isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCard url={urlapi.packingb1} isLoading={isLoading} />
+                <EarningCard url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardTwo url={urlapi.packingb1} isLoading={isLoading} />
+                <EarningCardTwo url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCardThree url={urlapi.packingb1} isLoading={isLoading} />
+                <EarningCardThree url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardFour url={urlapi.packingb1} isLoading={isLoading} />
+                <EarningCardFour url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center">
               <Grid item lg={12} md={12} sm={12} xs={12} >
-                <EarningCardFive label={label.grapb1} url={urlapi.grapikb1} isLoading={isLoading} />
+                <EarningCardFive label={label} url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>
@@ -143,30 +143,30 @@ const Biskuit = () => {
       <TabPanel value="2">
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} sm={4}>
-             <PopularCard url={urlapi.packingb2} isLoading={isLoading} />
+             <PopularCard url={urlapi} isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCard url={urlapi.packingb2} isLoading={isLoading} />
+                <EarningCard url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardTwo url={urlapi.packingb2} isLoading={isLoading} />
+                <EarningCardTwo url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCardThree url={urlapi.packingb2} isLoading={isLoading} />
+                <EarningCardThree url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardFour url={urlapi.packingb2} isLoading={isLoading} />
+                <EarningCardFour url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center">
               <Grid item lg={12} md={12} sm={12} xs={12} >
-                <EarningCardFive label={label.grapb2} url={urlapi.grapikb2} isLoading={isLoading} />
+                <EarningCardFive label={label} url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>
@@ -175,30 +175,30 @@ const Biskuit = () => {
       <TabPanel value="3">
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} sm={4}>
-             <PopularCard url={urlapi.packingb3} isLoading={isLoading} />
+             <PopularCard url={urlapi} isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCard url={urlapi.packingb3} isLoading={isLoading} />
+                <EarningCard url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardTwo url={urlapi.packingb3} isLoading={isLoading} />
+                <EarningCardTwo url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCardThree url={urlapi.packingb3} isLoading={isLoading} />
+                <EarningCardThree url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardFour url={urlapi.packingb3} isLoading={isLoading} />
+                <EarningCardFour url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center">
               <Grid item lg={12} md={12} sm={12} xs={12} >
-                <EarningCardFive label={label.grapb3} url={urlapi.grapikb3} isLoading={isLoading} />
+                <EarningCardFive label={label} url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>
@@ -207,30 +207,30 @@ const Biskuit = () => {
       <TabPanel value="4">
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} sm={4}>
-             <PopularCard url={urlapi.packingb4} isLoading={isLoading} />
+             <PopularCard url={urlapi} isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCard url={urlapi.packingb4} isLoading={isLoading} />
+                <EarningCard url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardTwo url={urlapi.packingb4} isLoading={isLoading} />
+                <EarningCardTwo url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCardThree url={urlapi.packingb4} isLoading={isLoading} />
+                <EarningCardThree url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardFour url={urlapi.packingb4} isLoading={isLoading} />
+                <EarningCardFour url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center">
               <Grid item lg={12} md={12} sm={12} xs={12} >
-                <EarningCardFive label={label.grapb4} url={urlapi.grapikb4} isLoading={isLoading} />
+                <EarningCardFive label={label} url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>
@@ -239,30 +239,30 @@ const Biskuit = () => {
       <TabPanel value="5">
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} sm={4}>
-             <PopularCard url={urlapi.packinga4} isLoading={isLoading} />
+             <PopularCard url={urlapi} isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCard url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCard url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardTwo url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardTwo url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCardThree url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardThree url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardFour url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardFour url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center">
               <Grid item lg={12} md={12} sm={12} xs={12} >
-                <EarningCardFive label={label.grapa4} url={urlapi.grapika4} isLoading={isLoading} />
+                <EarningCardFive label={label} url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>
@@ -271,30 +271,30 @@ const Biskuit = () => {
       <TabPanel value="6">
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} sm={4}>
-             <PopularCard url={urlapi.packinga4} isLoading={isLoading} />
+             <PopularCard url={urlapi} isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCard url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCard url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardTwo url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardTwo url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCardThree url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardThree url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardFour url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardFour url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center">
               <Grid item lg={12} md={12} sm={12} xs={12} >
-                <EarningCardFive label={label.grapa4} url={urlapi.grapika4} isLoading={isLoading} />
+                <EarningCardFive label={label} url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>
@@ -303,30 +303,30 @@ const Biskuit = () => {
       <TabPanel value="7">
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} sm={4}>
-             <PopularCard url={urlapi.packinga4} isLoading={isLoading} />
+             <PopularCard url={urlapi} isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCard url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCard url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardTwo url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardTwo url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCardThree url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardThree url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardFour url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardFour url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center">
               <Grid item lg={12} md={12} sm={12} xs={12} >
-                <EarningCardFive label={label.grapa4} url={urlapi.grapika4} isLoading={isLoading} />
+                <EarningCardFive label={label} url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>
@@ -335,30 +335,30 @@ const Biskuit = () => {
       <TabPanel value="8">
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} sm={4}>
-             <PopularCard url={urlapi.packinga4} isLoading={isLoading} />
+             <PopularCard url={urlapi} isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCard url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCard url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardTwo url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardTwo url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCardThree url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardThree url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardFour url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardFour url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center">
               <Grid item lg={12} md={12} sm={12} xs={12} >
-                <EarningCardFive label={label.grapa4} url={urlapi.grapika4} isLoading={isLoading} />
+                <EarningCardFive label={label} url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>
@@ -367,30 +367,30 @@ const Biskuit = () => {
       <TabPanel value="9">
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} sm={4}>
-             <PopularCard url={urlapi.packinga4} isLoading={isLoading} />
+             <PopularCard url={urlapi} isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCard url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCard url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardTwo url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardTwo url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCardThree url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardThree url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardFour url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardFour url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center">
               <Grid item lg={12} md={12} sm={12} xs={12} >
-                <EarningCardFive label={label.grapa4} url={urlapi.grapika4} isLoading={isLoading} />
+                <EarningCardFive label={label} url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>
@@ -399,30 +399,30 @@ const Biskuit = () => {
       <TabPanel value="10">
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} sm={4}>
-             <PopularCard url={urlapi.packinga4} isLoading={isLoading} />
+             <PopularCard url={urlapi} isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCard url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCard url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardTwo url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardTwo url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCardThree url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardThree url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardFour url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardFour url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center">
               <Grid item lg={12} md={12} sm={12} xs={12} >
-                <EarningCardFive label={label.grapa4} url={urlapi.grapika4} isLoading={isLoading} />
+                <EarningCardFive label={label} url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>
@@ -431,30 +431,30 @@ const Biskuit = () => {
       <TabPanel value="11">
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} sm={4}>
-             <PopularCard url={urlapi.packinga4} isLoading={isLoading} />
+             <PopularCard url={urlapi} isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCard url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCard url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardTwo url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardTwo url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCardThree url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardThree url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardFour url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardFour url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center">
               <Grid item lg={12} md={12} sm={12} xs={12} >
-                <EarningCardFive label={label.grapa4} url={urlapi.grapika4} isLoading={isLoading} />
+                <EarningCardFive label={label} url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>
@@ -463,30 +463,30 @@ const Biskuit = () => {
       <TabPanel value="12">
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} sm={4}>
-             <PopularCard url={urlapi.packinga4} isLoading={isLoading} />
+             <PopularCard url={urlapi} isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCard url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCard url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardTwo url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardTwo url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item lg={6} md={12} sm={12} xs={12} >
-                <EarningCardThree url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardThree url={urlapi} isLoading={isLoading} />
               </Grid>
               <Grid item lg={6} md={12} sm={12} xs={12}>
-                <EarningCardFour url={urlapi.packinga4} isLoading={isLoading} />
+                <EarningCardFour url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
             <Divider sx={{ my: 1.5 }} />
             <Grid container alignItems="center">
               <Grid item lg={12} md={12} sm={12} xs={12} >
-                <EarningCardFive label={label.grapa4} url={urlapi.grapika4} isLoading={isLoading} />
+                <EarningCardFive label={label} url={urlapi} isLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>

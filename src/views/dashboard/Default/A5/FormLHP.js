@@ -12,7 +12,6 @@ import dayjs from 'dayjs';
 // import { useNavigate } from "react-router-dom";
 import MainCard from 'ui-component/cards/MainCard';
 import ButtonSave from 'ui-component/ButtonSave';
-import ButtonOff from 'ui-component/ButtonOff';
 // import axios from 'axios';
 // ==============================|| HAPPY CODING ||============================== //
 
@@ -67,11 +66,6 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5 }) 
     const [forbanded2, setForBanded2] = useState('');
     const [cutoff, setCutOff] = useState('');
     const [ctnluar, setCtnLuar] = useState('');
-    const [kendala1, setKendala1] = useState('');
-    const [kendala2, setKendala2] = useState('');
-    const [kendala3, setKendala3] = useState('');
-    const [kendala4, setKendala4] = useState('');
-    const [kendala5, setKendala5] = useState('');
     var celloall = {
         cello: cello,
         cello1: cello1,
@@ -95,13 +89,7 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5 }) 
         speed4: speed4,
         speed5: speed5
     }
-    var kendalaall = {
-        kendala1: kendala1,
-        kendala2: kendala2,
-        kendala3: kendala3,
-        kendala4: kendala4,
-        kendala5: kendala5
-    }
+ 
     var ctnall = {
         ctnsup: ctnsup,
         ctnproud: ctnproud,
@@ -135,49 +123,12 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5 }) 
         buble: buble,
         suppliercello: supcello,
         speed_mesin: speedall,
-        kendala: kendalaall,
         sample_ctn_qc: samplectnqc,
         banded_under: forbanded,
         banded_over: forbanded2,
         cutoff_jam: cutoff,
         ctn_luar: ctnluar,
         users_input: users
-    };
-    const LHPDUA = {
-        realdatetime: valuedate,
-        grup: label0,
-        shift: shift,
-        sku: "-",
-        plan: 0,
-        real: 0,
-        ach: 0,
-        cello: 0,
-        cellocpp: 0,
-        ctn_type: 0,
-        cello_used: 0,
-        adonan_used: 0,
-        ccbcream_used: 0,
-        avgsheet: 0,
-        avgbook: 0,
-        sheet: 0,
-        book: 0,
-        cutkasar: 0,
-        bubukcuttig: 0,
-        sapuancut: 0,
-        qcpacking: 0,
-        qccello: 0,
-        packing_reject: 0,
-        banded: 0,
-        sapuanpack: 0,
-        buble: 0,
-        suppliercello: 0,
-        speed_mesin: 0,
-        kendala: 0,
-        sample_ctn_qc: 0,
-        banded_under: 0,
-        banded_over: 0,
-        cutoff_jam: 0,
-        ctn_luar: 0
     };
 
     const [timeEntries, setTimeEntries] = useState([{ time_start: null, time_stop: null, total_dt: '', kendala: '' }]);
@@ -829,75 +780,6 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5 }) 
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        <Divider sx={{ mb: 2, border: 1, borderColor: 'divider' }} />
-                        <Typography variant="h5">Kendala / Note</Typography>
-                        <Grid container spacing={2} direction="row" >
-                            <Grid item xs={12} sm={2.4} >
-                                <FormControl required sx={{ m: 1, width: '100%' }}>
-                                    <TextField
-                                        onChange={e => setKendala1(e.target.value)}
-                                        value={kendala1}
-                                        id="outlined-multiline-static"
-                                        label="Kendala 1"
-                                        multiline
-                                        rows={4}
-                                        defaultValue=""
-                                    />
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12} sm={2.4}>
-                                <FormControl required sx={{ m: 1, width: '100%' }}>
-                                    <TextField
-                                        onChange={e => setKendala2(e.target.value)}
-                                        value={kendala2}
-                                        id="outlined-multiline-static"
-                                        label="Kendala 2"
-                                        multiline
-                                        rows={4}
-                                        defaultValue=""
-                                    />
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12} sm={2.4}>
-                                <FormControl required sx={{ m: 1, width: '100%' }}>
-                                    <TextField
-                                        onChange={e => setKendala3(e.target.value)}
-                                        value={kendala3}
-                                        id="outlined-multiline-static"
-                                        label="Kendala 3"
-                                        multiline
-                                        rows={4}
-                                        defaultValue=""
-                                    />
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12} sm={2.4}>
-                                <FormControl required sx={{ m: 1, width: '100%' }}>
-                                    <TextField
-                                        onChange={e => setKendala4(e.target.value)}
-                                        value={kendala4}
-                                        id="outlined-multiline-static"
-                                        label="Kendala 4"
-                                        multiline
-                                        rows={4}
-                                        defaultValue=""
-                                    />
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12} sm={2.4}>
-                                <FormControl required sx={{ m: 1, width: '100%' }}>
-                                    <TextField
-                                        onChange={e => setKendala5(e.target.value)}
-                                        value={kendala5}
-                                        id="outlined-multiline-static"
-                                        label="Kendala 5"
-                                        multiline
-                                        rows={4}
-                                        defaultValue=""
-                                    />
-                                </FormControl>
-                            </Grid>
-                        </Grid>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <Divider sx={{ mb: 2, border: 1, borderColor: 'divider' }} />
                             <Typography variant="h5">Downtime</Typography>
@@ -956,9 +838,6 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5 }) 
                         <Grid container sx={{ margin: 2 }} spacing={2} direction="row" >
                             <Grid item xs={12} sm={1} >
                                 <ButtonSave lhp={LHP} downtime={timeEntries} />
-                            </Grid>
-                            <Grid item xs={12} sm={1} >
-                                <ButtonOff lhp={LHPDUA} />
                             </Grid>
                         </Grid>
 

@@ -1,25 +1,31 @@
 import PropTypes from 'prop-types';
-
-// material-ui
 import { useTheme } from '@mui/material/styles';
-import { Avatar, Box, ButtonBase, } from '@mui/material';
-
-// project imports
+import { Avatar, Box, ButtonBase, Button } from '@mui/material';
+import { IconMenu2 } from '@tabler/icons-react';
 import LogoSection from '../LogoSection';
 import SearchSection from './SearchSection';
 import ProfileSection from './ProfileSection';
 import NotificationSection from './NotificationSection';
 
-// assets
-import { IconMenu2 } from '@tabler/icons-react';
-
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
 const Header = ({ handleLeftDrawerToggle }) => {
   const theme = useTheme();
+
+  // Format tanggal hari ini
   const today = new Date();
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const todayFormatted = today.toLocaleDateString('id-ID', options);
+
+  // Fungsi untuk mengaktifkan fullscreen
+  const handleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  };
+
   return (
     <>
       {/* logo & toggler button */}
@@ -32,7 +38,6 @@ const Header = ({ handleLeftDrawerToggle }) => {
           }
         }}
       >
-    
         <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
           <LogoSection />
         </Box>
@@ -63,8 +68,29 @@ const Header = ({ handleLeftDrawerToggle }) => {
       <Box sx={{ flexGrow: 1 }} />
       <Box sx={{ flexGrow: 1 }} />
 
+
+      {/* Tombol Fullscreen */}
+      <Button
+        variant="contained"
+        onClick={handleFullScreen}
+        sx={{
+          backgroundColor: 'transparent', // Transparansi penuh
+          color: 'inherit', // Tidak ada warna teks, mengikuti warna teks bawaan dari elemen di sekitarnya
+          boxShadow: 'none', // Menghapus bayangan jika ada
+          '&:hover': {
+            backgroundColor: 'transparent', // Tidak ada efek hover
+            boxShadow: 'none', // Tidak ada bayangan saat hover
+          },
+          '&:active': {
+            backgroundColor: 'transparent', // Tidak ada warna saat ditekan
+          },
+          border: 'none', // Menghapus border jika ada
+        }}
+      >
+        <h2>{todayFormatted}</h2>
+      </Button>
+
       {/* notification & profile */}
-      <h2>{todayFormatted}</h2>
       <NotificationSection />
       <ProfileSection />
     </>

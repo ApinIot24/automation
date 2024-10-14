@@ -21,7 +21,6 @@ const FormLHP = ({ isLoading }) => {
         reguler: '',
         hold: '',
         output: '',
-        output_kg: '',
         bubuk: '',
         beratKering: '',
         beratBasah: '',
@@ -54,7 +53,6 @@ const FormLHP = ({ isLoading }) => {
         tampungan: '',
         total: '',
         batch: '',
-        batch_buat: '',
         brtpack: '',
         wipackinner: '',
         wikulit: '',
@@ -74,8 +72,6 @@ const FormLHP = ({ isLoading }) => {
             viE12: '',
         },
         variance: '',
-        variance_batch: '',
-        variance_fg: '',
         viawal: '',
         viambil: '',
         vireturn: '',
@@ -141,29 +137,18 @@ const FormLHP = ({ isLoading }) => {
         const rmall = {};
         for (let i = 1; i <= 12; i++) {
             const label = `E${i}`;  // Format for rmall is E1, E2, ..., E12
-            rmall[`rm${i}`] = getValue(label);
+            rmall[`rmE${i}`] = getValue(label);
         }
 
         // Parse VI values (viall)
         const viall = {};
         for (let i = 1; i <= 12; i++) {
-            const label = `E${i}`;  // Format for viall is VI E1, VI E2, ..., VI E12
-            viall[`vi${i}`] = getValue(label);
+            const label = `VI E${i}`;  // Format for viall is VI E1, VI E2, ..., VI E12
+            viall[`viE${i}`] = getValue(label);
         }
-
-        const shiftValue = getValue('SHIFT');
-        let formattedShift = '';
-        if (shiftValue === '1') {
-            formattedShift = 'Shift 1';
-        } else if (shiftValue === '2') {
-            formattedShift = 'Shift 2';
-        } else if (shiftValue === '3') {
-            formattedShift = 'Shift 3';
-        }
-
         setFormState({
             ...formState,
-            shift: formattedShift,
+            shift: getValue('SHIFT'),
             reguler: getValue('Release'),
             hold: getValue('Hold'),
             output: getValue('T. Output'),
@@ -193,11 +178,8 @@ const FormLHP = ({ isLoading }) => {
         if (planning && reguler && hold) {
             const outputCalc = ((parseFloat(reguler) + parseFloat(hold)) / parseFloat(planning)) * 100;
             handleChange('output', outputCalc.toFixed(2));
-            const outputKg = (outputCalc * 8.4).toFixed(2);  // Mengalikan dengan 8.4 untuk mendapatkan output dalam kg
-            handleChange('output_kg', outputKg);
         } else {
             handleChange('output', '');
-            handleChange('output_kg');
         }
     }, [formState.planning, formState.reguler, formState.hold]);
 
@@ -253,43 +235,17 @@ const FormLHP = ({ isLoading }) => {
     const beratBasahValues = [722.155, 732.155, 742.155, 752.155, 762.155, 772.155, 782.155];
     const handleBubukChange = (value) => {
         handleChange('bubuk', value);
-
         const bubukValue = parseInt(value, 10);
         const index = bubukValue / 10;
 
         if (index >= 0 && index < beratKeringValues.length) {
-            const beratKeringVal = beratKeringValues[index].toFixed(2);
-            const beratBasahVal = beratBasahValues[index].toFixed(2);
-
-            handleChange('beratKering', beratKeringVal);
-            handleChange('beratBasah', beratBasahVal);
-
-            // Hitung ulang variance batch dan variance FG setelah berat kering diperbarui
-            const { batch_buat, output_kg } = formState;
-
-            if (batch_buat && output_kg) {
-                const batchBuat = parseFloat(batch_buat);
-                const outputKgVal = parseFloat(output_kg);
-
-                // Variance batch
-                const varianceBatch = ((batchBuat * beratKeringVal - outputKgVal) / (batchBuat * beratKeringVal)).toFixed(4);
-                handleChange('variance_batch', varianceBatch);
-
-                // Variance FG
-                const varianceFg = ((batchBuat * beratKeringVal - outputKgVal) / (batchBuat * 8 * beratKeringVal)).toFixed(4);
-                handleChange('variance_fg', varianceFg);
-            } else {
-                handleChange('variance_batch', '');
-                handleChange('variance_fg', '');
-            }
+            handleChange('beratKering', beratKeringValues[index].toFixed(2));
+            handleChange('beratBasah', beratBasahValues[index].toFixed(2));
         } else {
             handleChange('beratKering', '');
             handleChange('beratBasah', '');
-            handleChange('variance_batch', '');
-            handleChange('variance_fg', '');
         }
     };
-
 
     // Handle Time Changes and Downtime
     const addTimeEntry = () => {
@@ -378,25 +334,21 @@ const FormLHP = ({ isLoading }) => {
                 <MainCard content={false}>
                     <CardContent>
                         <Typography variant="h5">Primary</Typography>
-                        <Grid container spacing={2} sx={{ mt: 3, mb: 2 }}>
-                            <Grid item xs={12} sm={12}>
-                                <TextField
-                                    label="Paste Laporan"
-                                    fullWidth
-                                    multiline
-                                    rows={10} // Atur berapa banyak baris yang diinginkan
-                                    variant="outlined"
-                                    value={rawData}
-                                    onChange={(e) => setRawData(e.target.value)}
-                                    // Tambahkan style jika perlu
-                                    sx={{ mb: 2 }} // Margin bawah untuk memberi ruang pada button
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={12}>
-                                <Button variant="contained" fullWidth onClick={parseData}>
-                                    Isi Form
-                                </Button>
-                            </Grid>
+                        <Grid container spacing={2}>
+                            <TextField
+                                label="Paste Laporan"
+                                multiline
+                                fullWidth
+                                rows={5}
+                                variant="outlined"
+                                value={rawData}
+                                onChange={(e) => setRawData(e.target.value)}
+                            />
+
+                            <Button variant="contained" sx={{ mt: 2 }} onClick={parseData}>
+                                Isi Form
+                            </Button>
+
                         </Grid>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={2}>
@@ -430,17 +382,8 @@ const FormLHP = ({ isLoading }) => {
                             <Grid item xs={12} sm={4}>{renderTextField('Release', 'reguler')}</Grid>
                             <Grid item xs={12} sm={4}>{renderTextField('Hold', 'hold')}</Grid>
                             <Grid item xs={12} sm={4}>{renderTextField('Output (%)', 'output', true)}</Grid>
-                            <Grid item xs={12} sm={4}>{renderTextField('Output (KG)', 'output_kg', true)}</Grid>
                         </Grid>
 
-                        <Divider sx={{ mt: 3, mb: 2 }} />
-                        <Typography variant="h5">Total dan Berat Pack</Typography>
-                        <Grid container spacing={2} sx={{ mt: 2 }}>
-                            <Grid item xs={12} sm={6}>{renderTextField('Berat/Pack', 'brtpack')}</Grid>
-                            <Grid item xs={12} sm={6}>{renderTextField('Batch Cetak', 'batch')}</Grid>
-                            <Grid item xs={12} sm={6}>{renderTextField('Batch Buat', 'batch_buat')}</Grid>
-                        </Grid>
-                        
                         <Grid container spacing={2} sx={{ mt: 3, mb: 2 }}>
                             <Grid item xs={12} sm={4}>
                                 <FormControl fullWidth>
@@ -461,8 +404,6 @@ const FormLHP = ({ isLoading }) => {
                                     </Select>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={12} sm={4}>{renderTextField('Variance / Batch', 'variance_batch', true)}</Grid>
-                            <Grid item xs={12} sm={4}>{renderTextField('Variance FG', 'variance_fg', true)}</Grid>
                         </Grid>
 
                         {/* Menampilkan Berat Kering dan Berat Basah jika bubuk dipilih */}
@@ -545,7 +486,12 @@ const FormLHP = ({ isLoading }) => {
                             <Grid item xs={12} sm={4}>{renderTextField('Total', 'total', true)}</Grid>
                         </Grid>
 
-                    
+                        <Divider sx={{ mt: 3, mb: 2 }} />
+                        <Typography variant="h5">Total dan Berat Pack</Typography>
+                        <Grid container spacing={2} sx={{ mt: 2 }}>
+                            <Grid item xs={12} sm={6}>{renderTextField('Berat/Pack', 'brtpack')}</Grid>
+                            <Grid item xs={12} sm={6}>{renderTextField('Batch Cetak', 'batch')}</Grid>
+                        </Grid>
 
                         <Divider sx={{ mt: 3, mb: 2 }} />
                         <Typography variant="h5">Batch dan WIP</Typography>

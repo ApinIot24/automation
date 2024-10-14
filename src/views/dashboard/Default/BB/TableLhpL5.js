@@ -58,9 +58,9 @@ const TableLhpL5 = () => {
   const [rmE11c, setRmE11c] = useState([0]);
   const [rmE12c, setRmE12c] = useState([0]);
   const [regulerc, setRegulerc] = useState([0]);
-  // console.log('reguler',regulerc);
-  const [holdc, setHoldc] = useState([0]);
-  const [outputc, setOutputc] = useState([0]);
+  const [planningc, setPlanningc] = useState([0]);
+  // const [holdc, setHoldc] = useState([0]);
+  // const [outputc, setOutputc] = useState([0]);
   const [rmdc, setRMDc] = useState([0]);
   const [rfeedingc, setRfeedingc] = useState([0]);
   const [rpackTablec, setRPackTablec] = useState([0]);
@@ -130,228 +130,206 @@ const TableLhpL5 = () => {
   const [krpakai, setKrpakai] = useState('');
   const [kreturn, setKreturn] = useState('');
   const [kreject, setKreject] = useState('');
-  const [kendala1, setKendala1] = useState('');
-  const [kendala2, setKendala2] = useState('');
-  const [kendala3, setKendala3] = useState('');
-  const [kendala4, setKendala4] = useState('');
-  const [kendala5, setKendala5] = useState('');
-  const [field] = useState([
-    { field: 'id', headerName: 'ID', width: 50 },
-    { field: 'users_input', headerName: 'User Input', width: 200 },
-    { field: 'shift', headerName: 'Time', width: 100 },
-    { field: 'sku', headerName: 'Sku', width: 200 },
-    { field: 'reguler', headerName: 'Release', width: 50 },
-    { field: 'planning', headerName: 'R Sample Qc', width: 50 },
-    { field: 'hold', headerName: 'Hold', width: 50 },
-    { field: 'output', headerName: 'Output', width: 50 },
-    { field: 'rmd', headerName: 'Rmd', width: 50 },
-    { field: 'rfeeding', headerName: 'Rfeeding', width: 50 },
-    { field: 'roll', headerName: 'Roll', width: 50 },
-    { field: 'rsampleqc', headerName: 'R Sample Qc', width: 50 },
-    {
-      field: 'rmE1', headerName: 'RM E1', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.rmall.rmE1 || ''}`;
-      }
-    },
-    {
-      field: 'rmE2', headerName: 'RM E2', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.rmall.rmE2 || ''}`;
-      }
-    },
-    {
-      field: 'rmE3', headerName: 'RM E3', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.rmall.rmE3 || ''}`;
-      }
-    },
-    {
-      field: 'rmE4', headerName: 'RM E4', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.rmall.rmE4 || ''}`;
-      }
-    },
-    {
-      field: 'rmE5', headerName: 'RM E5', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.rmall.rmE5 || ''}`;
-      }
-    },
-    {
-      field: 'rmE6', headerName: 'RM E6', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.rmall.rmE6 || ''}`;
-      }
-    },
-    {
-      field: 'rmE7', headerName: 'RM E7', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.rmall.rmE7 || ''}`;
-      }
-    },
-    {
-      field: 'rmE8', headerName: 'RM E8', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.rmall.rmE8 || ''}`;
-      }
-    },
-    {
-      field: 'rmE9', headerName: 'RM E9', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.rmall.rmE9 || ''}`;
-      }
-    },
-    {
-      field: 'rmE10', headerName: 'RM E10', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.rmall.rmE10 || ''}`;
-      }
-    },
-    {
-      field: 'rmE11', headerName: 'RM E11', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.rmall.rmE11 || ''}`;
-      }
-    },
-    {
-      field: 'rmE12', headerName: 'RM E12', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.rmall.rmE12 || ''}`;
-      }
-    },
-    { field: 'rpacktable', headerName: 'Rpacktable', width: 50 },
-    { field: 'rmtotal', headerName: 'Rmtotal', width: 50 },
-    { field: 'roven', headerName: 'R Oven', width: 50 },
-    { field: 'soven', headerName: 'Sampah Oven', width: 50 },
-    { field: 'mcbks', headerName: 'Mcbks', width: 50 },
-    { field: 'ptable', headerName: 'P Table', width: 50 },
-    { field: 'serbuk', headerName: 'Serbuk', width: 50 },
-    { field: 'tampungan', headerName: 'Tampungan', width: 50 },
-    { field: 'total', headerName: 'Total', width: 50 },
-    { field: 'brtpack', headerName: 'Brt Pack', width: 50 },
-    { field: 'batch', headerName: 'Batch', width: 50 },
-    { field: 'wipackinner', headerName: 'Wi Pack Inner', width: 50 },
-    { field: 'wikulit', headerName: 'Wi Kulit', width: 50 },
-    { field: 'witotal', headerName: 'Wi Total ', width: 50 },
-    { field: 'viawal', headerName: 'Vi awak', width: 50 },
-    { field: 'viambil', headerName: 'Vi ambil', width: 50 },
-    { field: 'viakhir', headerName: 'Vi Akhir', width: 50 },
-    { field: 'vireturn', headerName: 'Vi return', width: 50 },
-    { field: 'viinner', headerName: 'Vi Inner', width: 50 },
-    { field: 'virainner', headerName: 'Vi Rainner', width: 50 },
-    {
-      field: 'viE1', headerName: 'Vi E1', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.viall.viE1 || ''}`;
-      }
-    },
-    {
-      field: 'viE2', headerName: 'Vi E2', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.viall.viE2 || ''}`;
-      }
-    },
-    {
-      field: 'viE3', headerName: 'Vi E3', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.viall.viE3 || ''}`;
-      }
-    },
-    {
-      field: 'viE4', headerName: 'Vi E4', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.viall.viE4 || ''}`;
-      }
-    },
-    {
-      field: 'viE5', headerName: 'Vi E5', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.viall.viE5 || ''}`;
-      }
-    },
-    {
-      field: 'viE6', headerName: 'Vi E6', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.viall.viE6 || ''}`;
-      }
-    },
-    {
-      field: 'viE7', headerName: 'Vi E7', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.viall.viE7 || ''}`;
-      }
-    },
-    {
-      field: 'viE8', headerName: 'Vi E8', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.viall.viE8 || ''}`;
-      }
-    },
-    {
-      field: 'viE9', headerName: 'Vi E9', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.viall.viE9 || ''}`;
-      }
-    },
-    {
-      field: 'viE10', headerName: 'Vi E10', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.viall.viE10 || ''}`;
-      }
-    },
-    {
-      field: 'viE11', headerName: 'Vi E11', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.viall.viE11 || ''}`;
-      }
-    },
-    {
-      field: 'viE12', headerName: 'Vi E12', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.viall.viE12 || ''}`;
-      }
-    },
-    { field: 'variance', headerName: 'Variance', width: 50 },
-    { field: 'krkawal', headerName: 'Kr Awal', width: 50 },
-    { field: 'krawal', headerName: 'Kr Awak', width: 50 },
-    { field: 'krakhir', headerName: 'Kr Akhir', width: 50 },
-    { field: 'krpakai', headerName: 'Kr Pakai', width: 50 },
-    { field: 'kreturn', headerName: 'Kr Return', width: 50 },
-    { field: 'kreject', headerName: 'Kr Reject', width: 50 },
-
-    {
-      field: 'kendala1', headerName: 'Kendala 1', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.kendalaall.kendala1 || ''}`;
-      }
-    },
-    {
-      field: 'kendala2', headerName: 'Kendala 2', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.kendalaall.kendala2 || ''}`;
-      }
-    },
-    {
-      field: 'kendala3', headerName: 'Kendala 3', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.kendalaall.kendala3 || ''}`;
-      }
-    },
-    {
-      field: 'kendala4', headerName: 'Kendala 4', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.kendalaall.kendala4 || ''}`;
-      }
-    },
-    {
-      field: 'kendala5', headerName: 'Kendala 5', width: 50,
-      valueGetter: (value, row) => {
-        return `${row.kendalaall.kendala5 || ''}`;
-      }
-    },
-    { field: 'rpackinner', headerName: 'R pack Inner', width: 50 },
-  ]);
+  const [kendala, setKendala] = useState({});
+  const generateKendalaColumns = (maxKendalaCount) => {
+    const columns = [
+      { field: 'id', headerName: 'ID', width: 50 },
+      { field: 'users_input', headerName: 'User Input', width: 200 },
+      { field: 'shift', headerName: 'Time', width: 100 },
+      { field: 'sku', headerName: 'Sku', width: 200 },
+      { field: 'reguler', headerName: 'Release', width: 50 },
+      { field: 'planning', headerName: 'Planning', width: 50 },
+      { field: 'hold', headerName: 'Hold', width: 50 },
+      { field: 'output', headerName: 'Output', width: 50 },
+      { field: 'rmd', headerName: 'Rmd', width: 50 },
+      { field: 'rfeeding', headerName: 'Rfeeding', width: 50 },
+      { field: 'roll', headerName: 'Roll', width: 50 },
+      { field: 'rsampleqc', headerName: 'R Sample Qc', width: 50 },
+      {
+        field: 'rmE1', headerName: 'RM E1', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.rmall.rmE1 || ''}`;
+        }
+      },
+      {
+        field: 'rmE2', headerName: 'RM E2', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.rmall.rmE2 || ''}`;
+        }
+      },
+      {
+        field: 'rmE3', headerName: 'RM E3', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.rmall.rmE3 || ''}`;
+        }
+      },
+      {
+        field: 'rmE4', headerName: 'RM E4', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.rmall.rmE4 || ''}`;
+        }
+      },
+      {
+        field: 'rmE5', headerName: 'RM E5', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.rmall.rmE5 || ''}`;
+        }
+      },
+      {
+        field: 'rmE6', headerName: 'RM E6', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.rmall.rmE6 || ''}`;
+        }
+      },
+      {
+        field: 'rmE7', headerName: 'RM E7', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.rmall.rmE7 || ''}`;
+        }
+      },
+      {
+        field: 'rmE8', headerName: 'RM E8', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.rmall.rmE8 || ''}`;
+        }
+      },
+      {
+        field: 'rmE9', headerName: 'RM E9', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.rmall.rmE9 || ''}`;
+        }
+      },
+      {
+        field: 'rmE10', headerName: 'RM E10', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.rmall.rmE10 || ''}`;
+        }
+      },
+      {
+        field: 'rmE11', headerName: 'RM E11', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.rmall.rmE11 || ''}`;
+        }
+      },
+      {
+        field: 'rmE12', headerName: 'RM E12', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.rmall.rmE12 || ''}`;
+        }
+      },
+      { field: 'rpacktable', headerName: 'Rpacktable', width: 50 },
+      { field: 'rmtotal', headerName: 'Rmtotal', width: 50 },
+      { field: 'roven', headerName: 'R Oven', width: 50 },
+      { field: 'soven', headerName: 'Sampah Oven', width: 50 },
+      { field: 'mcbks', headerName: 'Mcbks', width: 50 },
+      { field: 'ptable', headerName: 'P Table', width: 50 },
+      { field: 'serbuk', headerName: 'Serbuk', width: 50 },
+      { field: 'tampungan', headerName: 'Tampungan', width: 50 },
+      { field: 'total', headerName: 'Total', width: 50 },
+      { field: 'brtpack', headerName: 'Brt Pack', width: 50 },
+      { field: 'batch', headerName: 'Batch', width: 50 },
+      { field: 'wipackinner', headerName: 'Wi Pack Inner', width: 50 },
+      { field: 'wikulit', headerName: 'Wi Kulit', width: 50 },
+      { field: 'witotal', headerName: 'Wi Total ', width: 50 },
+      { field: 'viawal', headerName: 'Vi awak', width: 50 },
+      { field: 'viambil', headerName: 'Vi ambil', width: 50 },
+      { field: 'viakhir', headerName: 'Vi Akhir', width: 50 },
+      { field: 'vireturn', headerName: 'Vi return', width: 50 },
+      { field: 'viinner', headerName: 'Vi Inner', width: 50 },
+      { field: 'virainner', headerName: 'Vi Rainner', width: 50 },
+      {
+        field: 'viE1', headerName: 'Vi E1', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.viall.viE1 || ''}`;
+        }
+      },
+      {
+        field: 'viE2', headerName: 'Vi E2', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.viall.viE2 || ''}`;
+        }
+      },
+      {
+        field: 'viE3', headerName: 'Vi E3', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.viall.viE3 || ''}`;
+        }
+      },
+      {
+        field: 'viE4', headerName: 'Vi E4', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.viall.viE4 || ''}`;
+        }
+      },
+      {
+        field: 'viE5', headerName: 'Vi E5', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.viall.viE5 || ''}`;
+        }
+      },
+      {
+        field: 'viE6', headerName: 'Vi E6', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.viall.viE6 || ''}`;
+        }
+      },
+      {
+        field: 'viE7', headerName: 'Vi E7', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.viall.viE7 || ''}`;
+        }
+      },
+      {
+        field: 'viE8', headerName: 'Vi E8', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.viall.viE8 || ''}`;
+        }
+      },
+      {
+        field: 'viE9', headerName: 'Vi E9', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.viall.viE9 || ''}`;
+        }
+      },
+      {
+        field: 'viE10', headerName: 'Vi E10', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.viall.viE10 || ''}`;
+        }
+      },
+      {
+        field: 'viE11', headerName: 'Vi E11', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.viall.viE11 || ''}`;
+        }
+      },
+      {
+        field: 'viE12', headerName: 'Vi E12', width: 50,
+        valueGetter: (value, row) => {
+          return `${row.viall.viE12 || ''}`;
+        }
+      },
+      { field: 'variance', headerName: 'Variance', width: 50 },
+      { field: 'krkawal', headerName: 'Kr Awal', width: 50 },
+      { field: 'krawal', headerName: 'Kr Awak', width: 50 },
+      { field: 'krakhir', headerName: 'Kr Akhir', width: 50 },
+      { field: 'krpakai', headerName: 'Kr Pakai', width: 50 },
+      { field: 'kreturn', headerName: 'Kr Return', width: 50 },
+      { field: 'kreject', headerName: 'Kr Reject', width: 50 },
+      { field: 'rpackinner', headerName: 'R pack Inner', width: 50 },
+    ];
+    for (let i = 1; i <= maxKendalaCount; i++) {
+      columns.push({
+        field: `kendala${i}`,
+        headerName: `Kendala ${i}`,
+        width: 200,
+        valueGetter: (value, row) => {
+          return `${row.kendalaall?.[`kendala${i}`] || ''}`; // Akses menggunakan bracket notation
+        }
+      });
+    }
+    return columns;
+  };
   // console.log("data pilih ini" , data)
   // console.log("setrme1c pilih ini" , rmE1c, rmE2c)
 
@@ -360,6 +338,12 @@ const TableLhpL5 = () => {
     lhpdaily: 'http://10.37.12.17:3000/lhpl5_daily/l5',
     urlp2: 'table',
   })
+
+  const maxKendalaCount = Math.max(...data.map(row => Object.keys(row.kendalaall).length));
+  const columns = generateKendalaColumns(maxKendalaCount); // Menghasilkan kolom
+
+
+
   const handleClose = (reason) => {
     if (reason === 'clickaway') {
       return;
@@ -398,7 +382,7 @@ const TableLhpL5 = () => {
         setRfeeding(dataolah.rfeeding);
         setRsampleqc(dataolah.rsampleqc);
         setRpackinner(dataolah.rpackinner);
-        setRmE1(dataolah.rmE1);
+        setRmE1(dataolah.rmall.rmE1);
         setRmE2(dataolah.rmE2);
         setRmE3(dataolah.rmE3);
         setRmE4(dataolah.rmE4);
@@ -450,11 +434,7 @@ const TableLhpL5 = () => {
         setKrpakai(dataolah.krpakai);
         setKreturn(dataolah.kreturn);
         setKreject(dataolah.kreject);
-        setKendala1(dataolah.kendala1);
-        setKendala2(dataolah.kendala2);
-        setKendala3(dataolah.kendala3);
-        setKendala4(dataolah.kendala4);
-        setKendala5(dataolah.kendala5);
+        setKendala(dataolah.kendalaall)
         setOpenDua(true);
         setOpenTiga(false);
       })
@@ -487,8 +467,7 @@ const TableLhpL5 = () => {
           setRmE11c([dataolah[0].rmall.rmE11 || 0]);
           setRmE12c([dataolah[0].rmall.rmE12 || 0]);
           setRegulerc([dataolah[0].reguler || 0]);
-          setHoldc([dataolah[0].hold || 0]);
-          setOutputc([dataolah[0].output || 0]);
+          setPlanningc([dataolah[0].planning || 0]);
           setRPackTablec([dataolah[0].rpackTable || 0]);
           setRovenc([dataolah[0].roven || 0]);
           setRMDc([dataolah[0].rmd || 0]);
@@ -546,8 +525,7 @@ const TableLhpL5 = () => {
                         setRmE11c([dataolah[0].rmall.rmE11])
                         setRmE12c([dataolah[0].rmall.rmE12])
                         setRegulerc([dataolah[0].reguler])
-                        setHoldc([dataolah[0].hold])
-                        setOutputc([dataolah[0].output])
+                        setPlanningc([dataolah[0].planning])
                         setRPackTablec([dataolah[0].rpackTable])
                         setRovenc([dataolah[0].roven])
                         setRMDc([dataolah[0].rmd])
@@ -575,8 +553,7 @@ const TableLhpL5 = () => {
                       setRmE11c([dataolah[0]?.rmall?.rmE11 || 0, dataolah[1]?.rmall?.rmE11 || 0, dataolah[2]?.rmall?.rmE11 || 0])
                       setRmE12c([dataolah[0]?.rmall?.rmE12 || 0, dataolah[1]?.rmall?.rmE12 || 0, dataolah[2]?.rmall?.rmE12 || 0])
                       setRegulerc([dataolah[0]?.reguler || 0, dataolah[1]?.reguler || 0, dataolah[2]?.reguler || 0])
-                      setHoldc([dataolah[0]?.hold || 0, dataolah[1]?.hold || 0, dataolah[2]?.hold || 0])
-                      setOutputc([dataolah[0]?.output || 0, dataolah[1]?.output || 0, dataolah[2]?.output || 0])
+                      setPlanningc([dataolah[0]?.planning || 0, dataolah[1]?.planning || 0, dataolah[2]?.planning || 0])
                       setRPackTablec([dataolah[0]?.rpackTable || 0, dataolah[1]?.rpackTable || 0, dataolah[2]?.rpackTable || 0])
                       setRovenc([dataolah[0]?.roven || 0, dataolah[1]?.roven || 0, dataolah[2]?.roven || 0])
                       setRMDc([dataolah[0]?.rmd || 0, dataolah[1]?.rmd || 0, dataolah[2]?.rmd || 0])
@@ -598,9 +575,7 @@ const TableLhpL5 = () => {
                       setRmE11c([0])
                       setRmE12c([0])
                       setRegulerc([0])
-                      setHoldc([0])
-                      setOutputc([0])
-                      setRPackTablec([0])
+                      setPlanningc([0])
                       setRovenc([0])
                       setRMDc([0])
                       setRfeedingc([0])
@@ -612,9 +587,7 @@ const TableLhpL5 = () => {
           </LocalizationProvider>
         </Grid>
       </Grid>
-      <Grid item sx={{ mb: 5 }} xs={12} >
-        <DataGrid rows={data} columns={field} loading={isLoading} slots={{ toolbar: GridToolbar }} onRowClick={handleRowClick} />
-      </Grid>
+
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         <Grid item xs={2} sm={4} md={4}>
           <CardWrapper border={false} content={false}>
@@ -739,7 +712,7 @@ const TableLhpL5 = () => {
                 <Grid container justifyContent="Center">
                   <Grid item>
                     <Typography variant="h4">
-                      (release = {Math.round(outputc[0] || 0)}%, release Shift 2 = {Math.round(outputc[1] || 0)}%, release Shift 3 = {Math.round(outputc[2] || 0)}%)
+                      (release = {Math.round(regulerc[0] || 0)}, release Shift 2 = {Math.round(regulerc[1] || 0)}, release Shift 3 = {Math.round(regulerc[2] || 0)})
                     </Typography>
                   </Grid>
                 </Grid>
@@ -761,14 +734,8 @@ const TableLhpL5 = () => {
                       {
                         id: '2',
                         stack: 'B',
-                        label: 'Hold',
-                        data: holdc,
-                      },
-                      {
-                        id: '3',
-                        stack: 'C',
-                        label: 'output',
-                        data: outputc,
+                        label: 'Planning',
+                        data: planningc,
                       },
                     ]}
                     height={300}
@@ -830,6 +797,9 @@ const TableLhpL5 = () => {
             </Grid>
           </CardWrapper>
         </Grid>
+      </Grid>
+      <Grid item sx={{ mb: 5 }} xs={12} >
+        <DataGrid rows={data} columns={columns} loading={isLoading} slots={{ toolbar: GridToolbar }} onRowClick={handleRowClick} />
       </Grid>
       <Snackbar
         onClose={handleClose}
@@ -1400,63 +1370,25 @@ const TableLhpL5 = () => {
                 </Grid>
               </Grid>
 
-              <Divider sx={{ mb: 2, mt: 2 }} />
-              <Typography variant="h5">Kendala</Typography>
-
-              <Grid container spacing={2} sx={{ mt: 2 }} direction="row">
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    label="Kendala 1"
-                    value={kendala1}
-                    rows={4}
-                    multiline
-                    onChange={(e) => setKendala1(e.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    label="Kendala 2"
-                    value={kendala2}
-                    rows={4}
-                    multiline
-                    onChange={(e) => setKendala2(e.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    label="Kendala 3"
-                    value={kendala3}
-                    rows={4}
-                    multiline
-                    onChange={(e) => setKendala3(e.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-              </Grid>
-
-              <Grid container spacing={2} sx={{ mb: 2, mt: 2 }} direction="row">
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    label="Kendala 4"
-                    value={kendala4}
-                    rows={4}
-                    multiline
-                    onChange={(e) => setKendala4(e.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    label="Kendala 5"
-                    value={kendala5}
-                    rows={4}
-                    multiline
-                    onChange={(e) => setKendala5(e.target.value)}
-                    fullWidth
-                  />
-                </Grid>
+              <Divider sx={{ mb: 2, border: 1, borderColor: 'divider' }} />
+              <Typography variant="h5">Kendala / Note</Typography>
+              <Grid container spacing={2} direction="row" >
+                {Object.entries(kendala).map(([key, value]) => (
+                  <Grid item xs={12} sm={2.4} key={key}>
+                    <FormControl required sx={{ m: 1, width: '100%' }}>
+                      <TextField
+                        value={value} // Mengambil nilai dari kendala
+                        id={key} // ID unik untuk setiap TextField
+                        label={key} // Label berdasarkan kunci kendala
+                        multiline
+                        rows={4}
+                        InputProps={{
+                          readOnly: true, // Membuat field menjadi read-only
+                        }}
+                      />
+                    </FormControl>
+                  </Grid>
+                ))}
               </Grid>
             </CardContent>
           </MainCard>

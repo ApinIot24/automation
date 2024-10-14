@@ -77,26 +77,26 @@ const TableLhpL7 = () => {
   const [cello3, setCello3] = useState('');
   const [cello4, setCello4] = useState('');
   const [cello5, setCello5] = useState('');
-  //   const [cello6 , setCello6] = useState('');
-  //   const [cello7 , setCello7] = useState('');
-  //   const [cello8 , setCello8] = useState('');
+  const [cello6, setCello6] = useState('');
+  const [cello7, setCello7] = useState('');
+  const [cello8, setCello8] = useState('');
   const [sumpackd, setSumPackd] = useState('');
   const [pack1d, setPack1d] = useState('');
   const [pack2d, setPack2d] = useState('');
   const [pack3d, setPack3d] = useState('');
   const [pack4d, setPack4d] = useState('');
   const [pack5d, setPack5d] = useState('');
-  //   const [pack6d , setPack6d] = useState('');
-  //   const [pack7d , setPack7d] = useState('');
-  //   const [pack8d , setPack8d] = useState('');
+  const [pack6d, setPack6d] = useState('');
+  const [pack7d, setPack7d] = useState('');
+  const [pack8d, setPack8d] = useState('');
   const [speed1, setSpeed1] = useState('');
   const [speed2, setSpeed2] = useState('');
   const [speed3, setSpeed3] = useState('');
   const [speed4, setSpeed4] = useState('');
   const [speed5, setSpeed5] = useState('');
-  //   const [speed6 , setSpeed6] = useState('');
-  //   const [speed7 , setSpeed7] = useState('');
-  //   const [speed8 , setSpeed8] = useState('');
+  const [speed6, setSpeed6] = useState('');
+  const [speed7, setSpeed7] = useState('');
+  const [speed8, setSpeed8] = useState('');
   const [adonan, setAdonan] = useState('');
   const [avgbook, setAVGBook] = useState('');
   const [avgsheet, setAVGSheet] = useState('');
@@ -121,236 +121,249 @@ const TableLhpL7 = () => {
   const [forbanded2, setForBanded2] = useState('');
   const [cutoff, setCutOff] = useState('');
   const [ctnluar, setCtnLuar] = useState('');
-  const [kendala1, setKendala1] = useState('');
-  const [kendala2, setKendala2] = useState('');
-  const [kendala3, setKendala3] = useState('');
-  const [kendala4, setKendala4] = useState('');
-  const [kendala5, setKendala5] = useState('');
   //   const [Db , setDb] = useState('');
   //     const [plastikpof , setPlastikPof] = useState('');
   //     const [coklat , setCoklat] = useState('');
   //     const [pof , setPOF] = useState('');
   //     const [sortir , setSortir] = useState('');
-  const [field] = useState([
-    { field: 'id', headerName: 'ID', width: 50 },
-    { field: 'user_input', headerName: 'User Input', width: 50 },
-    { field: 'shift', headerName: 'Shift', width: 100 },
-    { field: 'sku', headerName: 'Sku', width: 200 },
-    { field: 'plan', headerName: 'Plan', width: 75 },
-    { field: 'real', headerName: 'Real', width: 75 },
-    { field: 'ach', headerName: 'Achievement', width: 100 },
-    {
-      field: 'cello', headerName: 'Cello', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello || ''}`;
-      }
-    },
-    {
-      field: 'cello.cello1', headerName: 'Cello1', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello1 || ''}`;
-      }
-    },
-    {
-      field: 'cello.cello2', headerName: 'Cello2', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello2 || ''}`;
-      }
-    },
-    {
-      field: 'cello.cello3', headerName: 'Cello3', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello3 || ''}`;
-      }
-    },
-    {
-      field: 'cello.cello4', headerName: 'Cello4', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello4 || ''}`;
-      }
-    },
-    {
-      field: 'cello.cello5', headerName: 'Cello5', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello5 || ''}`;
-      }
-    },
-    {
-      field: 'cello.cello6', headerName: 'Cello6', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello6 || ''}`;
-      }
-    },
-    {
-      field: 'cello.cello7', headerName: 'Cello7', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.cello.cello7 || ''}`;
-      }
-    },
-    { field: 'cellocpp', headerName: 'Cello CPP', width: 100 },
-    {
-      field: 'ctnsup', headerName: 'CTN SUP', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.ctn_type.ctnsup || ''}`;
-      }
-    },
-    {
-      field: 'ctnproud', headerName: 'CTN PROUD', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.ctn_type.ctnproud || ''}`;
-      }
-    },
-    { field: 'plastik_pof', headerName: 'Plastik Pof', width: 100 },
-    { field: 'coklat_used', headerName: 'Coklat Used', width: 100 },
-    { field: 'pof_kue', headerName: 'Pof Kue', width: 100 },
-    {
-      field: 'dbsubp', headerName: 'DB SUP', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.ctn_type.dbsup || ''}`;
-      }
-    },
-    {
-      field: 'dbproud', headerName: 'DB PROUD', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.d_b.dbproud || ''}`;
-      }
-    },
-    { field: 'cello_used', headerName: 'Cello USED', width: 100 },
-    { field: 'adonan_used', headerName: 'Adonan Used', width: 100 },
-    { field: 'ccbcream_used', headerName: 'CCB Cream', width: 100 },
-    { field: 'avgsheet', headerName: 'AVG Sheet', width: 100 },
-    { field: 'avgbook', headerName: 'AVG BOOK', width: 100 },
-    { field: 'sheet', headerName: 'Sheet', width: 100 },
-    { field: 'book', headerName: 'Book', width: 100 },
-    { field: 'cutkasar', headerName: 'Cut Kasar', width: 100 },
-    { field: 'bubukcutting', headerName: 'Bubuk Cutting', width: 100 },
-    { field: 'sapuancut', headerName: 'Sapuan Cut', width: 100 },
-    { field: 'qcpacking', headerName: 'Qc Packing', width: 100 },
-    { field: 'qccello', headerName: 'Qc Cello', width: 100 },
-    { field: 'sample_ctn_qc', headerName: 'Sample Ctn Qc', width: 100 }, {
-      field: 'pack1', headerName: 'pack1', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.pack1 || ''}`;
-      }
-    },
-    {
-      field: 'pack2', headerName: 'pack2', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.pack2 || ''}`;
-      }
-    },
-    {
-      field: 'pack3', headerName: 'pack3', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.pack3 || ''}`;
-      }
-    },
-    {
-      field: 'pack4', headerName: 'pack4', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.pack4 || ''}`;
-      }
-    },
-    {
-      field: 'pack5', headerName: 'pack5', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.pack5 || ''}`;
-      }
-    },
-    {
-      field: 'pack6', headerName: 'pack6', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.pack6 || ''}`;
-      }
-    },
-    {
-      field: 'pack7', headerName: 'pack7', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.pack7 || ''}`;
-      }
-    },
-    {
-      field: 'pack8', headerName: 'pack8', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.pack8 || ''}`;
-      }
-    },
-    {
-      field: 'sumpack', headerName: 'Reject Packing', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.packing_reject.sumpack || ''}`;
-      }
-    },
-    { field: 'banded_under', headerName: 'Banded Under', width: 100 },
-    { field: 'banded_over', headerName: 'Banded Over', width: 100 },
-    { field: 'sapuanpack', headerName: 'Sapuan Pack', width: 100 },
-    { field: 'buble', headerName: 'Buble', width: 100 },
-    { field: 'suppliercello', headerName: 'Suppliercello', width: 100 },
-    { field: 'cutoff', headerName: 'Cut OFF', width: 100 },
-    { field: 'ctn_luar', headerName: 'CTN Luar', width: 100 }, {
-      field: 'speed1', headerName: 'speed1', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.speed_mesin.speed1 || ''}`;
-      }
-    },
-    {
-      field: 'speed2', headerName: 'speed2', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.speed_mesin.speed2 || ''}`;
-      }
-    },
-    {
-      field: 'speed3', headerName: 'speed3', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.speed_mesin.speed3 || ''}`;
-      }
-    },
-    {
-      field: 'speed4', headerName: 'speed4', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.speed_mesin.speed4 || ''}`;
-      }
-    },
-    {
-      field: 'speed5', headerName: 'speed5', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.speed_mesin.speed5 || ''}`;
-      }
-    },
-    {
-      field: 'kendala1', headerName: 'kendala1', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.kendala.kendala1 || ''}`;
-      }
-    }, {
-      field: 'kendala2', headerName: 'kendala2', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.kendala.kendala2 || ''}`;
-      }
-    }, {
-      field: 'kendala3', headerName: 'kendala3', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.kendala.kendala3 || ''}`;
-      }
-    }, {
-      field: 'kendala4', headerName: 'kendala4', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.kendala.kendala4 || ''}`;
-      }
-    }, {
-      field: 'kendala5', headerName: 'kendala5', width: 100,
-      valueGetter: (value, row) => {
-        return `${row.kendala.kendala5 || ''}`;
-      }
-    },
-    { field: 'realdatetime', headerName: 'Date', width: 100 }
-  ]);
+  const [kendala, setKendala] = useState({});
+  const generateKendalaColumns = (maxKendalaCount) => {
+    const columns = [
+      { field: 'id', headerName: 'ID', width: 50 },
+      { field: 'user_input', headerName: 'User Input', width: 50 },
+      { field: 'shift', headerName: 'Shift', width: 100 },
+      { field: 'sku', headerName: 'Sku', width: 200 },
+      { field: 'plan', headerName: 'Plan', width: 75 },
+      { field: 'real', headerName: 'Real', width: 75 },
+      { field: 'ach', headerName: 'Achievement', width: 100 },
+      {
+        field: 'cello', headerName: 'Cello', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello || ''}`;
+        }
+      },
+      {
+        field: 'cello.cello1', headerName: 'Cello1', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello1 || ''}`;
+        }
+      },
+      {
+        field: 'cello.cello2', headerName: 'Cello2', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello2 || ''}`;
+        }
+      },
+      {
+        field: 'cello.cello3', headerName: 'Cello3', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello3 || ''}`;
+        }
+      },
+      {
+        field: 'cello.cello4', headerName: 'Cello4', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello4 || ''}`;
+        }
+      },
+      {
+        field: 'cello.cello5', headerName: 'Cello5', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello5 || ''}`;
+        }
+      },
+      {
+        field: 'cello.cello6', headerName: 'Cello6', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello6 || ''}`;
+        }
+      },
+      {
+        field: 'cello.cello7', headerName: 'Cello7', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello7 || ''}`;
+        }
+      },
+      {
+        field: 'cello.cello8', headerName: 'Cello8', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.cello.cello8 || ''}`;
+        }
+      },
+      { field: 'cellocpp', headerName: 'Cello CPP', width: 100 },
+      {
+        field: 'ctnsup', headerName: 'CTN SUP', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.ctn_type.ctnsup || ''}`;
+        }
+      },
+      {
+        field: 'ctnproud', headerName: 'CTN PROUD', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.ctn_type.ctnproud || ''}`;
+        }
+      },
+      { field: 'plastik_pof', headerName: 'Plastik Pof', width: 100 },
+      { field: 'coklat_used', headerName: 'Coklat Used', width: 100 },
+      { field: 'pof_kue', headerName: 'Pof Kue', width: 100 },
+      {
+        field: 'dbsubp', headerName: 'DB SUP', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.ctn_type.dbsup || ''}`;
+        }
+      },
+      {
+        field: 'dbproud', headerName: 'DB PROUD', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.d_b.dbproud || ''}`;
+        }
+      },
+      { field: 'cello_used', headerName: 'Cello USED', width: 100 },
+      { field: 'adonan_used', headerName: 'Adonan Used', width: 100 },
+      { field: 'ccbcream_used', headerName: 'CCB Cream', width: 100 },
+      { field: 'avgsheet', headerName: 'AVG Sheet', width: 100 },
+      { field: 'avgbook', headerName: 'AVG BOOK', width: 100 },
+      { field: 'sheet', headerName: 'Sheet', width: 100 },
+      { field: 'book', headerName: 'Book', width: 100 },
+      { field: 'cutkasar', headerName: 'Cut Kasar', width: 100 },
+      { field: 'bubukcutting', headerName: 'Bubuk Cutting', width: 100 },
+      { field: 'sapuancut', headerName: 'Sapuan Cut', width: 100 },
+      { field: 'qcpacking', headerName: 'Qc Packing', width: 100 },
+      { field: 'qccello', headerName: 'Qc Cello', width: 100 },
+      { field: 'sample_ctn_qc', headerName: 'Sample Ctn Qc', width: 100 }, {
+        field: 'pack1', headerName: 'pack1', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.pack1 || ''}`;
+        }
+      },
+      {
+        field: 'pack2', headerName: 'pack2', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.pack2 || ''}`;
+        }
+      },
+      {
+        field: 'pack3', headerName: 'pack3', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.pack3 || ''}`;
+        }
+      },
+      {
+        field: 'pack4', headerName: 'pack4', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.pack4 || ''}`;
+        }
+      },
+      {
+        field: 'pack5', headerName: 'pack5', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.pack5 || ''}`;
+        }
+      },
+      {
+        field: 'pack6', headerName: 'pack6', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.pack6 || ''}`;
+        }
+      },
+      {
+        field: 'pack7', headerName: 'pack7', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.pack7 || ''}`;
+        }
+      },
+      {
+        field: 'pack8', headerName: 'pack8', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.pack8 || ''}`;
+        }
+      },
+      {
+        field: 'sumpack', headerName: 'Reject Packing', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.packing_reject.sumpack || ''}`;
+        }
+      },
+      { field: 'banded_under', headerName: 'Banded Under', width: 100 },
+      { field: 'banded_over', headerName: 'Banded Over', width: 100 },
+      { field: 'sapuanpack', headerName: 'Sapuan Pack', width: 100 },
+      { field: 'buble', headerName: 'Buble', width: 100 },
+      { field: 'suppliercello', headerName: 'Suppliercello', width: 100 },
+      { field: 'cutoff', headerName: 'Cut OFF', width: 100 },
+      { field: 'ctn_luar', headerName: 'CTN Luar', width: 100 }, {
+        field: 'speed1', headerName: 'speed1', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.speed_mesin.speed1 || ''}`;
+        }
+      },
+      {
+        field: 'speed2', headerName: 'speed2', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.speed_mesin.speed2 || ''}`;
+        }
+      },
+      {
+        field: 'speed3', headerName: 'speed3', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.speed_mesin.speed3 || ''}`;
+        }
+      },
+      {
+        field: 'speed4', headerName: 'speed4', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.speed_mesin.speed4 || ''}`;
+        }
+      },
+      {
+        field: 'speed5', headerName: 'speed5', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.speed_mesin.speed5 || ''}`;
+        }
+      },
+      {
+        field: 'speed6', headerName: 'speed6', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.speed_mesin.speed6 || ''}`;
+        }
+      },
+      {
+        field: 'speed7', headerName: 'speed7', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.speed_mesin.speed7 || ''}`;
+        }
+      },
+      {
+        field: 'speed8', headerName: 'speed8', width: 100,
+        valueGetter: (value, row) => {
+          return `${row.speed_mesin.speed8 || ''}`;
+        }
+      },
+      { field: 'realdatetime', headerName: 'Date', width: 100 }
+    ];
+    for (let i = 1; i <= maxKendalaCount; i++) {
+      columns.push({
+        field: `kendala${i}`,
+        headerName: `Kendala ${i}`,
+        width: 200,
+        valueGetter: (value, row) => {
+          return `${row.kendala?.[`kendala${i}`] || ''}`; // Akses menggunakan bracket notation
+        }
+      });
+    }
+    return columns;
+  };
+
   const [urlapi] = useState({
     lhp: 'http://10.37.12.17:3000/packing_a1',
     lhpdaily: 'http://10.37.12.17:3000/lhp_daily/l7',
     urlp2: 'table',
 
   })
+
+  const maxKendalaCount = Math.max(...data.map(row => Object.keys(row.kendala).length));
+  const columns = generateKendalaColumns(maxKendalaCount); // Menghasilkan kolom
+
+
   const handleClose = (reason) => {
     if (reason === 'clickaway') {
       return;
@@ -391,9 +404,9 @@ const TableLhpL7 = () => {
         setCello3(dataolah.cello.cello3)
         setCello4(dataolah.cello.cello4)
         setCello5(dataolah.cello.cello5)
-        //   setCello6(dataolah.cello.cello6)
-        //   setCello7(dataolah.cello.cello7)
-        //   setCello8(dataolah.cello.cello8)
+        setCello6(dataolah.cello.cello6)
+        setCello7(dataolah.cello.cello7)
+        setCello8(dataolah.cello.cello8)
         setSumPackd(dataolah.packing_reject.sumpack)
         setPack1d(dataolah.packing_reject.pack1)
         setPack2d(dataolah.packing_reject.pack2)
@@ -408,9 +421,9 @@ const TableLhpL7 = () => {
         setSpeed3(dataolah.speed_mesin.speed3)
         setSpeed4(dataolah.speed_mesin.speed4)
         setSpeed5(dataolah.speed_mesin.speed5)
-        //   setSpeed6(dataolah.speed_mesin.speed3)
-        //   setSpeed7(dataolah.speed_mesin.speed4)
-        //   setSpeed8(dataolah.speed_mesin.speed5)
+        setSpeed6(dataolah.speed_mesin.speed6)
+        setSpeed7(dataolah.speed_mesin.speed7)
+        setSpeed8(dataolah.speed_mesin.speed8)
         setAdonan(dataolah.adonan_used)
         setAVGBook(dataolah.avgbook)
         setAVGSheet(dataolah.avgsheet)
@@ -435,11 +448,7 @@ const TableLhpL7 = () => {
         setForBanded2(dataolah.banded_over)
         setCutOff(dataolah.cutoff_jam)
         setCtnLuar(dataolah.ctn_luar)
-        setKendala1(dataolah.kendala.kendala1)
-        setKendala2(dataolah.kendala.kendala2)
-        setKendala3(dataolah.kendala.kendala3)
-        setKendala4(dataolah.kendala.kendala4)
-        setKendala5(dataolah.kendala.kendala5)
+        setKendala(dataolah.kendala)
         setOpenDua(true);
         setOpenTiga(false);
       })
@@ -540,54 +549,54 @@ const TableLhpL7 = () => {
                     });
                 } else {
                   axios.get(`http://10.37.12.17:3000/lhp_daily/date/${datestring}/l7`)
-                  .then(response => {
-                    var dataolah = response.data;
-                    // console.log("Tanggal" , dataolah)
-                    setData(dataolah)
-                    setPack1([dataolah[0]?.packing_reject?.pack1 || 0, dataolah[1]?.packing_reject?.pack1 || 0, dataolah[2]?.packing_reject?.pack1 || 0])
-                    setPack2([dataolah[0]?.packing_reject?.pack2 || 0, dataolah[1]?.packing_reject?.pack2 || 0, dataolah[2]?.packing_reject?.pack2 || 0])
-                    setPack3([dataolah[0]?.packing_reject?.pack3 || 0, dataolah[1]?.packing_reject?.pack3 || 0, dataolah[2]?.packing_reject?.pack3 || 0])
-                    setPack4([dataolah[0]?.packing_reject?.pack4 || 0, dataolah[1]?.packing_reject?.pack4 || 0, dataolah[2]?.packing_reject?.pack4 || 0])
-                    setPack5([dataolah[0]?.packing_reject?.pack5 || 0, dataolah[1]?.packing_reject?.pack5 || 0, dataolah[2]?.packing_reject?.pack5 || 0])
-                    setPack6([dataolah[0]?.packing_reject?.pack6 || 0, dataolah[1]?.packing_reject?.pack6 || 0, dataolah[2]?.packing_reject?.pack6 || 0])
-                    setPack7([dataolah[0]?.packing_reject?.pack7 || 0, dataolah[1]?.packing_reject?.pack7 || 0, dataolah[2]?.packing_reject?.pack7 || 0])
-                    setPack8([dataolah[0]?.packing_reject?.pack8 || 0, dataolah[1]?.packing_reject?.pack8 || 0, dataolah[2]?.packing_reject?.pack8 || 0])
-                    setSumPack([dataolah[0]?.packing_reject?.sumpack || 0, dataolah[1]?.packing_reject?.sumpack || 0, dataolah[2]?.packing_reject?.sumpack || 0])
-                    setPlan([dataolah[0]?.plan || 0, dataolah[1]?.plan || 0, dataolah[2]?.plan || 0])
-                    setReal([dataolah[0]?.real || 0, dataolah[1]?.real || 0, dataolah[2]?.real || 0])
-                    setAch([dataolah[0]?.ach || 0])
-                    setAch1([dataolah[1]?.ach || 0])
-                    setAch2([dataolah[2]?.ach || 0])
-                    setSheet([dataolah[0]?.sheet || 0, dataolah[1]?.sheet || 0, dataolah[2]?.sheet || 0])
-                    setBook([dataolah[0]?.book || 0, dataolah[1]?.book || 0, dataolah[2]?.book || 0])
-                    setBanded([dataolah[0]?.banded || 0, dataolah[1]?.banded || 0, dataolah[2]?.banded || 0])
-                    setSapuanPack([dataolah[0]?.sapuanpack || 0, dataolah[1]?.sapuanpack || 0, dataolah[2]?.sapuanpack || 0])
-                    setBuble([dataolah[0]?.buble || 0, dataolah[1]?.buble || 0, dataolah[2]?.buble || 0])
-                  })
-                  .catch(error => {
-                    setOpen(true)
-                    setData([])
-                    setPack1([0])
-                    setPack2([0])
-                    setPack3([0])
-                    setPack4([0])
-                    setPack5([0])
-                    setPack6([0])
-                    setPack7([0])
-                    setPack8([0])
-                    setSumPack([0])
-                    setPlan([0])
-                    setReal([0])
-                    setAch([0])
-                    setAch1([0])
-                    setAch2([0])
-                    setSheet([0])
-                    setBook([0])
-                    setBanded([0])
-                    setSapuanPack([0])
-                    setBuble([0])
-                    console.log(error);
-                  });                
+                    .then(response => {
+                      var dataolah = response.data;
+                      // console.log("Tanggal" , dataolah)
+                      setData(dataolah)
+                      setPack1([dataolah[0]?.packing_reject?.pack1 || 0, dataolah[1]?.packing_reject?.pack1 || 0, dataolah[2]?.packing_reject?.pack1 || 0])
+                      setPack2([dataolah[0]?.packing_reject?.pack2 || 0, dataolah[1]?.packing_reject?.pack2 || 0, dataolah[2]?.packing_reject?.pack2 || 0])
+                      setPack3([dataolah[0]?.packing_reject?.pack3 || 0, dataolah[1]?.packing_reject?.pack3 || 0, dataolah[2]?.packing_reject?.pack3 || 0])
+                      setPack4([dataolah[0]?.packing_reject?.pack4 || 0, dataolah[1]?.packing_reject?.pack4 || 0, dataolah[2]?.packing_reject?.pack4 || 0])
+                      setPack5([dataolah[0]?.packing_reject?.pack5 || 0, dataolah[1]?.packing_reject?.pack5 || 0, dataolah[2]?.packing_reject?.pack5 || 0])
+                      setPack6([dataolah[0]?.packing_reject?.pack6 || 0, dataolah[1]?.packing_reject?.pack6 || 0, dataolah[2]?.packing_reject?.pack6 || 0])
+                      setPack7([dataolah[0]?.packing_reject?.pack7 || 0, dataolah[1]?.packing_reject?.pack7 || 0, dataolah[2]?.packing_reject?.pack7 || 0])
+                      setPack8([dataolah[0]?.packing_reject?.pack8 || 0, dataolah[1]?.packing_reject?.pack8 || 0, dataolah[2]?.packing_reject?.pack8 || 0])
+                      setSumPack([dataolah[0]?.packing_reject?.sumpack || 0, dataolah[1]?.packing_reject?.sumpack || 0, dataolah[2]?.packing_reject?.sumpack || 0])
+                      setPlan([dataolah[0]?.plan || 0, dataolah[1]?.plan || 0, dataolah[2]?.plan || 0])
+                      setReal([dataolah[0]?.real || 0, dataolah[1]?.real || 0, dataolah[2]?.real || 0])
+                      setAch([dataolah[0]?.ach || 0])
+                      setAch1([dataolah[1]?.ach || 0])
+                      setAch2([dataolah[2]?.ach || 0])
+                      setSheet([dataolah[0]?.sheet || 0, dataolah[1]?.sheet || 0, dataolah[2]?.sheet || 0])
+                      setBook([dataolah[0]?.book || 0, dataolah[1]?.book || 0, dataolah[2]?.book || 0])
+                      setBanded([dataolah[0]?.banded || 0, dataolah[1]?.banded || 0, dataolah[2]?.banded || 0])
+                      setSapuanPack([dataolah[0]?.sapuanpack || 0, dataolah[1]?.sapuanpack || 0, dataolah[2]?.sapuanpack || 0])
+                      setBuble([dataolah[0]?.buble || 0, dataolah[1]?.buble || 0, dataolah[2]?.buble || 0])
+                    })
+                    .catch(error => {
+                      setOpen(true)
+                      setData([])
+                      setPack1([0])
+                      setPack2([0])
+                      setPack3([0])
+                      setPack4([0])
+                      setPack5([0])
+                      setPack6([0])
+                      setPack7([0])
+                      setPack8([0])
+                      setSumPack([0])
+                      setPlan([0])
+                      setReal([0])
+                      setAch([0])
+                      setAch1([0])
+                      setAch2([0])
+                      setSheet([0])
+                      setBook([0])
+                      setBanded([0])
+                      setSapuanPack([0])
+                      setBuble([0])
+                      console.log(error);
+                    });
                 }
               }}
             />
@@ -790,7 +799,7 @@ const TableLhpL7 = () => {
         </Grid>
       </Grid>
       <Grid item sx={{ mb: 5 }} xs={12} >
-        <DataGrid rows={data} columns={field} loading={isLoading} slots={{ toolbar: GridToolbar }} onRowClick={handleRowClick} />
+        <DataGrid rows={data} columns={columns} loading={isLoading} slots={{ toolbar: GridToolbar }} onRowClick={handleRowClick} />
       </Grid>
 
       <Snackbar
@@ -928,10 +937,12 @@ const TableLhpL7 = () => {
                 <Grid item xs={12} sm={2} >
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
+                      onChange={e => setCello(e.target.value)}
                       value={cello}
+                      required
+                      id="outlined-read-only-input"
                       label="Cello (Kg)"
                       defaultValue=""
-                      id="outlined-read-only-input"
                       InputProps={{
                         readOnly: true,
                       }}
@@ -941,10 +952,12 @@ const TableLhpL7 = () => {
                 <Grid item xs={12} sm={2}>
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
+                      onChange={e => setCello1(e.target.value)}
                       value={cello1}
-                      label={"MP B1"}
-                      defaultValue=""
+                      required
                       id="outlined-read-only-input"
+                      label={"Cello 1"}
+                      defaultValue=""
                       InputProps={{
                         readOnly: true,
                       }}
@@ -954,10 +967,12 @@ const TableLhpL7 = () => {
                 <Grid item xs={12} sm={2}>
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
+                      onChange={e => setCello2(e.target.value)}
                       value={cello2}
-                      label={"MP B2"}
-                      defaultValue=""
+                      required
                       id="outlined-read-only-input"
+                      label={"Cello 2"}
+                      defaultValue=""
                       InputProps={{
                         readOnly: true,
                       }}
@@ -967,24 +982,27 @@ const TableLhpL7 = () => {
                 <Grid item xs={12} sm={2} >
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
+                      onChange={e => setCello3(e.target.value)}
+                      required
                       value={cello3}
-                      label={"MP B3"}
-                      defaultValue=""
                       id="outlined-read-only-input"
+                      label={"Cello 3"}
+                      defaultValue=""
                       InputProps={{
                         readOnly: true,
                       }}
-
                     />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={2}>
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
+                      onChange={e => setCello4(e.target.value)}
+                      required
                       value={cello4}
-                      label={"MP B4"}
-                      defaultValue=""
                       id="outlined-read-only-input"
+                      label={"Cello 4"}
+                      defaultValue=""
                       InputProps={{
                         readOnly: true,
                       }}
@@ -994,10 +1012,57 @@ const TableLhpL7 = () => {
                 <Grid item xs={12} sm={2}>
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
+                      onChange={e => setCello5(e.target.value)}
+                      required
                       value={cello5}
-                      label={"MP A4"}
-                      defaultValue=""
                       id="outlined-read-only-input"
+                      label={"Cello 5"}
+                      defaultValue=""
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      onChange={e => setCello6(e.target.value)}
+                      required
+                      value={cello6}
+                      id="outlined-read-only-input"
+                      label={"Cello 6"}
+                      defaultValue=""
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      onChange={e => setCello7(e.target.value)}
+                      required
+                      value={cello7}
+                      id="outlined-read-only-input"
+                      label={"Cello 7"}
+                      defaultValue=""
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      onChange={e => setCello8(e.target.value)}
+                      required
+                      value={cello8}
+                      id="outlined-read-only-input"
+                      label={"Cello 8"}
+                      defaultValue=""
                       InputProps={{
                         readOnly: true,
                       }}
@@ -1227,65 +1292,120 @@ const TableLhpL7 = () => {
                 <Grid item xs={12} sm={2}>
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
+                      onChange={e => setPack1(e.target.value)}
                       value={pack1d}
-                      label={"MP B1"}
-                      defaultValue=""
+                      required
                       id="outlined-read-only-input"
                       InputProps={{
                         readOnly: true,
                       }}
+                      label={"Pack 1"}
+                      defaultValue=""
                     />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={2}>
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
+                      onChange={e => setPack2(e.target.value)}
                       value={pack2d}
-                      label={"MP B2"}
-                      defaultValue=""
+                      required
                       id="outlined-read-only-input"
                       InputProps={{
                         readOnly: true,
                       }}
+                      label={"Pack 2"}
+                      defaultValue=""
                     />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={2} >
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
+                      onChange={e => setPack3(e.target.value)}
                       value={pack3d}
-                      label={"MP B3"}
-                      defaultValue=""
+                      required
                       id="outlined-read-only-input"
                       InputProps={{
                         readOnly: true,
                       }}
+                      label={"Pack 3"}
+                      defaultValue=""
                     />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={2}>
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
+                      onChange={e => setPack4(e.target.value)}
                       value={pack4d}
-                      label={"MP B4"}
-                      defaultValue=""
+                      required
                       id="outlined-read-only-input"
                       InputProps={{
                         readOnly: true,
                       }}
+                      label={"Pack 4"}
+                      defaultValue=""
                     />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={2}>
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
+                      onChange={e => setPack5(e.target.value)}
                       value={pack5d}
-                      label={"MP A4"}
-                      defaultValue=""
+                      required
                       id="outlined-read-only-input"
                       InputProps={{
                         readOnly: true,
                       }}
+                      label={"Pack 5"}
+                      defaultValue=""
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      onChange={e => setPack6(e.target.value)}
+                      value={pack6d}
+                      required
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      label={"Pack 6"}
+                      defaultValue=""
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      onChange={e => setPack7(e.target.value)}
+                      value={pack7d}
+                      required
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      label={"Pack 7"}
+                      defaultValue=""
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      onChange={e => setPack8(e.target.value)}
+                      value={pack8d}
+                      required
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      label={"Pack 8"}
+                      defaultValue=""
                     />
                   </FormControl>
                 </Grid>
@@ -1351,7 +1471,7 @@ const TableLhpL7 = () => {
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
                       value={speed1}
-                      label={"MP B1"}
+                      label={"MP G1"}
                       defaultValue=""
                       id="outlined-read-only-input"
                       InputProps={{
@@ -1364,7 +1484,7 @@ const TableLhpL7 = () => {
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
                       value={speed2}
-                      label={"MP B2"}
+                      label={"MP G2"}
                       defaultValue=""
                       id="outlined-read-only-input"
                       InputProps={{
@@ -1377,7 +1497,7 @@ const TableLhpL7 = () => {
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
                       value={speed3}
-                      label={"MP B3"}
+                      label={"MP G3"}
                       defaultValue=""
                       id="outlined-read-only-input"
                       InputProps={{
@@ -1390,7 +1510,7 @@ const TableLhpL7 = () => {
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
                       value={speed4}
-                      label={"MP B4"}
+                      label={"MP G4"}
                       defaultValue=""
                       id="outlined-read-only-input"
                       InputProps={{
@@ -1403,7 +1523,46 @@ const TableLhpL7 = () => {
                   <FormControl required sx={{ m: 1, width: '100%' }}>
                     <TextField
                       value={speed5}
-                      label={"MP A4"}
+                      label={"MP G5"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={speed6}
+                      label={"MP G6"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={speed7}
+                      label={"MP G7"}
+                      defaultValue=""
+                      id="outlined-read-only-input"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={2.4}>
+                  <FormControl required sx={{ m: 1, width: '100%' }}>
+                    <TextField
+                      value={speed8}
+                      label={"MP G8"}
                       defaultValue=""
                       id="outlined-read-only-input"
                       InputProps={{
@@ -1486,81 +1645,22 @@ const TableLhpL7 = () => {
               <Divider sx={{ mb: 2, border: 1, borderColor: 'divider' }} />
               <Typography variant="h5">Kendala / Note</Typography>
               <Grid container spacing={2} direction="row" >
-                <Grid item xs={12} sm={2.4} >
-                  <FormControl required sx={{ m: 1, width: '100%' }}>
-                    <TextField
-                      value={kendala1}
-                      id="outlined-multiline-static"
-                      label="Kendala 1"
-                      multiline
-                      rows={4}
-                      defaultValue=""
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={2.4}>
-                  <FormControl required sx={{ m: 1, width: '100%' }}>
-                    <TextField
-                      value={kendala2}
-                      id="outlined-multiline-static"
-                      label="Kendala 2"
-                      multiline
-                      rows={4}
-                      defaultValue=""
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={2.4}>
-                  <FormControl required sx={{ m: 1, width: '100%' }}>
-                    <TextField
-                      value={kendala3}
-                      id="outlined-multiline-static"
-                      label="Kendala 3"
-                      multiline
-                      rows={4}
-                      defaultValue=""
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={2.4}>
-                  <FormControl required sx={{ m: 1, width: '100%' }}>
-                    <TextField
-                      value={kendala4}
-                      id="outlined-multiline-static"
-                      label="Kendala 4"
-                      multiline
-                      rows={4}
-                      defaultValue=""
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={2.4}>
-                  <FormControl required sx={{ m: 1, width: '100%' }}>
-                    <TextField
-                      value={kendala5}
-                      id="outlined-multiline-static"
-                      label="Kendala 5"
-                      multiline
-                      rows={4}
-                      defaultValue=""
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                  </FormControl>
-                </Grid>
+                {Object.entries(kendala).map(([key, value]) => (
+                  <Grid item xs={12} sm={2.4} key={key}>
+                    <FormControl required sx={{ m: 1, width: '100%' }}>
+                      <TextField
+                        value={value} // Mengambil nilai dari kendala
+                        id={key} // ID unik untuk setiap TextField
+                        label={key} // Label berdasarkan kunci kendala
+                        multiline
+                        rows={4}
+                        InputProps={{
+                          readOnly: true, // Membuat field menjadi read-only
+                        }}
+                      />
+                    </FormControl>
+                  </Grid>
+                ))}
               </Grid>
             </CardContent>
           </MainCard>

@@ -1,12 +1,13 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 // import { useNavigate } from "react-router-dom"; // Uncomment if using navigation
+import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Alert, Snackbar } from '@mui/material';
 
 // ==============================|| BUTTON SAVE ||============================== //
-const ButtonSave = ({ lhp }) => {
+const ButtonSave = ({ lhp, downtime }) => {
   // let navigate = useNavigate(); // Uncomment if using navigation
   const [state] = React.useState({
     vertical: 'top',
@@ -16,6 +17,7 @@ const ButtonSave = ({ lhp }) => {
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = React.useState('');
   const [severity, setSeverity] = React.useState('error'); // Default severity to error
+
 
   const validateInput = () => {
     // Check for empty inputs
@@ -35,12 +37,23 @@ const ButtonSave = ({ lhp }) => {
   };
 
   const routeChange = () => {
+    const formattedDowntime = downtime.map(entry => ({
+      time_start: entry.time_start ? dayjs(entry.time_start).format('HH:mm:ss') : null,
+      time_stop: entry.time_stop ? dayjs(entry.time_stop).format('HH:mm:ss') : null,
+      total_dt: entry.total_dt,
+      kendala: entry.kendala,
+    }));
+    // console.log(formattedDowntime);
     if (!validateInput()) return; // Stop if validation fails
+    const payload = {
+      ...lhp,
+      downtime: formattedDowntime // Include downtime in the payload
+    }
 
-    axios.post('http://10.37.12.17:3000/lhp', lhp)
+    axios.post('http://10.37.12.17:3000/lhp', payload)
       .then(response => {
         console.log("Data saved:", response);
-        setMessage("LHP successfully saved to the database. Thank you for your input! and this id lhp: " + response.data.id); 
+        setMessage("LHP successfully saved to the database. Thank you for your input! and this id lhp: " + response.data.id);
         setSeverity("success"); // Set severity to success
         setOpen(true);
         // navigate(path); // Uncomment if needed
