@@ -212,23 +212,28 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5, la
         }
     };
 
-    const calculateDuration = (start, stop) => {
-        if (start && stop) {
-            const diff = stop.diff(start, 'minute'); // Hitung perbedaan dalam menit
-            return `${diff} minutes`;
+    const handleChange = (index, field, value) => {
+        const updatedEntries = [...timeEntries];
+        updatedEntries[index][field] = value;
+
+        if (field === 'time_start' || field === 'time_stop') {
+            const start = updatedEntries[index].time_start;
+            const stop = updatedEntries[index].time_stop;
+
+            if (start && stop) {
+                let duration;
+                if (stop.isBefore(start)) {
+                    duration = stop.add(1, 'day').diff(start, 'minute');
+                } else {
+                    duration = stop.diff(start, 'minute');
+                }
+                updatedEntries[index].total_dt = duration + ' minutes';
+            } else {
+                updatedEntries[index].total_dt = '';
+            }
         }
-        return '';
-    };
 
-    const handleChange = (index, name, value) => {
-        const newEntries = [...timeEntries];
-        newEntries[index][name] = value;
-
-        if (name === 'time_start' || name === 'time_stop') {
-            newEntries[index].total_dt = calculateDuration(newEntries[index].time_start, newEntries[index].time_stop);
-        }
-
-        setTimeEntries(newEntries);
+        setTimeEntries(updatedEntries);
     };
 
     useEffect(() => {
