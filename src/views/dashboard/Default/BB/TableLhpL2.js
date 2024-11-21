@@ -10,7 +10,7 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import {
   ChartContainer, ChartsReferenceLine, LinePlot, MarkPlot,
-  ChartsXAxis, ChartsYAxis, BarChart, ChartsTooltip, ChartsLegend, ChartsGrid, 
+  ChartsXAxis, ChartsYAxis, BarChart, ChartsTooltip, ChartsLegend, ChartsGrid,
 } from '@mui/x-charts';
 import axios from 'axios';
 import dayjs from 'dayjs';
@@ -57,7 +57,7 @@ const TableLhpL1 = ({ label1, label2, label3, label4, label5 }) => {
 
   const apiEndpoints = {
     lhp: 'http://10.37.12.17:3000/packing_a1',
-    lhpdaily: 'http://10.37.12.17:3000/lhp_daily/l2'
+    lhpdaily: 'http://10.37.12.17:3000/lhp_daily/2'
   };
 
   // Handle closing the Snackbar
@@ -168,175 +168,56 @@ const TableLhpL1 = ({ label1, label2, label3, label4, label5 }) => {
   const handleDateChange = (newValue) => {
     setValueDate(newValue);
     const formattedDate = dayjs(newValue).format('YYYY-MM-DD');
-    fetchData(`http://10.37.12.17:3000/lhp_daily/date/${formattedDate}/l2`);
+    fetchData(`http://10.37.12.17:3000/lhp_daily/date/${formattedDate}/2`);
   };
 
   // Columns for DataGrid
-  const generateKendalaColumns = (maxKendalaCount) => {
-    const columns = [
-      { field: 'id', headerName: 'ID', width: 50 },
-      { field: 'shift', headerName: 'Time', width: 100 },
-      { field: 'sku', headerName: 'Sku', width: 200 },
-      { field: 'plan', headerName: 'Plan', width: 75 },
-      { field: 'real', headerName: 'Real', width: 75 },
-      { field: 'ach', headerName: 'Achievement', width: 100 },
-      {
-        field: 'cello1', headerName: 'Cello', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.cello.cello || ''}`;
-        }
-      },
-      {
-        field: 'cello.cello1', headerName: 'Cello1', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.cello.cello1 || ''}`;
-        }
-      },
-      {
-        field: 'cello.cello2', headerName: 'Cello2', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.cello.cello2 || ''}`;
-        }
-      },
-      {
-        field: 'cello.cello3', headerName: 'Cello3', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.cello.cello3 || ''}`;
-        }
-      },
-      {
-        field: 'cello.cello4', headerName: 'Cello4', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.cello.cello4 || ''}`;
-        }
-      },
-      {
-        field: 'cello.cello5', headerName: 'Cello5', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.cello.cello5 || ''}`;
-        }
-      },
-      { field: 'cellocpp', headerName: 'Cello CPP', width: 100 },
-      {
-        field: 'ctnsup', headerName: 'CTN SUP', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.ctn_type.ctnsup || ''}`;
-        }
-      },
-      {
-        field: 'ctnproud', headerName: 'CTN PROUD', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.ctn_type.ctnproud || ''}`;
-        }
-      },
-      { field: 'cello_used', headerName: 'Cello USED', width: 100 },
-      { field: 'adonan_used', headerName: 'Adonan Used', width: 100 },
-      { field: 'ccbcream_used', headerName: 'CCB Cream', width: 100 },
-      { field: 'avgsheet', headerName: 'AVG Sheet', width: 100 },
-      { field: 'avgbook', headerName: 'AVG BOOK', width: 100 },
-      { field: 'sheet', headerName: 'Sheet', width: 100 },
-      { field: 'book', headerName: 'Book', width: 100 },
-      { field: 'cutkasar', headerName: 'Cut Kasar', width: 100 },
-      { field: 'bubukcutting', headerName: 'Bubuk Cutting', width: 100 },
-      { field: 'sapuancut', headerName: 'Sapuan Cut', width: 100 },
-      { field: 'qcpacking', headerName: 'Qc Packing', width: 100 },
-      { field: 'qccello', headerName: 'Qc Cello', width: 100 },
-      { field: 'sample_ctn_qc', headerName: 'Sample Ctn Qc', width: 100 }, {
-        field: 'pack1', headerName: 'pack1', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.packing_reject.pack1 || ''}`;
-        }
-      },
-      {
-        field: 'pack2', headerName: 'pack2', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.packing_reject.pack2 || ''}`;
-        }
-      },
-      {
-        field: 'pack3', headerName: 'pack3', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.packing_reject.pack3 || ''}`;
-        }
-      },
-      {
-        field: 'pack4', headerName: 'pack4', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.packing_reject.pack4 || ''}`;
-        }
-      },
-      {
-        field: 'pack5', headerName: 'pack5', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.packing_reject.pack5 || ''}`;
-        }
-      },
-      {
-        field: 'sumpack', headerName: 'Reject Pack', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.packing_reject.sumpack || ''}`;
-        }
-      },
-      {
-        field: 'banded_asli', headerName: 'Banded', width: 100, valueGetter: (value, row) => {
-          return `${row.banded || ''}`;
-        }
-      },
-      { field: 'banded_under', headerName: 'Banded Under', width: 100 },
-      { field: 'banded_over', headerName: 'Banded Over', width: 100 },
-      { field: 'sapuanpack', headerName: 'Sapuan Pack', width: 100 },
-      { field: 'buble', headerName: 'Buble', width: 100 },
-      { field: 'suppliercello', headerName: 'Suppliercello', width: 100 },
-      { field: 'cutoff', headerName: 'Cut OFF', width: 100 },
-      { field: 'ctn_luar', headerName: 'CTN Luar', width: 100 }, {
-        field: 'speed1', headerName: 'speed1', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.speed_mesin.speed1 || ''}`;
-        }
-      },
-      {
-        field: 'speed2', headerName: 'speed2', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.speed_mesin.speed2 || ''}`;
-        }
-      },
-      {
-        field: 'speed3', headerName: 'speed3', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.speed_mesin.speed3 || ''}`;
-        }
-      },
-      {
-        field: 'speed4', headerName: 'speed4', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.speed_mesin.speed4 || ''}`;
-        }
-      },
-      {
-        field: 'speed5', headerName: 'speed5', width: 100,
-        valueGetter: (value, row) => {
-          return `${row.speed_mesin.speed5 || ''}`;
-        }
-      },
-      { field: 'realdatetime', headerName: 'Date', width: 100 }
-    ];
-
-    for (let i = 1; i <= maxKendalaCount; i++) {
-      columns.push({
-        field: `kendala${i}`,
-        headerName: `Kendala ${i}`,
-        width: 200,
-        valueGetter: (value, row) => {
-          return `${row.kendala?.[`kendala${i}`] || ''}`; // Akses menggunakan bracket notation
-        }
-      });
-    }
-    return columns;
-  };
-  // Menentukan jumlah maksimum kendala berdasarkan data
-  const maxKendalaCount = Math.max(...data.map(row => Object.keys(row.kendala).length));
-  const columns = generateKendalaColumns(maxKendalaCount); // Menghasilkan kolom
-
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'sku', headerName: 'Sku', width: 200 },
+    { field: 'grup', headerName: 'line', width: 100 },
+    { field: 'shift', headerName: 'Shift', width: 100 },
+    { field: 'uh', headerName: 'UH', width: 100 },
+    { field: 'hadir', headerName: 'Man Power Hadir', width: 100 },
+    { field: 'jam_kerja', headerName: 'Jam Kerja', width: 100 },
+    { field: 'real', headerName: 'Real Karton', width: 100 },
+    { field: 'give_ado', headerName: 'Give Away Adonan', width: 100 },
+    { field: 'give_cream', headerName: 'Give Away Cream', width: 100 },
+    { field: 'give_cello', headerName: 'Give Away Cello', width: 100 },
+    { field: 'jenis_adonan', headerName: 'Jenis Pemakaian Adonan', width: 100 },
+    { field: 'adonan_used', headerName: 'Pemakaian Adonan(batch)', width: 100 },
+    { field: 'ccbcream_used', headerName: 'Pemakaian Cream', width: 100 },
+    { field: 'rej_ado', headerName: 'Reject Adonan', width: 100 },
+    { field: 'rej_cream', headerName: 'Reject Cream ', width: 100 },
+    { field: 'sheet', headerName: 'Opak/Sheet', width: 100 },
+    { field: 'book', headerName: 'Book', width: 100 },
+    { field: 'cutkasar', headerName: 'Potongan Kasar', width: 100 },
+    {
+      field: 'sumpack', headerName: 'Reject Pack', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.packing_reject.sumpack || ''}`;
+      }
+    },
+    { field: 'qcpacking', headerName: 'QC', width: 100 },
+    { field: 'wip_kg', headerName: 'WIP', width: 100 },
+    { field: 'book_kotor', headerName: 'Book Kotor(KG)', width: 100 },
+    { field: 'sapuanpack', headerName: 'Sapuan Pack', width: 100 },
+    { field: 'buble', headerName: 'Buble', width: 100 },
+    { field: 'bubukcutting', headerName: 'Bubuk Cutting', width: 100 },
+    { field: 'cello_used', headerName: 'Pemakaian Cello', width: 100 },
+    { field: 'bs_cello', headerName: 'BS Cello(roll)', width: 100 },
+    { field: 'pakai_ctn', headerName: 'Pakai Karton', width: 100 },
+    {
+      field: 'ctnproud', headerName: 'BS Karton', width: 100,
+      valueGetter: (value, row) => {
+        return `${row.ctn_type.ctnproud || ''}`;
+      }
+    },
+    { field: 'cellocpp', headerName: 'Pakai CPP', width: 100 },
+    { field: 'bs_cpp_roll', headerName: 'BS CPP (roll)', width: 100 },
+    { field: 'plan', headerName: 'Plan', width: 100 },
+    { field: 'mc_quality', headerName: 'MC dari Quality(%)', width: 100 }
+  ];
   // Handle row click event
   const handleRowClick = (params) => {
     setLoading(true); // Menandai bahwa data sedang diambil
@@ -451,7 +332,7 @@ const TableLhpL1 = ({ label1, label2, label3, label4, label5 }) => {
         <Grid item xs={12} sm={4}>
           <CardWrapper>
             <Typography variant="h3" align="center">Grafik Reject Cello</Typography>
-              <Box sx={{ width: '100%' }}>
+            <Box sx={{ width: '100%' }}>
               <ChartContainer
                 width={450}
                 height={300}
@@ -488,7 +369,7 @@ const TableLhpL1 = ({ label1, label2, label3, label4, label5 }) => {
           <CardWrapper>
             <Typography variant="h3" align="center">Grafik Achievement</Typography>
             <Typography variant="h4" align="center">
-            (Ach Shift 1 = {chartData.ach[0]} %, Ach Shift 2 = {chartData.ach[1]} %,Ach Shift 3 = {chartData.ach[2]} %)
+              (Ach Shift 1 = {chartData.ach[0]} %, Ach Shift 2 = {chartData.ach[1]} %,Ach Shift 3 = {chartData.ach[2]} %)
             </Typography>
             <Box sx={{ width: '100%' }}>
               <BarChart
@@ -511,7 +392,7 @@ const TableLhpL1 = ({ label1, label2, label3, label4, label5 }) => {
               <ChartContainer
                 width={450}
                 height={300}
-                series={[                  
+                series={[
                   { id: '1', label: 'Bended', type: 'line', curve: 'linear', data: chartData.banded, color: '#ff0389' },
                   { id: '2', label: 'Sapuan Pack', type: 'line', curve: 'linear', data: chartData.sapuanpack, color: '#9603ff' },
                   { id: '3', label: 'MAX', type: 'line', curve: 'linear', data: [1.1, 1.1, 1.1], color: '#f20707' }
@@ -540,7 +421,7 @@ const TableLhpL1 = ({ label1, label2, label3, label4, label5 }) => {
           <CardWrapper>
             <Typography variant="h3" align="center">Bubble</Typography>
             <Box sx={{ width: '100%' }}>
-            <ChartContainer
+              <ChartContainer
                 xAxis={[{
                   scaleType: 'point',
                   data: ['Shift 1', 'Shift 2', 'Shift 3']
@@ -639,7 +520,7 @@ const TableLhpL1 = ({ label1, label2, label3, label4, label5 }) => {
         </Grid>
       </Grid>
 
-      <Grid item sx={{ mb: 5 ,mt:2 }} xs={12} >
+      <Grid item sx={{ mb: 5, mt: 2 }} xs={12} >
         <DataGrid
           rows={data}
           columns={columns}

@@ -18,7 +18,7 @@ const ButtonSave = ({ lhp, downtime }) => {
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = React.useState('');
   const [severity, setSeverity] = React.useState('error'); // Default to error
- console.log(lhp)
+  console.log(lhp)
   // Function to validate inputs
   const validateInput = () => {
     // Check for empty inputs
@@ -45,8 +45,12 @@ const ButtonSave = ({ lhp, downtime }) => {
       time_stop: entry.time_stop ? dayjs(entry.time_stop).format('HH:mm:ss') : null,
       total_dt: entry.total_dt,
       kendala: entry.kendala,
+      unit_mesin: entry.unit_mesin,
+      part_mesin: entry.part_mesin,
+      penyebab: entry.penyebab,
+      perbaikan: entry.perbaikan
     }));
-    if (!validateInput()) return; 
+    if (!validateInput()) return;
     const payload = {
       ...lhp,
       downtime: formattedDowntime // Include downtime in the payload
@@ -61,8 +65,11 @@ const ButtonSave = ({ lhp, downtime }) => {
       })
       .catch(error => {
         console.error("Error:", error);
-        setMessage("Request failed. Please try again.");
-        setSeverity("error");
+        const errorMessage = error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : "Request failed. Please try again."; // Pesan default jika tidak ada pesan khusus dari server
+        setMessage(errorMessage); // Menggunakan pesan spesifik dari server jika ada
+        setSeverity("error"); // Set severity ke error
         setOpen(true);
       });
   };

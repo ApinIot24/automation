@@ -1,22 +1,27 @@
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
 
 // routing
 import Routes from 'routes';
-
-// defaultTheme
 import themes from 'themes';
-
-// project imports
 import NavigationScroll from 'layout/NavigationScroll';
-
-// ==============================|| APP ||============================== //
+import connectToSocket from './socket'; // Import logika Socket.IO
 
 const App = () => {
   const customization = useSelector((state) => state.customization);
 
+  useEffect(() => {
+    // Hubungkan ke server Socket.IO
+    const socket = connectToSocket();
+
+    // Cleanup saat komponen dilepas
+    return () => {
+      socket.disconnect();
+      console.log('Socket.IO disconnected');
+    };
+  }, []);
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={themes(customization)}>

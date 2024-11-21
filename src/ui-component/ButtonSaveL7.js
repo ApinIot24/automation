@@ -40,7 +40,15 @@ const ButtonSave = ({ lhp, downtime }) => {
       time_start: entry.time_start ? dayjs(entry.time_start).format('HH:mm:ss') : null,
       time_stop: entry.time_stop ? dayjs(entry.time_stop).format('HH:mm:ss') : null,
       total_dt: entry.total_dt,
+      kategori_downtime: entry.kategori_downtime,
+      unit_mesin: entry.unit_mesin,
+      part_mesin: entry.part_mesin,
       kendala: entry.kendala,
+      speed_oven_plan: entry.speed_oven_plan,
+      speed_oven_reduce: entry.speed_oven_reduce,
+      total_sbl: entry.total_sbl,
+      penyebab: entry.penyebab,
+      perbaikan: entry.perbaikan,
     }));
     if (!validateInput()) return; // Stop if validation fails
     const payload = {
@@ -50,15 +58,18 @@ const ButtonSave = ({ lhp, downtime }) => {
     axios.post('http://10.37.12.17:3000/lhpl7', payload)
       .then(response => {
         console.log("Data saved:", response);
-        setMessage("LHP successfully saved to the database. Thank you for your input! and this id lhp: " + response.data.id); 
+        setMessage("LHP successfully saved to the database. Thank you for your input! and this id lhp: " + response.data.id);
         setSeverity("success"); // Set severity to success
         setOpen(true);
         // navigate(path); // Uncomment if using navigation
       })
       .catch(error => {
         console.error("Error:", error);
-        setMessage("Request failed. Please try again.");
-        setSeverity("error"); // Set severity to error
+        const errorMessage = error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : "Request failed. Please try again."; // Pesan default jika tidak ada pesan khusus dari server
+        setMessage(errorMessage); // Menggunakan pesan spesifik dari server jika ada
+        setSeverity("error"); // Set severity ke error
         setOpen(true);
       });
   };

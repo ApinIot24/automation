@@ -64,6 +64,17 @@ const UtilsMaterialIcons = Loadable(lazy(() => import('views/utilities/MaterialI
 const UtilityListrik = Loadable(lazy(() => import('views/utilities/Listrik')));
 const UtilityAir = Loadable(lazy(() => import('views/utilities/Air')));
 const UtilityGas = Loadable(lazy(() => import('views/utilities/Listrik')));
+//new
+const WaferLine1 = Loadable(lazy(() => import('views/pages/LHP/Wafer/wafer_line1/WaferLine1')));
+const WaferLine2 = Loadable(lazy(() => import('views/pages/LHP/Wafer/wafer_line2/WaferLine2')));
+const WaferLine7 = Loadable(lazy(() => import('views/pages/LHP/Wafer/wafer_line7/WaferLine7')));
+const BscLine5 = Loadable(lazy(() => import('views/pages/LHP/Bsc/bsc_line5/BscLine5')));
+// PM
+const PMWAFER = Loadable(lazy(() => import('views/pages/PM/wafer/PMWafer')));
+const PMnotifikasi = Loadable(lazy(() => import('views/pages/PM/PMnotifikasi')));
+
+
+// const WaferLine1Table = Loadable(lazy(() => import('views/pages/LHP/Wafer/wafer_line1/WaferLine1Table')));
 
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
@@ -486,6 +497,51 @@ const MainRoutes = {
       ]
     },
     {
+      path: 'utils',
+      children: [
+        {
+          path: 'lhp-line1',
+          element: <PrivateRoute element={<WaferLine1/>} />
+        }
+      ]
+    },
+    {
+      path: 'utils',
+      children: [
+        {
+          path: 'lhp-line2',
+          element: <PrivateRoute element={<WaferLine2/>} />
+        }
+      ]
+    },
+    {
+      path: 'utils',
+      children: [
+        {
+          path: 'lhp-line7',
+          element: <PrivateRoute element={<WaferLine7/>} />
+        }
+      ]
+    },
+    {
+      path: 'utils',
+      children: [
+        {
+          path: 'lhp-line5',
+          element: <PrivateRoute element={<BscLine5/>} />
+        }
+      ]
+    },
+    {
+      path: 'utils',
+      children: [
+        {
+          path: 'lhp-line1table',
+          element: <PrivateRoute element={<TableLhpL1/>} />
+        }
+      ]
+    },
+    {
       path: 'icons',
       children: [
         {
@@ -596,12 +652,31 @@ const MainRoutes = {
           element: <PrivateRoute element={<TableMonthlySix/>} />
         }
       ]
-    },{
+    },
+    {
       path: 'utils',
       children: [
         {
           path: 'packing-line5-bsc/table/lhp',
           element: <PrivateRoute element={<TableLhpL5 />} />
+        }
+      ]
+    },
+    {
+      path: 'utils',
+      children: [
+        {
+          path: 'pm/wafer',
+          element: <PrivateRoute element={<PMWAFER />} />
+        }
+      ]
+    },
+    {
+      path: 'utils',
+      children: [
+        {
+          path: 'pm/notif',
+          element: <PrivateRoute element={<PMnotifikasi />} />
         }
       ]
     },

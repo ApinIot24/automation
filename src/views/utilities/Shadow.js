@@ -19,7 +19,7 @@ import GrafekBox from 'views/dashboard/Default/BB/GrafekBox';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import ButtonEle from 'ui-component/Button';
-import FormLHP from 'views/dashboard/Default/A5/FormLHP';
+// import FormLHP from 'views/dashboard/Default/A5/FormLHP';
 
 // ==============================|| Happy Coding ||============================== //
 
@@ -75,7 +75,6 @@ const UtilitiesShadow = () => {
           <Tab label="A2" value="2" />
           <Tab label="A5" value="3" />
           <Tab label="B5" value="4" />
-          <Tab label="LHP" value="6" />
         </TabList>
       </Box>
       <TabPanel value="0">
@@ -251,17 +250,6 @@ const UtilitiesShadow = () => {
             </Grid>
           </Grid>
         </Grid>
-      </TabPanel>
-      <TabPanel value="6">
-        <FormLHP 
-        pathnih={urlapi.pathnih}
-        label0={label.grapl1}
-        label1={label.a1} 
-        label2={label.a2} 
-        label3={label.a5} 
-        label4={label.b5} 
-        label5={label.a3}
-        />
       </TabPanel>
     </TabContext>
   </MainCard>

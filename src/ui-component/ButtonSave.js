@@ -37,34 +37,60 @@ const ButtonSave = ({ lhp, downtime }) => {
   };
 
   const routeChange = () => {
-    const formattedDowntime = downtime.map(entry => ({
-      time_start: entry.time_start ? dayjs(entry.time_start).format('HH:mm:ss') : null,
-      time_stop: entry.time_stop ? dayjs(entry.time_stop).format('HH:mm:ss') : null,
-      total_dt: entry.total_dt,
-      kendala: entry.kendala,
-    }));
-    // console.log(formattedDowntime);
-    if (!validateInput()) return; // Stop if validation fails
+    const formattedDowntime = downtime.map(entry => {
+      // Validasi: Jika kendala terisi, pastikan time_start dan time_stop juga terisi
+      // if (entry.kendala && (!entry.time_start || !entry.time_stop)) {
+      //   setMessage("Error: Please ensure both 'time_start' and 'time_stop' are filled when 'kendala' is provided.");
+      //   setSeverity("error");
+      //   setOpen(true);
+      //   return null; // Kembalikan null jika kondisi tidak terpenuhi
+      // }
+  
+      // Lanjutkan pemformatan jika validasi lolos
+      return {
+        time_start: entry.time_start ? dayjs(entry.time_start).format('HH:mm:ss') : null,
+        time_stop: entry.time_stop ? dayjs(entry.time_stop).format('HH:mm:ss') : null,
+        total_dt: entry.total_dt,
+        kategori_downtime: entry.kategori_downtime,
+        unit_mesin: entry.unit_mesin,
+        part_mesin: entry.part_mesin,
+        kendala: entry.kendala,
+        speed_oven_plan: entry.speed_oven_plan,
+        speed_oven_reduce: entry.speed_oven_reduce,
+        total_sbl: entry.total_sbl,
+        penyebab: entry.penyebab,
+        perbaikan: entry.perbaikan,
+      };
+    }).filter(Boolean); // Menghapus entry null jika ada
+  
+    // Periksa apakah validasi input lolos
+    if (!validateInput() || !formattedDowntime.length) return; // Stop jika validasi gagal atau formattedDowntime kosong
+  
     const payload = {
       ...lhp,
-      downtime: formattedDowntime // Include downtime in the payload
-    }
-
+      downtime: formattedDowntime // Sertakan downtime dalam payload
+    };
+  
     axios.post('http://10.37.12.17:3000/lhp', payload)
       .then(response => {
         console.log("Data saved:", response);
         setMessage("LHP successfully saved to the database. Thank you for your input! and this id lhp: " + response.data.id);
-        setSeverity("success"); // Set severity to success
+        setSeverity("success"); // Set severity ke success
         setOpen(true);
-        // navigate(path); // Uncomment if needed
+        // navigate(path); // Uncomment jika perlu
       })
       .catch(error => {
         console.error("Error:", error);
-        setMessage("Request failed. Please try again.");
-        setSeverity("error"); // Set severity to error
+        // Memeriksa apakah ada respons dan pesan kesalahan dari server
+        const errorMessage = error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : "Request failed. Please try again."; // Pesan default jika tidak ada pesan khusus dari server
+        setMessage(errorMessage); // Menggunakan pesan spesifik dari server jika ada
+        setSeverity("error"); // Set severity ke error
         setOpen(true);
       });
   };
+  
 
   const handleClose = (reason) => {
     if (reason === 'clickaway') {

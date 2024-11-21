@@ -8,7 +8,7 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { styled } from '@mui/material/styles';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LineChart, BarChart } from '@mui/x-charts';
+import { LineChart, BarChart, ChartsReferenceLine } from '@mui/x-charts';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import ButtonBack from 'ui-component/ButtonBack';
@@ -66,7 +66,7 @@ const TableLhpL5 = () => {
     output_kg: '',
     rmd: '',
     rfeeding: '',
-    rsampleqc: '',
+    sampahpacking: '',
     rpackinner: '',
     rmE1: '',
     rmE2: '',
@@ -82,6 +82,9 @@ const TableLhpL5 = () => {
     rmE12: '',
     roll: '',
     rpackTable: '',
+    rejectpacking: '',
+    rejectstacking: '',
+    rejectcoolingconveyor: '',
     rmtotal: '',
     roven: '',
     soven: '',
@@ -93,9 +96,10 @@ const TableLhpL5 = () => {
     brtpack: '',
     batch: '',
     batch_buat: '',
-    wipackinner: '',
-    wikulit: '',
-    witotal: '',
+    wipkulitawal: '',
+    wipkulitakhir: '',
+    wipselisih: '',
+    wipkulit: '',
     viawal: '',
     viambil: '',
     viakhir: '',
@@ -177,7 +181,7 @@ const TableLhpL5 = () => {
       rmE12c: data.map(item => item.rmall?.rmE12 || 0),
       regulerc: data.map(item => item.reguler || 0),
       planningc: data.map(item => item.planning || 0),
-      rpackTablec: data.map(item => item.rpackTable || 0),
+      rpackTablec: data.map(item => item.rpacktable || 0),
       rovenc: data.map(item => item.roven || 0),
       rmdc: data.map(item => item.rmd || 0),
       rfeedingc: data.map(item => item.rfeeding || 0)
@@ -214,7 +218,7 @@ const TableLhpL5 = () => {
       { field: 'rmd', headerName: 'Rmd', width: 50 },
       { field: 'rfeeding', headerName: 'Rfeeding', width: 50 },
       { field: 'roll', headerName: 'Roll', width: 50 },
-      { field: 'rsampleqc', headerName: 'R Sample Qc', width: 50 },
+      { field: 'sampahpacking', headerName: 'Sampah Packing', width: 50 },
       {
         field: 'rmE1', headerName: 'RM E1', width: 50,
         valueGetter: (value, row) => `${row.rmall.rmE1 || ''}`
@@ -264,6 +268,9 @@ const TableLhpL5 = () => {
         valueGetter: (value, row) => `${row.rmall.rmE12 || ''}`
       },
       { field: 'rpacktable', headerName: 'Rpacktable', width: 50 },
+      { field: 'rejectpacking', headerName: 'Reject Packing', width: 50 },
+      { field: 'rejectstacking', headerName: 'Reject Stacking', width: 50 },
+      { field: 'rejectcoolingconveyor', headerName: 'Reject Cooling Conveyor', width: 50 },
       { field: 'rmtotal', headerName: 'Rmtotal', width: 50 },
       { field: 'roven', headerName: 'R Oven', width: 50 },
       { field: 'soven', headerName: 'Sampah Oven', width: 50 },
@@ -273,19 +280,22 @@ const TableLhpL5 = () => {
       { field: 'tampungan', headerName: 'Tampungan', width: 50 },
       { field: 'total', headerName: 'Total', width: 50 },
       { field: 'brtpack', headerName: 'Brt Pack', width: 50 },
-      { field: 'batch', headerName: 'Batch', width: 50 },
+      { field: 'brtpcs', headerName: 'Brt PCS', width: 50 },
       { field: 'batch_buat', headerName: 'Batch Buat', width: 50 },
       { field: 'batch_tuang', headerName: 'Batch Tuang', width: 50 },
       { field: 'batch_cetak', headerName: 'Batch Cetak', width: 50 },
+      { field: 'weight_bsc_pcs', headerName: 'Weight BSC PCS', width: 50 },
+      { field: 'weight_bsc_pack', headerName: 'Weight BSC PACK', width: 50 },
       { field: 'wip_adonan_awal', headerName: 'WIP Adonan Awal', width: 50 },
       { field: 'wip_adonan_akhir', headerName: 'WIP Adonan Akhir', width: 50 },
       { field: 'wip_adonan_selisih', headerName: 'WIP Adonan Selisih', width: 50 },
       { field: 'wip_adonan_kulit', headerName: 'WIP Adonan Kulit', width: 50 },
       { field: 'adonan_gagal_kg', headerName: 'Adonan Gagal (kg)', width: 50 },
       { field: 'adonan_gagal_kulit', headerName: 'Adonan Gagal Kulit', width: 50 },
-      { field: 'wipackinner', headerName: 'Wi Pack Inner', width: 50 },
-      { field: 'wikulit', headerName: 'Wi Kulit', width: 50 },
-      { field: 'witotal', headerName: 'Wi Total ', width: 50 },
+      { field: 'wipkulitawal', headerName: 'Wip Kulit Awal', width: 50 },
+      { field: 'wipkulitakhir', headerName: 'Wip Kulit Akhir', width: 50 },
+      { field: 'wipselisih', headerName: 'Wip Selisih', width: 50 },
+      { field: 'wipkulit', headerName: 'Wip Selisih ', width: 50 },
       { field: 'viawal', headerName: 'Vi awak', width: 50 },
       { field: 'viambil', headerName: 'Vi ambil', width: 50 },
       { field: 'viakhir', headerName: 'Vi Akhir', width: 50 },
@@ -357,7 +367,7 @@ const TableLhpL5 = () => {
         field: `kendala${i}`,
         headerName: `Kendala ${i}`,
         width: 200,
-        valueGetter: (value, row) => `${row.kendala?.[`kendala${i}`] || ''}`
+        valueGetter: (value, row) => `${row.kendalaall?.[`kendala${i}`] || ''}`
       });
     }
 
@@ -382,10 +392,10 @@ const TableLhpL5 = () => {
           hold: dataolah.hold,
           output: dataolah.output,
           output_kg: dataolah.output_kg,
-          bubuk: dataolah.bubuk,
+          brtpcs: dataolah.brtpcs,
           rmd: dataolah.rmd,
           rfeeding: dataolah.rfeeding,
-          rsampleqc: dataolah.rsampleqc,
+          sampahpacking: dataolah.sampahpacking,
           rpackinner: dataolah.rpackinner,
           rmE1: dataolah.rmall?.rmE1 || 0,
           rmE2: dataolah.rmall?.rmE2 || 0,
@@ -401,6 +411,9 @@ const TableLhpL5 = () => {
           rmE12: dataolah.rmall?.rmE12 || 0,
           roll: dataolah.roll,
           rpackTable: dataolah.rpacktable,
+          rejectpacking: dataolah.rejectpacking,
+          rejectstacking: dataolah.rejectstacking,
+          rejectcoolingconveyor: dataolah.rejectcoolingconveyor,
           rmtotal: dataolah.rmtotal,
           roven: dataolah.roven,
           soven: dataolah.soven,
@@ -412,9 +425,10 @@ const TableLhpL5 = () => {
           brtpack: dataolah.brtpack,
           batch: dataolah.batch,
           batch_buat: dataolah.batch_buat,
-          wipackinner: dataolah.wipackinner,
-          wikulit: dataolah.wikulit,
-          witotal: dataolah.witotal,
+          wipkulitawal: dataolah.wipkulitawal,
+          wipkulitakhir: dataolah.wipkulitakhir,
+          wipselisih: dataolah.wipselisih,
+          wipkulit: dataolah.wipkulit,
           viawal: dataolah.viawal,
           viambil: dataolah.viambil,
           viakhir: dataolah.viakhir,
@@ -452,7 +466,9 @@ const TableLhpL5 = () => {
           wip_adonan_selisih: dataolah.wip_adonan_selisih,
           wip_adonan_kulit: dataolah.wip_adonan_kulit,
           adonan_gagal_kg: dataolah.adonan_gagal_kg,
-          adonan_gagal_kulit: dataolah.adonan_gagal_kulit
+          adonan_gagal_kulit: dataolah.adonan_gagal_kulit,
+          weight_bsc_pcs: dataolah.weight_bsc_pcs,
+          weight_bsc_pack: dataolah.weight_bsc_pack,
         });
         setOpenDialog(true);
       })
@@ -518,18 +534,28 @@ const TableLhpL5 = () => {
             <Box sx={{ width: '100%' }}>
               <LineChart
                 xAxis={[{ scaleType: 'band', data: ['Shift 1', 'Shift 2', 'Shift 3'] }]}
-                series={Object.keys(chartData)
-                  .filter((key) => key.startsWith('rmE'))
-                  .map((key, index) => ({
-                    id: String(index + 1),
-                    label: key.toUpperCase(),
-                    data: chartData[key]?.length ? chartData[key] : [0, 0, 0], // Fallback ke [0, 0, 0] jika data tidak ada
-                    color: ['#ff0000', '#00ff00', '#0000ff', '#ff00ff', '#00ffff', '#ffff00', '#ff6600', '#0066ff', '#6600ff', '#33cc33', '#ff3366', '#66ccff'][index % 12], // Warna kontras
-                  }))}
+                series={[
+                  ...Object.keys(chartData)
+                    .filter((key) => key.startsWith('rmE'))
+                    .map((key, index) => ({
+                      id: String(index + 1),
+                      label: `E${index + 1}`, // Label E1 hingga E12
+                      data: chartData[key]?.length ? chartData[key] : [0, 0, 0], // Fallback ke [0, 0, 0] jika data tidak ada
+                      color: ['#ff0000', '#00ff00', '#0000ff', '#ff00ff', '#00ffff', '#ffff00', '#ff6600', '#0066ff', '#6600ff', '#33cc33', '#ff3366', '#66ccff'][index % 12], // Warna kontras
+                    })),
+                  { id: '13', label: 'MAX', type: 'line', curve: 'linear', data: [60, 60, 60], color: '#f20707' }
+                ]}
                 height={300}
                 width={450}
                 margin={{ left: 30, right: 30, top: 100, bottom: 30 }}
-              />
+              >
+                <ChartsReferenceLine
+                  y={60}
+                  label="Max"
+                  lineStyle={{ stroke: 'red' }}
+                  labelStyle={{ fontSize: '16px', fontWeight: 'bold', fill: 'red', zIndex: 10 }}
+                />
+              </LineChart>
             </Box>
           </CardWrapper>
         </Grid>
@@ -567,18 +593,88 @@ const TableLhpL5 = () => {
 
         <Grid item xs={12} sm={4}>
           <CardWrapper>
-            <Typography variant="h3" align="center">Grafik Reject Mesin</Typography>
+            <Typography variant="h3" align="center">Grafik Reject Packing Table</Typography>
             <LineChart
               xAxis={[{ scaleType: 'band', data: ['Shift 1', 'Shift 2', 'Shift 3'] }]}
               series={[
                 { id: '1', label: 'Pack Table', data: chartData.rpackTablec?.length ? chartData.rpackTablec : [0, 0, 0], color: '#0000ff' },
-                { id: '2', label: 'Oven', data: chartData.rovenc?.length ? chartData.rovenc : [0, 0, 0], color: '#ff00ff' },
-                { id: '3', label: 'MD', data: chartData.rmdc?.length ? chartData.rmdc : [0, 0, 0], color: '#00ffff' },
-                { id: '4', label: 'Feeding', data: chartData.rfeedingc?.length ? chartData.rfeedingc : [0, 0, 0], color: '#ffff00' }
+                { id: '2', label: 'MAX', type: 'line', curve: 'linear', data: [200, 200, 200], color: '#f20707' }
               ]}
               height={300}
               width={450}
-            />
+            >
+              <ChartsReferenceLine
+                y={200}
+                label="Max"
+                lineStyle={{ stroke: 'red' }}
+                labelStyle={{ fontSize: '16px', fontWeight: 'bold', fill: 'red', zIndex: 10 }}
+              />
+            </LineChart>
+          </CardWrapper>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <CardWrapper>
+            <Typography variant="h3" align="center">Grafik Reject Oven</Typography>
+            <LineChart
+              xAxis={[{ scaleType: 'band', data: ['Shift 1', 'Shift 2', 'Shift 3'] }]}
+              series={[
+
+                { id: '1', label: 'Oven', data: chartData.rovenc?.length ? chartData.rovenc : [0, 0, 0], color: '#ff00ff' },
+                { id: '2', label: 'MAX', type: 'line', curve: 'linear', data: [50, 50, 50], color: '#f20707' }
+              ]}
+              height={300}
+              width={450}
+            >
+              <ChartsReferenceLine
+                y={50}
+                label="Max"
+                lineStyle={{ stroke: 'red' }}
+                labelStyle={{ fontSize: '16px', fontWeight: 'bold', fill: 'red', zIndex: 10 }}
+              />
+            </LineChart>
+          </CardWrapper>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <CardWrapper>
+            <Typography variant="h3" align="center">Grafik Reject Metal Detector</Typography>
+            <LineChart
+              xAxis={[{ scaleType: 'band', data: ['Shift 1', 'Shift 2', 'Shift 3'] }]}
+              series={[
+                { id: '1', label: 'MD', data: chartData.rmdc?.length ? chartData.rmdc : [0, 0, 0], color: '#00ffff' },
+                // { id: '5', label: 'MAX', type: 'line', curve: 'linear', data: [60, 60, 60], color: '#f20707' }
+              ]}
+              height={300}
+              width={450}
+            >
+              {/* <ChartsReferenceLine
+                y={60}
+                label="Max"
+                lineStyle={{ stroke: 'red' }}
+                labelStyle={{ fontSize: '16px', fontWeight: 'bold', fill: 'red', zIndex: 10 }}
+              /> */}
+            </LineChart>
+          </CardWrapper>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <CardWrapper>
+            <Typography variant="h3" align="center">Grafik Reject Feeding</Typography>
+            <LineChart
+              xAxis={[{ scaleType: 'band', data: ['Shift 1', 'Shift 2', 'Shift 3'] }]}
+              series={[
+
+                { id: '1', label: 'Feeding', data: chartData.rfeedingc?.length ? chartData.rfeedingc : [0, 0, 0], color: '#ff6600' },
+                { id: '2', label: 'MAX', type: 'line', curve: 'linear', data: [150, 150, 150], color: '#f20707' }
+              ]}
+              height={300}
+              width={450}
+            >
+              <ChartsReferenceLine
+                y={150}
+                label="Max"
+                lineStyle={{ stroke: 'red' }}
+                labelStyle={{ fontSize: '16px', fontWeight: 'bold', fill: 'red', zIndex: 10 }}
+              />
+            </LineChart>
           </CardWrapper>
         </Grid>
       </Grid>
@@ -665,7 +761,9 @@ const TableLhpL5 = () => {
             <Typography variant="h5">Total dan Berat Pack</Typography>
             <Grid container spacing={2} sx={{ mt: 2 }}>
               <Grid item xs={12} sm={6}>{renderTextField('Berat/Pack', 'brtpack')}</Grid>
-              <Grid item xs={12} sm={6}>{renderTextField('Batch Cetak', 'batch')}</Grid>
+              <Grid item xs={12} sm={6}>{renderTextField('Berat/Pcs', 'brtpcs')}</Grid>
+              <Grid item xs={12} sm={6}>{renderTextField('Weight BSC PCS', 'weight_bsc_pcs')}</Grid>
+              <Grid item xs={12} sm={6}>{renderTextField('Weight BSC PACK', 'weight_bsc_pack')}</Grid>
               <Grid item xs={12} sm={6}>{renderTextField('Batch Buat', 'batch_buat')}</Grid>
               <Grid item xs={12} sm={6}>{renderTextField('Batch Tuang', 'batch_tuang', true)}</Grid>
               <Grid item xs={12} sm={6}>{renderTextField('Batch Cetak', 'batch_cetak', true)}</Grid>
@@ -692,8 +790,14 @@ const TableLhpL5 = () => {
               <Grid item xs={12} sm={4}>{renderTextField('WIP Adonan Kulit', 'wip_adonan_kulit', true)}</Grid>
             </Grid>
             <Divider sx={{ mt: 3, mb: 2 }} />
-            <Typography variant="h5">Reject Data</Typography>
-            <Grid container spacing={2}>
+            <Typography variant="h5">Data Reject RM / Mesin (Kg)</Typography>
+            <Grid container spacing={2} sx={{ mt: 2 }}>
+              <Grid item xs={12} sm={4}>
+                {renderTextField('Reject Stacking', 'rejectstacking')}
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                {renderTextField('Reject Cooling Conveyor', 'rejectcoolingconveyor')}
+              </Grid>
               <Grid item xs={12} sm={4}>
                 {renderTextField('R-Pack Table (RM)', 'rpackTable')}
               </Grid>
@@ -701,18 +805,22 @@ const TableLhpL5 = () => {
                 {renderTextField('RMD', 'rmd')}
               </Grid>
               <Grid item xs={12} sm={4}>
+                {renderTextField('Sampah Packing', 'sampahpacking')}
+              </Grid>
+              <Grid item xs={12} sm={4}>
                 {renderTextField('R Pack Inner', 'rpackinner')}
               </Grid>
               <Grid item xs={12} sm={4}>
-                {renderTextField('Feeding', 'rfeeding')}
+                {renderTextField('R Feeding', 'rfeeding')}
               </Grid>
               <Grid item xs={12} sm={4}>
-                {renderTextField('Sample QC', 'rsampleqc')}
+                {renderTextField('Reject Packing', 'rejectpacking', true)}
               </Grid>
               <Grid item xs={12} sm={4}>
                 {renderTextField('RM Total', 'rmtotal', true)}
               </Grid>
             </Grid>
+
             <Grid container spacing={2} sx={{ mt: 2 }}>
               {[...Array(12).keys()].map((idx) => (
                 <Grid item xs={12} sm={4} key={idx}>
@@ -740,9 +848,10 @@ const TableLhpL5 = () => {
             <Divider sx={{ mt: 3, mb: 2 }} />
             <Typography variant="h5">Batch dan WIP</Typography>
             <Grid container spacing={2} sx={{ mt: 2 }}>
-              <Grid item xs={12} sm={4}>{renderTextField('WIP Pack Inner', 'wipackinner')}</Grid>
-              <Grid item xs={12} sm={4}>{renderTextField('WIP Kulit', 'wikulit')}</Grid>
-              <Grid item xs={12} sm={4}>{renderTextField('WIP Total', 'witotal', true)}</Grid>
+              <Grid item xs={12} sm={4}>{renderTextField('WIP Kulit Awal', 'wipkulitawal')}</Grid>
+              <Grid item xs={12} sm={4}>{renderTextField('WIP Kulit Akhir', 'wipkulitakhir')}</Grid>
+              <Grid item xs={12} sm={4}>{renderTextField('WIP Selisih', 'wipselisih', true)}</Grid>
+              <Grid item xs={12} sm={4}>{renderTextField('WIP Kulit', 'wipkulit', true)}</Grid>
             </Grid>
             <Divider sx={{ mt: 3, mb: 2 }} />
             <Typography variant="h5">Variance Inner (VI)</Typography>

@@ -27,7 +27,7 @@ const FormLHP = ({ isLoading }) => {
         beratBasah: '',
         rmd: '',
         rfeeding: '',
-        rsampleqc: '',
+        sampahpacking: '',
         rpackinner: '',
         rpackTable: '',
         rmall: {
@@ -44,6 +44,9 @@ const FormLHP = ({ isLoading }) => {
             rmE11: '',
             rmE12: '',
         },
+        rejectpacking: '',
+        rejectstacking: '',
+        rejectcoolingconveyor: '',
         rmtotal: '',
         roll: '',
         roven: '',
@@ -66,9 +69,10 @@ const FormLHP = ({ isLoading }) => {
         wip_adonan_akhir: '',
         wip_adonan_selisih: '',
         wip_adonan_kulit: '',
-        wipackinner: '',
-        wikulit: '',
-        witotal: '',
+        wipkulitawal: '',
+        wipkulitakhir: '',
+        wipselisih: '',
+        wipkulit: '',
         viall: {
             viE1: '',
             viE2: '',
@@ -180,10 +184,10 @@ const FormLHP = ({ isLoading }) => {
             hold: getValue('Hold'),
             output: getValue('T. Output'),
             rmd: getValue('R.MD'),
-            rsampleqc: getValue('R. Sampel QC'),
+            sampahpacking: getValue('R. Sampel QC'),
             rpackinner: getValue('R.pack inner'),
             rpackTable: getValue('R.pack table'),
-            rmtotal: getValue('TOTAL'),
+            rejectpacking: getValue('TOTAL'),
             mcbks: getValue('Mc.bks'),
             ptable: getValue('P. Table'),
             serbuk: getValue('serbuk'),
@@ -192,7 +196,7 @@ const FormLHP = ({ isLoading }) => {
             brtpack: getValue('Brt/Pack'),
             wipackinner: getValue('Pack Inner'),
             wikulit: getValue('Box Kulit'),
-            witotal: getValue('Total WIP'),
+            wipkulit: getValue('Total WIP'),
             rmall: rmall,  // Set parsed RM values
             viall: viall   // Set parsed VI values
         });
@@ -214,12 +218,14 @@ const FormLHP = ({ isLoading }) => {
 
     // RM Total Calculation
     useEffect(() => {
-        const { rpackTable, rmd, rsampleqc, rpackinner, rfeeding } = formState;
+        const { rpackTable, rmd, sampahpacking, rpackinner, rfeeding, output_kg } = formState;
         // Jika tidak ada nilai, hentikan eksekusi
-        if (!rpackTable && !rmd && !rsampleqc && !rpackinner && !rfeeding) { return; }
-        const rmtotal = parseFloat(rpackTable || 0) + parseFloat(rmd || 0) + parseFloat(rsampleqc || 0) + parseFloat(rpackinner || 0) + parseFloat(rfeeding || 0);
+        if (!rpackTable && !rmd && !sampahpacking && !rpackinner && !rfeeding) { return; }
+        const rmtotal = parseFloat(rpackTable || 0) + parseFloat(rmd || 0) + parseFloat(sampahpacking || 0) + parseFloat(rpackinner || 0) + parseFloat(rfeeding || 0);
+        const rejectpacking = ((parseFloat(rmtotal || 0) * 100) / 100) / parseFloat(output_kg || 0);
         handleChange('rmtotal', rmtotal.toFixed(2));
-    }, [formState.rpackTable, formState.rmd, formState.rsampleqc, formState.rpackinner, formState.rfeeding]);
+        handleChange('rejectpacking', rejectpacking.toFixed(2));
+    }, [formState.rpackTable, formState.rmd, formState.sampahpacking, formState.rpackinner, formState.rfeeding]);
 
     // RM Roll Calculation
     useEffect(() => {
@@ -252,16 +258,16 @@ const FormLHP = ({ isLoading }) => {
 
     // WIP Total Calculation
     useEffect(() => {
-        const { wipackinner, wikulit } = formState;
-
+        const { wipkulitawal, wipkulitakhir, batch_buat, beratKering } = formState;
         // Jika tidak ada nilai, hentikan eksekusi
-        if (!wipackinner && !wikulit) {
+        if (!wipkulitawal && !wipkulitakhir) {
             return;
         }
-
-        const wipTotal = parseFloat(wipackinner || 0) + parseFloat(wikulit || 0);
-        handleChange('witotal', wipTotal.toFixed(2));
-    }, [formState.wipackinner, formState.wikulit]);
+        const wipSelisih = parseFloat(wipkulitakhir || 0) - parseFloat(wipkulitawal || 0);
+        const wipKulit = (parseFloat(batch_buat || 0) * parseFloat(beratKering || 0)) / wipSelisih;
+        handleChange('wipselisih', wipSelisih.toFixed(2));
+        handleChange('wipkulit', wipKulit.toFixed(2));
+    }, [formState.wipkulitawal, formState.wipkulitakhir]);
 
     // VI Akhir Calculation
     useEffect(() => {
@@ -347,7 +353,7 @@ const FormLHP = ({ isLoading }) => {
         // Konversi nilai menjadi angka
         const batchBuat = parseFloat(batch_buat);
         const adonanGagalKg = parseFloat(adonan_gagal_kg) || 0;
-        const wipSelisih = parseFloat(wip_adonan_selisih) || 0;
+        const wipAdonanSelisih = parseFloat(wip_adonan_selisih) || 0;
         const beratBasahVal = parseFloat(beratBasah);
         // Pastikan beratBasahVal tidak nol untuk menghindari pembagian oleh nol
         if (beratBasahVal === 0) {
@@ -356,7 +362,7 @@ const FormLHP = ({ isLoading }) => {
         // Hitung Batch Tuang berdasarkan rumus: Batch Buat - (Adonan Gagal Kg / Berat Basah)
         const batchTuang = (batchBuat - (adonanGagalKg / beratBasahVal)).toFixed(2);
         // Hitung Batch Cetak berdasarkan rumus: Batch Buat - (WIP Adonan Selisih / Berat Basah)
-        const batchCetak = (batchBuat - (wipSelisih / beratBasahVal)).toFixed(2);
+        const batchCetak = (batchBuat - (wipAdonanSelisih / beratBasahVal)).toFixed(2);
         // Update state dengan nilai hasil perhitungan
         setFormState((prev) => ({
             ...prev,
@@ -446,11 +452,11 @@ const FormLHP = ({ isLoading }) => {
                 const outputKgVal = parseFloat(output_kg);
 
                 // Variance batch
-                const varianceBatch = ((batchBuat * beratKeringVal - outputKgVal) / (batchBuat * beratKeringVal)).toFixed(4);
+                const varianceBatch = ((batchBuat * beratKeringVal - outputKgVal) / (batchBuat * beratKeringVal) * 100).toFixed(4);
                 handleChange('variance_batch', varianceBatch);
 
                 // Variance FG
-                const varianceFg = ((batchBuat * beratKeringVal - outputKgVal) / (batchBuat)).toFixed(4);
+                const varianceFg = ((batchBuat * beratKeringVal - outputKgVal) / (batchBuat) * 100).toFixed(4);
                 handleChange('variance_fg', varianceFg);
             } else {
                 handleChange('variance_batch', '');
@@ -491,7 +497,7 @@ const FormLHP = ({ isLoading }) => {
                 } else {
                     duration = stop.diff(start, 'minute');
                 }
-                updatedEntries[index].total_dt = duration + ' minutes';
+                updatedEntries[index].total_dt = duration;
             } else {
                 updatedEntries[index].total_dt = '';
             }
@@ -543,6 +549,46 @@ const FormLHP = ({ isLoading }) => {
         />
     );
 
+    const handleSelectChange = (index, event) => {
+        const updatedEntries = [...timeEntries];
+        updatedEntries[index]['unit_mesin'] = event.target.value;
+        setTimeEntries(updatedEntries);
+    };
+    const unitMesinOptions = [
+        { value: 'None', label: 'None' },
+        { value: 'Vibro', label: 'Vibro' },
+        { value: 'Storage Tank sugar cooking', label: 'Storage Tank sugar cooking' },
+        { value: 'Tilting', label: 'Tilting' },
+        { value: 'Mixer', label: 'Mixer' },
+        { value: 'Rotary moulder/cetakan', label: 'Rotary moulder/cetakan' },
+        { value: 'Hoper', label: 'Hoper' },
+        { value: 'Conveyor / conveyor transfer', label: 'Conveyor / conveyor transfer' },
+        { value: 'Conveyor swivel panner', label: 'Conveyor swivel panner' },
+        { value: 'Wiremesh roll transfer', label: 'Wiremesh roll transfer' },
+        { value: 'Loyang / scrapper/take Off', label: 'Loyang / scrapper/take Off' },
+        { value: 'Oven/ burner', label: 'Oven/ burner' },
+        { value: 'Spray Oil', label: 'Spray Oil' },
+        { value: 'Metall detector CCP', label: 'Metall detector CCP' },
+        { value: 'Cooling conveyor', label: 'Cooling conveyor' },
+        { value: 'Metal detector OPRP', label: 'Metal detector OPRP' },
+        { value: 'Stacking', label: 'Stacking' },
+        { value: 'Packing table', label: 'Packing table' },
+        { value: 'Bestpack', label: 'Bestpack' },
+        { value: 'MC E1', label: 'MC E1' },
+        { value: 'MC E2', label: 'MC E2' },
+        { value: 'MC E3', label: 'MC E3' },
+        { value: 'MC E4', label: 'MC E4' },
+        { value: 'MC E5', label: 'MC E5' },
+        { value: 'MC E6', label: 'MC E6' },
+        { value: 'MC E7', label: 'MC E7' },
+        { value: 'MC E8', label: 'MC E8' },
+        { value: 'MC E9', label: 'MC E9' },
+        { value: 'MC E10', label: 'MC E10' },
+        { value: 'MC E11', label: 'MC E11' },
+        { value: 'MC E12', label: 'MC E12' },
+    ];
+    
+
     return (
         <>
             {isLoading ? (
@@ -593,9 +639,11 @@ const FormLHP = ({ isLoading }) => {
                                 {renderSelectField('SKU', 'sku', [
                                     { value: '', label: 'None' },
                                     { value: 'ROMA KELAPA (410279)', label: 'ROMA KELAPA (410279)' },
+                                    { value: 'ROMA KELAPA (310837)', label: 'ROMA KELAPA (310837)' },
                                 ])}
                             </Grid>
                         </Grid>
+                        
                         <Divider sx={{ mt: 3, mb: 2 }} />
                         <Typography variant="h5">Planning and Output</Typography>
                         <Grid container spacing={2}>
@@ -686,19 +734,28 @@ const FormLHP = ({ isLoading }) => {
                         <Typography variant="h5">Data Reject RM / Mesin (Kg)</Typography>
                         <Grid container spacing={2} sx={{ mt: 2 }}>
                             <Grid item xs={12} sm={4}>
+                                {renderTextField('Reject Stacking', 'rejectstacking')}
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                                {renderTextField('Reject Cooling Conveyor', 'rejectcoolingconveyor')}
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
                                 {renderTextField('R-Pack Table (RM)', 'rpackTable')}
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 {renderTextField('RMD', 'rmd')}
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                                {renderTextField('R Sample Qc', 'rsampleqc')}
+                                {renderTextField('Sampah Packing', 'sampahpacking')}
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 {renderTextField('R Pack Inner', 'rpackinner')}
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 {renderTextField('R Feeding', 'rfeeding')}
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                                {renderTextField('Reject Packing', 'rejectpacking', true)}
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 {renderTextField('RM Total', 'rmtotal', true)}
@@ -740,9 +797,10 @@ const FormLHP = ({ isLoading }) => {
                         <Divider sx={{ mt: 3, mb: 2 }} />
                         <Typography variant="h5">Batch dan WIP</Typography>
                         <Grid container spacing={2} sx={{ mt: 2 }}>
-                            <Grid item xs={12} sm={4}>{renderTextField('WIP Pack Inner', 'wipackinner')}</Grid>
-                            <Grid item xs={12} sm={4}>{renderTextField('WIP Kulit', 'wikulit')}</Grid>
-                            <Grid item xs={12} sm={4}>{renderTextField('WIP Total', 'witotal', true)}</Grid>
+                            <Grid item xs={12} sm={4}>{renderTextField('WIP Kulit Awal', 'wipkulitawal')}</Grid>
+                            <Grid item xs={12} sm={4}>{renderTextField('WIP Kulit Akhir', 'wipkulitakhir')}</Grid>
+                            <Grid item xs={12} sm={4}>{renderTextField('WIP Selisih', 'wipselisih', true)}</Grid>
+                            <Grid item xs={12} sm={4}>{renderTextField('WIP Total', 'wipkulit', true)}</Grid>
                         </Grid>
 
                         <Divider sx={{ mt: 3, mb: 2 }} />
@@ -788,46 +846,95 @@ const FormLHP = ({ isLoading }) => {
                         <Typography variant="h5">Downtime</Typography>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             {timeEntries.map((entry, index) => (
-                                <Grid container spacing={2} sx={{ mt: 2 }} key={index}>
-                                    <Grid item xs={12} sm={2}>
+                                <Grid container m={2} spacing={2} direction="row" key={index}>
+                                    <Grid item xs={12} sm={1}>
                                         <TimePicker
                                             label="Time Start"
                                             value={entry.time_start}
                                             onChange={(newValue) => handleTimeChange(index, 'time_start', newValue)}
-                                            renderInput={(params) => <TextField {...params} fullWidth />}
+                                            renderInput={(params) => <TextField {...params} fullWidth required />}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={2}>
+                                    <Grid item xs={12} sm={1}>
                                         <TimePicker
                                             label="Time Stop"
                                             value={entry.time_stop}
                                             onChange={(newValue) => handleTimeChange(index, 'time_stop', newValue)}
-                                            renderInput={(params) => <TextField {...params} fullWidth />}
+                                            renderInput={(params) => <TextField {...params} fullWidth required />}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={2}>
+                                    <Grid item xs={12} sm={1}>
                                         <TextField
+                                            name="total_dt"
                                             label="Total DT"
                                             value={entry.total_dt}
                                             fullWidth
                                             disabled
                                         />
                                     </Grid>
+                                    <Grid item xs={12} sm={1}>
+                                        <TextField
+                                            name="part_mesin"
+                                            label="Part Mesin"
+                                            value={entry.part_mesin}
+                                            onChange={(e) => handleTimeChange(index, 'part_mesin', e.target.value)}
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={2}>
+                                        <FormControl fullWidth>
+                                            <InputLabel id="unit-mesin-label">Unit Mesin</InputLabel>
+                                            <Select
+                                                labelId="unit-mesin-label"
+                                                id="unit-mesin-select"
+                                                name="unit_mesin"
+                                                value={entry.unit_mesin || ''}
+                                                label="Unit Mesin"
+                                                onChange={(event) => handleSelectChange(index, event)} // Menggunakan handleSelectChange
+                                            >
+                                                {unitMesinOptions.map((option) => (
+                                                    <MenuItem key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+                                    </Grid>
                                     <Grid item xs={12} sm={4}>
                                         <TextField
+                                            name="kendala"
                                             label="Kendala"
                                             value={entry.kendala}
                                             onChange={(e) => handleTimeChange(index, 'kendala', e.target.value)}
                                             fullWidth
+                                            required
+                                            multiline
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={4}>
+                                        <TextField
+                                            name="penyebab"
+                                            label="penyebab"
+                                            value={entry.penyebab}
+                                            onChange={(e) => handleTimeChange(index, 'penyebab', e.target.value)}
+                                            fullWidth
+                                            required
+                                            multiline
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={4}>
+                                        <TextField
+                                            name="perbaikan"
+                                            label="perbaikan"
+                                            value={entry.perbaikan}
+                                            onChange={(e) => handleTimeChange(index, 'perbaikan', e.target.value)}
+                                            fullWidth
+                                            required
                                             multiline
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={1}>
-                                        <Button
-                                            variant="outlined"
-                                            onClick={() => removeTimeEntry(index)}
-                                            disabled={timeEntries.length === 1}
-                                        >
+                                        <Button variant="outlined" onClick={() => removeTimeEntry(index)} disabled={timeEntries.length === 1}>
                                             Remove
                                         </Button>
                                     </Grid>

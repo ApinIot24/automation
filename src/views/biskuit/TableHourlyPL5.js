@@ -256,13 +256,12 @@ const TablePackingL5 = () => {
                     setValueDate(newValue);
                     var thisdate = new Date(newValue);
                     thisdate.setDate(thisdate.getDate() + 1)
-                    var datenyar = new Date(newValue);
-                    var datestring = datenyar.getFullYear()  + "-0" + (datenyar.getMonth()+1) + "-0" + datenyar.getDate() 
+                    const formattedDate = dayjs(newValue).format('YYYY-MM-DD');
                     let hour = ['07:00 - 08:00' , '08:00 - 09:00','09:00 - 10:00','10:00 - 11:00','11:00 - 12:00',
                     '12:00 - 13:00','13:00 - 14:00','14:00 - 15:00','15:00 - 16:00','16:00 - 17:00','17:00 - 18:00','18:00 - 19:00','19:00 - 20:00','20:00 - 21:00',
                     '21:00 - 22:00','22:00 - 23:00','23:00 - 24:00','24:00 - 01:00','01:00 - 02:00','02:00 - 03:00','03:00 - 04:00','04:00 - 05:00','05:00 - 06:00','06:00 - 07:00'];
                     if (value==='packing_l1_hourly') {
-                      axios.get(`http://10.37.12.17:3000/packing_l1_hourly/date/${datestring}`)
+                      axios.get(`http://10.37.12.17:3000/packing_l1_hourly/date/${formattedDate}`)
                       .then(response => {
                         var dataolah = response.data;
                         let objects = [];  
@@ -298,7 +297,7 @@ const TablePackingL5 = () => {
                         console.log(error);
                       });
                     } else {
-                      axios.get(`http://10.37.12.17:3000/${value}/date/${datestring}`)
+                      axios.get(`http://10.37.12.17:3000/${value}/date/${formattedDate}`)
                         .then(response => {
                           var dataolah = response.data;
                           let objects = [];  

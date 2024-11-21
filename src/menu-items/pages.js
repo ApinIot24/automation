@@ -1,11 +1,13 @@
 // assets
-import {  IconCooker ,IconMicrowave ,IconPackages} from '@tabler/icons-react';
+import {  IconCooker ,IconMicrowave ,IconPackages, IconNotes, IconFileSpreadsheet} from '@tabler/icons-react';
 
 // constant
 const icons = {
   IconCooker,
   IconMicrowave,
-  IconPackages
+  IconPackages,
+  IconNotes,
+  IconFileSpreadsheet
 };
 
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
@@ -136,6 +138,94 @@ const pages = {
               breadcrumbs: false
             }
           ]
+        }
+      ]
+    },
+    {
+      id: 'lhp',
+      title: 'LHP',
+      type: 'collapse',
+      icon: icons.IconNotes,
+      roles: ['all','wafer','biskuit'],
+      children: [
+        {
+          id: 'wafer',
+          title: 'WAFER',
+          type: 'collapse',
+          icon: icons.IconNotes,
+          roles: ['all','wafer'],
+          children: [
+            {
+              id: 'waferline1',
+              title: 'Wafer LINE 1',
+              type: 'item',
+              url: '/utils/lhp-line1',
+              breadcrumbs: false
+            },
+            {
+              id: 'waferline2',
+              title: 'Wafer LINE 2',
+              type: 'item',
+              url: '/utils/lhp-line2',
+              breadcrumbs: false
+            },
+            {
+              id: 'waferline7',
+              title: 'Wafer LINE 7',
+              type: 'item',
+              url: '/utils/lhp-line7',
+              breadcrumbs: false
+            },
+          ]
+        },
+        {
+          id: 'biskuit',
+          title: 'BISKUIT',
+          type: 'collapse',
+          icon: icons.IconNotes,
+          roles: ['all','biskuit'],
+          children: [
+            {
+              id: 'biskuitline5',
+              title: 'Biskuit LINE 5',
+              type: 'item',
+              url: '/utils/lhp-line5',
+              breadcrumbs: false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'pm',
+      title: 'PM',
+      type: 'collapse',
+      icon: icons.IconFileSpreadsheet,
+      roles: ['all','wafer','biskuit'],
+      children: [
+        {
+          id: 'wafer',
+          title: 'PM WAFER',
+          type: 'item',
+          icon: icons.IconFileSpreadsheet,
+          url: '/utils/pm/wafer',
+          roles: ['all','wafer'],
+        },
+        {
+          id: 'biskuit',
+          title: 'PM BISKUIT',
+          type: 'item',
+          icon: icons.IconFileSpreadsheet,
+          url: '/pm/biskuit',
+          roles: ['all','biskuit']
+        },
+        {
+          id: 'notif',
+          title: 'PM Notifikasi',
+          type: 'item',
+          icon: icons.IconFileSpreadsheet,
+          url: '/pm/notif',
+          roles: ['all','biskuit','wafer']
         }
       ]
     },

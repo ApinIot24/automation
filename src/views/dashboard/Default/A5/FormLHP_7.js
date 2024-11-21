@@ -123,7 +123,7 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5, la
     const LHP = {
 
         realdatetime: valuedate.format('YYYY-MM-DD'),
-        grup: label0,
+        grup: '7',
         shift: shift,
         sku: sku,
         plan: plan,
@@ -198,7 +198,11 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5, la
     };
 
 
-
+    const handleSelectChange = (index, event) => {
+        const updatedEntries = [...timeEntries];
+        updatedEntries[index]['unit_mesin'] = event.target.value;
+        setTimeEntries(updatedEntries);
+    };
     const [timeEntries, setTimeEntries] = useState([{ time_start: null, time_stop: null, total_dt: '', kendala: '' }]);
 
     const addTimeEntry = () => {
@@ -227,7 +231,7 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5, la
                 } else {
                     duration = stop.diff(start, 'minute');
                 }
-                updatedEntries[index].total_dt = duration + ' minutes';
+                updatedEntries[index].total_dt = duration;
             } else {
                 updatedEntries[index].total_dt = '';
             }
@@ -238,7 +242,31 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5, la
 
     useEffect(() => {
     }, []);
-
+    const unitMesinOptions = [
+        { value: 'None', label: 'none'},
+        { value: 'G1', label: 'G1' },
+        { value: 'G2', label: 'G2' },
+        { value: 'G3', label: 'G3' },
+        { value: 'G4', label: 'G4' },
+        { value: 'G5', label: 'G5' },
+        { value: 'G6', label: 'G6' },
+        { value: 'G7', label: 'G7' },
+        { value: 'G8', label: 'G8' },
+        { value: 'Oven', label: 'Oven' },
+        { value: 'MD', label: 'MD' },
+        { value: 'Banded', label: 'Banded' },
+        { value: 'Cooling', label: 'Cooling' },
+        { value: 'BallMill', label: 'BallMill' },
+        { value: 'Mixer', label: 'Mixer' },
+        { value: 'Cream Builder', label: 'Cream Builder' },
+        { value: 'Cooling Box', label: 'Cooling Box' },
+        { value: 'Cutting', label: 'Cutting' },
+        { value: 'Enrober', label: 'Enrober' },
+        { value: 'Cooling Tunnel', label: 'Cooling Tunnel' },
+        { value: 'Packing', label: 'Packing' },
+        { value: 'Shrinking', label: 'Shrinking' },
+        { value: 'Carton Sealer', label: 'Carton Sealer' }
+    ];
     return (
         <>
             {isLoading ? (
@@ -271,9 +299,9 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5, la
                                         <MenuItem value="">
                                             <em>None</em>
                                         </MenuItem>
-                                        <MenuItem value={'Shift 1'}>Shift 1</MenuItem>
-                                        <MenuItem value={'Shift 2'}>Shift 2</MenuItem>
-                                        <MenuItem value={'Shift 3'}>Shift 3</MenuItem>
+                                        <MenuItem value={'1'}>Shift 1</MenuItem>
+                                        <MenuItem value={'2'}>Shift 2</MenuItem>
+                                        <MenuItem value={'3'}>Shift 3</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>
@@ -1022,7 +1050,7 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5, la
 
                             {timeEntries.map((entry, index) => (
                                 <Grid container m={2} spacing={2} direction="row" key={index}>
-                                    <Grid item xs={12} sm={2}>
+                                    <Grid item xs={12} sm={1}>
                                         <TimePicker
                                             label="Time Start"
                                             value={entry.time_start}
@@ -1030,7 +1058,7 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5, la
                                             renderInput={(params) => <TextField {...params} fullWidth required />}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={2}>
+                                    <Grid item xs={12} sm={1}>
                                         <TimePicker
                                             label="Time Stop"
                                             value={entry.time_stop}
@@ -1038,7 +1066,7 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5, la
                                             renderInput={(params) => <TextField {...params} fullWidth required />}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={2}>
+                                    <Grid item xs={12} sm={1}>
                                         <TextField
                                             name="total_dt"
                                             label="Total DT"
@@ -1047,12 +1075,62 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5, la
                                             disabled
                                         />
                                     </Grid>
+                                    <Grid item xs={12} sm={1}>
+                                        <TextField
+                                            name="part_mesin"
+                                            label="Part Mesin"
+                                            value={entry.part_mesin}
+                                            onChange={(e) => handleChange(index, 'part_mesin', e.target.value)}
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={2}>
+                                        <FormControl fullWidth>
+                                            <InputLabel id="unit-mesin-label">Unit Mesin</InputLabel>
+                                            <Select
+                                                labelId="unit-mesin-label"
+                                                id="unit-mesin-select"
+                                                name="unit_mesin"
+                                                value={entry.unit_mesin || ''}
+                                                label="Unit Mesin"
+                                                onChange={(event) => handleSelectChange(index, event)} // Menggunakan handleSelectChange
+                                            >
+                                                {unitMesinOptions.map((option) => (
+                                                    <MenuItem key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+                                    </Grid>
                                     <Grid item xs={12} sm={4}>
                                         <TextField
                                             name="kendala"
                                             label="Kendala"
                                             value={entry.kendala}
                                             onChange={(e) => handleChange(index, 'kendala', e.target.value)}
+                                            fullWidth
+                                            required
+                                            multiline
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={4}>
+                                        <TextField
+                                            name="penyebab"
+                                            label="penyebab"
+                                            value={entry.penyebab}
+                                            onChange={(e) => handleChange(index, 'penyebab', e.target.value)}
+                                            fullWidth
+                                            required
+                                            multiline
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={4}>
+                                        <TextField
+                                            name="perbaikan"
+                                            label="perbaikan"
+                                            value={entry.perbaikan}
+                                            onChange={(e) => handleChange(index, 'perbaikan', e.target.value)}
                                             fullWidth
                                             required
                                             multiline
@@ -1078,8 +1156,6 @@ const FormLHP = ({ isLoading, label0, label1, label2, label3, label4, label5, la
                             <Grid item xs={12} sm={1} >
                                 <ButtonOff lhp={LHPDUA} />
                             </Grid>
-
-
                         </Grid>
 
                     </CardContent>

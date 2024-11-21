@@ -57,7 +57,7 @@ const TableLhpL1 = ({ label1, label2, label3, label4, label5 }) => {
 
   const apiEndpoints = {
     lhp: 'http://10.37.12.17:3000/packing_a1',
-    lhpdaily: 'http://10.37.12.17:3000/lhp_daily/l7'
+    lhpdaily: 'http://10.37.12.17:3000/lhp_daily/7'
   };
 
   // Handle closing the Snackbar
@@ -183,14 +183,14 @@ const TableLhpL1 = ({ label1, label2, label3, label4, label5 }) => {
   const handleDateChange = (newValue) => {
     setValueDate(newValue);
     const formattedDate = dayjs(newValue).format('YYYY-MM-DD');
-    fetchData(`http://10.37.12.17:3000/lhp_daily/date/${formattedDate}/l7`);
+    fetchData(`http://10.37.12.17:3000/lhp_daily/date/${formattedDate}/7`);
   };
 
   // Columns for DataGrid
   const generateKendalaColumns = (maxKendalaCount) => {
     const columns = [
       { field: 'id', headerName: 'ID', width: 50 },
-      { field: 'shift', headerName: 'Time', width: 100 },
+      { field: 'shift', headerName: 'Shift', width: 100 },
       { field: 'sku', headerName: 'Sku', width: 200 },
       { field: 'plan', headerName: 'Plan', width: 75 },
       { field: 'real', headerName: 'Real', width: 75 },
@@ -202,49 +202,49 @@ const TableLhpL1 = ({ label1, label2, label3, label4, label5 }) => {
         }
       },
       {
-        field: 'cello.cello1', headerName: 'Cello1', width: 100,
+        field: 'cello.cello1', headerName: 'Cello G1', width: 100,
         valueGetter: (value, row) => {
           return `${row.cello.cello1 || ''}`;
         }
       },
       {
-        field: 'cello.cello2', headerName: 'Cello2', width: 100,
+        field: 'cello.cello2', headerName: 'Cello G2', width: 100,
         valueGetter: (value, row) => {
           return `${row.cello.cello2 || ''}`;
         }
       },
       {
-        field: 'cello.cello3', headerName: 'Cello3', width: 100,
+        field: 'cello.cello3', headerName: 'Cello G3', width: 100,
         valueGetter: (value, row) => {
           return `${row.cello.cello3 || ''}`;
         }
       },
       {
-        field: 'cello.cello4', headerName: 'Cello4', width: 100,
+        field: 'cello.cello4', headerName: 'Cello G4', width: 100,
         valueGetter: (value, row) => {
           return `${row.cello.cello4 || ''}`;
         }
       },
       {
-        field: 'cello.cello5', headerName: 'Cello5', width: 100,
+        field: 'cello.cello5', headerName: 'Cello G5', width: 100,
         valueGetter: (value, row) => {
           return `${row.cello.cello5 || ''}`;
         }
       },
       {
-        field: 'cello.cello6', headerName: 'Cello6', width: 100,
+        field: 'cello.cello6', headerName: 'Cello G6', width: 100,
         valueGetter: (value, row) => {
           return `${row.cello.cello6 || ''}`;
         }
       },
       {
-        field: 'cello.cello7', headerName: 'Cello7', width: 100,
+        field: 'cello.cello7', headerName: 'Cello G7', width: 100,
         valueGetter: (value, row) => {
           return `${row.cello.cello7 || ''}`;
         }
       },
       {
-        field: 'cello.cello8', headerName: 'Cello8', width: 100,
+        field: 'cello.cello8', headerName: 'Cello G8', width: 100,
         valueGetter: (value, row) => {
           return `${row.cello.cello8 || ''}`;
         }
@@ -784,7 +784,7 @@ const TableLhpL1 = ({ label1, label2, label3, label4, label5 }) => {
                     { value: 'Wafello Chocoblast 12 x 10 x 17', label: 'Wafello Chocoblast 12 x 10 x 17' },
                     { value: 'Wafello Chocoblast 6 x 10 x 43', label: 'Wafello Chocoblast 6 x 10 x 43' },
                     { value: 'Wafello Butter Caramel 12 x 10 x 17', label: 'Wafello Butter Caramel 12 x 10 x 17' },
-                    { value: 'Superstar TCW 8 x 20 x 16', label: 'Superstar TCW 8 x 20 x 16' }
+                    { value: 'Superstar TCW 8 x 20 x 16', label: 'Superstar TCW 8 x 20 x 12.5' }
                   ])}
                 </Grid>
               </Grid>

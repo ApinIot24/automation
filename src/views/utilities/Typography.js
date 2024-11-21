@@ -19,7 +19,7 @@ import { gridSpacing } from 'store/constant';
 import CardCounterBox from 'views/dashboard/Default/BB/CardCounterBox';
 import GrafekBandet from 'views/dashboard/Default/BB/GrafekBandet';
 import GrafekBox from 'views/dashboard/Default/BB/GrafekBox';
-import FormLHP from 'views/dashboard/Default/A5/FormLHP';
+// import FormLHP from 'views/dashboard/Default/A5/FormLHP';
 
 // ==============================|| Happy Coding ||============================== //
 
@@ -82,7 +82,6 @@ const Typography = () => {
           <Tab label="B3" value="3" />
           <Tab label="B4" value="4" />
           <Tab label="A4" value="5" />
-          <Tab label="LHP" value="6" />
         </TabList>
       </Box>
       <TabPanel value="0">
@@ -258,17 +257,6 @@ const Typography = () => {
             </Grid>
           </Grid>
         </Grid>
-      </TabPanel>
-      <TabPanel value="6">
-        <FormLHP
-        pathnih={urlapi.pathnih}
-        label0={label.grapl2}
-        label1={label.b1} 
-        label2={label.b2} 
-        label3={label.b3} 
-        label4={label.b4} 
-        label5={label.a4}
-        />
       </TabPanel>
     </TabContext>
   </MainCard>
