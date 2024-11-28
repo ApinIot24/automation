@@ -71,6 +71,7 @@ const WaferLine7 = Loadable(lazy(() => import('views/pages/LHP/Wafer/wafer_line7
 const BscLine5 = Loadable(lazy(() => import('views/pages/LHP/Bsc/bsc_line5/BscLine5')));
 // PM
 const PMWAFER = Loadable(lazy(() => import('views/pages/PM/wafer/PMWafer')));
+const PMBiscuit = Loadable(lazy(() => import('views/pages/PM/biscuit/PMBiscuit')));
 const PMnotifikasi = Loadable(lazy(() => import('views/pages/PM/PMnotifikasi')));
 
 
@@ -668,6 +669,15 @@ const MainRoutes = {
         {
           path: 'pm/wafer',
           element: <PrivateRoute element={<PMWAFER />} />
+        }
+      ]
+    },
+    {
+      path: 'utils',
+      children: [
+        {
+          path: 'pm/biscuit',
+          element: <PrivateRoute element={<PMBiscuit />} />
         }
       ]
     },

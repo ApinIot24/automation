@@ -216,7 +216,7 @@ const pages = {
           title: 'PM BISKUIT',
           type: 'item',
           icon: icons.IconFileSpreadsheet,
-          url: '/pm/biskuit',
+          url: '/utils/pm/biscuit',
           roles: ['all','biskuit']
         },
         {
