@@ -115,6 +115,13 @@ const pages = {
               breadcrumbs: false
             },
             {
+              id: 'kalpa',
+              title: 'PACKING LINE 6',
+              type: 'item',
+              url: '/utils/packing-line6',
+              breadcrumbs: false
+            },
+            {
               id: 'tcw',
               title: 'PACKING LINE 7',
               type: 'item',
@@ -167,6 +174,13 @@ const pages = {
               title: 'Wafer LINE 2',
               type: 'item',
               url: '/utils/lhp-line2',
+              breadcrumbs: false
+            },
+            {
+              id: 'waferline6',
+              title: 'Wafer LINE 6',
+              type: 'item',
+              url: '/utils/lhp-line6',
               breadcrumbs: false
             },
             {
